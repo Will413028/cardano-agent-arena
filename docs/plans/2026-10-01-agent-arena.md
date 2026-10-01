@@ -261,7 +261,7 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
 | 1 產品風險驗證 | 不適用（D1 選 B） | | 不適用 | |
 | 2 Spike：L1 成本與延遲 | 完成 | devnet 合法／非法與 mutation、UTxO contention、雙玩家簽章與 state token、最低 ADA；preprod 20 筆入塊與索引延遲，全部驗證為有效 script spend；見 spike-l1.md | 無（只完成 spike 的驗收，不代表正式產品） | |
 | 3 Spike：替代執行方式 | 完成 | Hydra 20 步 confirmed snapshots、L1 開關與 deposit 成本、Bob 離線 Close/Fanout；簽章 transcript 曲線與最大 N=84 的 devnet 真實交易、合法／非法與 source mutation；19 Aiken checks；見 spike-alternatives.md | 無（N=84 只適用本 fixture 與 devnet 14M memory，不是 preprod 上限） | |
-| 4 Walking skeleton | 程式完成待驗收 | `48aa0be` 的 CI `make check` 全部通過（run `36868324868`，walking-skeleton job success）：Aiken 4 checks、blueprint 漂移、TS、unit 2 tests、三種勝負、非法交易拒絕、獨立重播、結果頁與 verifier mutation；本機非 E2E 檢查通過 | 本機完整 `make check` 尚未通過：node 啟動／CLI query tip 60 秒 timeout；根因未證實。超時清理修正另待最新 head 的 CI | `7d750cf`、`48aa0be` |
+| 4 Walking skeleton | 程式完成待驗收 | `48aa0be` 的 CI `make check` 全部通過（run `36868324868`，walking-skeleton job success）：Aiken 4 checks、blueprint 漂移、TS、unit 2 tests、三種勝負、非法交易拒絕、獨立重播、結果頁與 verifier mutation；本機非 E2E 檢查通過 | 本機完整 `make check` 尚未通過：node 啟動／CLI query tip 60 秒 timeout；根因未證實。超時清理修正 `85c7830` 的 CI run `36870994814` 全部 success | `7d750cf`、`48aa0be` |
 | 5 規則引擎與測試向量 | 未開始 | | 步驟 4 | |
 | 6 完整正式戰局 | 未開始 | | 步驟 5 | |
 | 7 Verifier | 未開始 | | 步驟 6 | |
