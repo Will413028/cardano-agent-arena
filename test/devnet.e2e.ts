@@ -29,13 +29,13 @@ try {
     await move(net, match, scenario.numbers[1]);
     const index = await indexMatch(net.endpoint, match.matchId);
     assert.equal(index.result, scenario.expected);
+    const indexFile = join(net.directory, `${scenario.name}.index.json`);
+    writeFileSync(indexFile, JSON.stringify(index));
     const cli = process.execPath;
     const args = ['--experimental-strip-types', join(ROOT, 'verifier/cli.ts'), 'replay', match.matchId, net.endpoint];
     // A separate process reads chain-sync directly, with no index or submitted datum input.
     const replay = JSON.parse(execFileSync(cli, args, { encoding: 'utf8', timeout: 120_000 }));
     assert.deepEqual(replay, index);
-    const indexFile = join(net.directory, `${scenario.name}.index.json`);
-    writeFileSync(indexFile, JSON.stringify(index));
     const server = createWebServer(indexFile);
     await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
     try {

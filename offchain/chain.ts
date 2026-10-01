@@ -3,7 +3,7 @@ export interface ChainOutput { address: string; value: Record<string, Record<str
 export interface ChainInput { transaction: { id: string }; index: number }
 export interface ChainTransaction {
   id: string; inputs: ChainInput[]; outputs: ChainOutput[];
-  spends?: 'inputs' | 'collaterals'; extraSignatories?: string[];
+  spends?: 'inputs' | 'collaterals'; requiredExtraSignatories?: string[];
   mint?: Record<string, Record<string, number>>;
 }
 export interface Block extends Point { transactions?: ChainTransaction[] }

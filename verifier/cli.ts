@@ -11,7 +11,7 @@ export async function replay(endpoint: string, matchId: string) {
     if (before.moves.length >= 2 || before.result !== -1 || after.moves.length !== before.moves.length + 1 ||
         after.policy !== before.policy || JSON.stringify(after.players) !== JSON.stringify(before.players) ||
         !before.moves.every((number, index) => after.moves[index] === number) ||
-        !tx.extraSignatories?.includes(before.players[before.moves.length])) throw new Error('Illegal state transition');
+        !tx.requiredExtraSignatories?.includes(before.players[before.moves.length])) throw new Error('Illegal state transition');
     if (after.result !== outcome(after.moves)) throw new Error('On-chain result disagrees with replay');
   }
   const final = history.states.at(-1)!;
