@@ -62,7 +62,14 @@ export async function startDevnet(): Promise<Devnet> {
       if (i % 5 === 0 && docker('inspect', '-f', '{{.State.Status}}', net.node) === 'exited') {
         throw new Error(`Cardano node exited: ${docker('logs', '--tail', '8', net.node)}`);
       }
-      try { const tip = JSON.parse(cli(net, 'query', 'tip', '--testnet-magic', '42')); if (tip.block > 0) { ready = true; break; } } catch { /* Node booting. */ }
+      try {
+        const tip = JSON.parse(cli(net, 'query', 'tip', '--testnet-magic', '42'));
+        if (tip.block > 0) { ready = true; break; }
+      } catch (error) {
+        // A killed Docker client can leave its CLI running inside the container.
+        // Stop and clean up rather than accumulating more timed-out query processes.
+        if ((error as NodeJS.ErrnoException).code === 'ETIMEDOUT') throw error;
+      }
     }
     if (!ready) throw new Error(`Cardano node not ready: ${docker('logs', '--tail', '20', net.node)}`);
     docker('run', '-d', '--name', net.ogmios, '--label', 'arena.scope=walking-skeleton',

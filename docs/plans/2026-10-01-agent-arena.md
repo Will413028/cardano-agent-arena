@@ -4,7 +4,7 @@
 
 **上層：** 暫代。沒有主清單（需求來源是一次性的構想筆記，不算主清單），範圍段的「延後」暫當清單，下一段暫放全域約束與完成定義。
 
-**附件：** `2026-10-01-agent-arena/`：`requirements.md`（需求清單與來源句）、`nfr-and-risks.md`（非功能需求、產品風險）、`external-interfaces.md`（外部介面與既有先例，查詢日期 2026-10-01）、`spike-l1.md`／`spike-alternatives.md`（實測與適用界線）、`spikes/`（拋棄式程式碼與原始資料）、`check_plan.py`（計畫與需求清單的欄位檢查）。產品 scaffold 尚未建立；目前本機 checkout 尚無快照 commit。
+**附件：** `2026-10-01-agent-arena/`：`requirements.md`（需求清單與來源句）、`nfr-and-risks.md`（非功能需求、產品風險）、`external-interfaces.md`（外部介面與既有先例，查詢日期 2026-10-01）、`spike-l1.md`／`spike-alternatives.md`（實測與適用界線）、`spikes/`（拋棄式程式碼與原始資料）、`check_plan.py`（計畫與需求清單的欄位檢查）。Walking skeleton 已建立；計畫、附件與 spike 的版本控制基線為 `7d750cf`。
 
 **位置：** 已選定獨立公開 repo `Will413028/cardano-agent-arena`（D2）；本檔與附件已在目標 checkout，步驟 4 建立產品 scaffold。
 
@@ -35,11 +35,11 @@
 - P8 安全參數：玩家私鑰的存放照 Cardano 錢包慣例（CIP-30 瀏覽器錢包或本機 signing key 檔，不上傳）（預設（可推翻）；來源：CIP-30，步驟 8 開工時附連結）。
 - P9 既有缺陷：無（全新系統）。
 
-**驗收基線：** repo 已建立，但無可執行的產品 scaffold；步驟 2、3 的 spike 驗收不等於產品驗收。
+**驗收基線：** 規劃時無可執行的產品 scaffold；目前 Walking skeleton 的 CI `make check` 已在 `48aa0be` 通過。本機端到端仍受 devnet 啟動／CLI timeout 阻擋；步驟 2、3 的 spike 驗收不等於產品驗收。
 
 ## 本階段依賴的不變量
 
-模組名是預計的，步驟 4 之後補實際檔案路徑。
+Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain/tx-builder.ts`、`indexer/cli.ts`、`verifier/cli.ts`、`web/server.ts`、`offchain/generated/contract.ts`；下表其餘模組仍是後續步驟的預計位置。
 
 | 不變量 | 依賴它的機制（預計模組） |
 |---|---|
@@ -95,7 +95,7 @@
 
 - [ ] **4. Walking skeleton**（被擋於：無；P2、D1、D2、D5、D6 已決）
   - 範圍：在既有 repo 建產品 scaffold、CI（GitHub Actions）、驗收入口 `make check`。接通最薄的端到端路徑，遊戲可以是假的（例如「每人送一個數字，大者勝」）：兩個腳本 Agent 在本機 devnet 建局並各送一步 → validator 驗證 → 索引器記錄 → `verifier replay <match-id>` 從鏈資料重算結果 → 靜態頁顯示該局結果。TS 型別由 `plutus.json` blueprint 產生，CI 加產生物漂移檢查（I8）。執行形式固定為逐步 L1（D5）。
-  - 消費端：無（產品 scaffold 未建）。本步完成後在本檔補上各步的搜尋指令，預計：`rg -n "MatchDatum|MatchRedeemer" -g '*.ak' -g '*.ts'`、`rg -n "verifier|replay" offchain/ web/`。
+  - 消費端：`rg -n "MatchDatum|MatchRedeemer" validators/ offchain/ indexer/ verifier/ test/ -g '*.ak' -g '*.ts'`、`rg -n "verifier|replay|indexMatch|createWebServer" offchain/ indexer/ verifier/ web/ test/`。
   - 不能動：無（第一個產品步驟）。
   - 驗收：本機與 CI 的 `make check` 綠燈，CI 每個 job 自己的結論都是 success；端到端測試比對 verifier 重算結果與索引器記錄一致；mutation：讓 verifier 把勝負反過來，端到端測試要失敗。
   - 停止條件：devnet 無法在 CI 內啟動時停下，回報選項（改用 emulator 測 validator、devnet 測試改為本機必跑）。
@@ -261,7 +261,7 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
 | 1 產品風險驗證 | 不適用（D1 選 B） | | 不適用 | |
 | 2 Spike：L1 成本與延遲 | 完成 | devnet 合法／非法與 mutation、UTxO contention、雙玩家簽章與 state token、最低 ADA；preprod 20 筆入塊與索引延遲，全部驗證為有效 script spend；見 spike-l1.md | 無（只完成 spike 的驗收，不代表正式產品） | |
 | 3 Spike：替代執行方式 | 完成 | Hydra 20 步 confirmed snapshots、L1 開關與 deposit 成本、Bob 離線 Close/Fanout；簽章 transcript 曲線與最大 N=84 的 devnet 真實交易、合法／非法與 source mutation；19 Aiken checks；見 spike-alternatives.md | 無（N=84 只適用本 fixture 與 devnet 14M memory，不是 preprod 上限） | |
-| 4 Walking skeleton | 進行中 | Aiken 4 checks、TS 型別檢查、資料編碼 2 tests；已建 devnet／Ogmios、indexer、獨立 verifier、結果頁與 CI workflow | 完整 make check、端到端 mutation 與 GitHub CI 正在驗收 | |
+| 4 Walking skeleton | 程式完成待驗收 | `48aa0be` 的 CI `make check` 全部通過（run `36868324868`，walking-skeleton job success）：Aiken 4 checks、blueprint 漂移、TS、unit 2 tests、三種勝負、非法交易拒絕、獨立重播、結果頁與 verifier mutation；本機非 E2E 檢查通過 | 本機完整 `make check` 尚未通過：node 啟動／CLI query tip 60 秒 timeout；根因未證實。超時清理修正另待最新 head 的 CI | `7d750cf`、`48aa0be` |
 | 5 規則引擎與測試向量 | 未開始 | | 步驟 4 | |
 | 6 完整正式戰局 | 未開始 | | 步驟 5 | |
 | 7 Verifier | 未開始 | | 步驟 6 | |
@@ -290,7 +290,7 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
 | F10 中：D1 的分支沒有落到步驟上 | 已改。進度表加「不適用」狀態，步驟 4 寫明 D1 選 A 或 C 時要等哪個結論 |
 | F11 中：步驟 1 報告的檢查太鬆 | 已改。`check_plan.py --report` 會核對報告涵蓋每個風險，並用一份缺列的報告驗證它會失敗 |
 | F12 中：缺配對與登記兩題決定 | 已改。新增 D11、D12，需求 R5、R15 也改指向它們 |
-| F13 低：步驟 13 的 `rg` 會誤中別段；spike 產物沒有版本控制 | `rg` 已改成只查不變量表那一段。產物原先延後到步驟 4。已修正前提：repo 已存在，產物就在目標 checkout；初始 commit 仍待驗證與授權 |
+| F13 低：步驟 13 的 `rg` 會誤中別段；spike 產物沒有版本控制 | `rg` 已改成只查不變量表那一段。產物原先延後到步驟 4。已修正前提：repo 已存在，產物就在目標 checkout；初始版本已於 `7d750cf` commit／push |
 | 低：D10 選 A 時卡住的局鎖住的 ADA 沒估金額 | 已改。D10 的 A 註明金額，由步驟 2 量 |
 
 修改後重跑 `python3 2026-10-01-agent-arena/check_plan.py`，結果是 `steps=13 decisions=12 errors=0`。檢查器本身也跑過 mutation：拿掉一個停止條件、把需求指到不存在的步驟、報告缺風險列，三種情況都會報錯。
