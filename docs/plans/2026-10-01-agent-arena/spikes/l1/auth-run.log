@@ -1,0 +1,17 @@
+{
+  "minimum": "Coin 1495570",
+  "rows": [
+    {
+      "actor": "alice",
+      "txid": "de7690d34bbed8fc470e383e6e27860b5369b56457436a82c54fd68d65cc75ff",
+      "bytes": 1681,
+      "seconds": 0.42951479204930365
+    },
+    {
+      "actor": "bob",
+      "txid": "87ec1d7c58ba64a3c04c58fe617f4cd1ab5fb1691dbf7e8f979ec89e00dc658e",
+      "bytes": 1682,
+      "seconds": 0.49254270805977285
+    }
+  ]
+}

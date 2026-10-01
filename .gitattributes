@@ -1,0 +1,2 @@
+# Preserve original CLI evidence, including diagnostic trailing spaces.
+*.log -whitespace

@@ -1,0 +1,219 @@
+[
+  {
+    "seconds": 3.478,
+    "event": {
+      "contestationDeadline": "2026-10-01T11:29:50.4Z",
+      "headId": "06615b7e6e6b89881cc85bf7ad6583565e65cfb101b00abcc10f6c19",
+      "seq": 5956,
+      "snapshotNumber": 43,
+      "tag": "HeadIsClosed",
+      "timestamp": "2026-10-01T11:29:47.08772921Z"
+    }
+  },
+  {
+    "seconds": 6.878,
+    "event": {
+      "headId": "06615b7e6e6b89881cc85bf7ad6583565e65cfb101b00abcc10f6c19",
+      "seq": 5995,
+      "tag": "ReadyToFanout",
+      "timestamp": "2026-10-01T11:29:50.506363295Z"
+    }
+  },
+  {
+    "seconds": 9.252,
+    "event": {
+      "finalizedUTxO": {
+        "58f6bd859e75a08c6c38e5d162c3f8f1eb6768b928cddb845a141a3f337c7e2f#0": {
+          "address": "addr_test1wz0d4p9zq8y3t4lj6sgctwkyr8ua9cwnpuvpspe2gq3vfds89kgaa",
+          "datum": null,
+          "inlineDatum": {
+            "constructor": 0,
+            "fields": [
+              {
+                "list": [
+                  {
+                    "int": 19
+                  },
+                  {
+                    "int": 18
+                  },
+                  {
+                    "int": 17
+                  },
+                  {
+                    "int": 16
+                  },
+                  {
+                    "int": 15
+                  },
+                  {
+                    "int": 14
+                  },
+                  {
+                    "int": 13
+                  },
+                  {
+                    "int": 12
+                  },
+                  {
+                    "int": 11
+                  },
+                  {
+                    "int": 10
+                  },
+                  {
+                    "int": 9
+                  },
+                  {
+                    "int": 8
+                  },
+                  {
+                    "int": 7
+                  },
+                  {
+                    "int": 6
+                  },
+                  {
+                    "int": 5
+                  },
+                  {
+                    "int": 4
+                  },
+                  {
+                    "int": 3
+                  },
+                  {
+                    "int": 2
+                  },
+                  {
+                    "int": 1
+                  },
+                  {
+                    "int": 0
+                  }
+                ]
+              },
+              {
+                "int": 0
+              }
+            ]
+          },
+          "inlineDatumRaw": "d8799f9f131211100f0e0d0c0b0a09080706050403020100ff00ff",
+          "inlineDatumhash": "fcaa96afae4ecfa138b0e6dfcc225b098456a560160ac94888f6e739205d1083",
+          "referenceScript": null,
+          "value": {
+            "lovelace": 3000000
+          }
+        },
+        "58f6bd859e75a08c6c38e5d162c3f8f1eb6768b928cddb845a141a3f337c7e2f#1": {
+          "address": "addr_test1vp5cxztpc6hep9ds7fjgmle3l225tk8ske3rmwr9adu0m6qchmx5z",
+          "datum": null,
+          "datumhash": null,
+          "inlineDatum": null,
+          "inlineDatumRaw": null,
+          "referenceScript": null,
+          "value": {
+            "lovelace": 94000000
+          }
+        },
+        "58f6bd859e75a08c6c38e5d162c3f8f1eb6768b928cddb845a141a3f337c7e2f#2": {
+          "address": "addr_test1wz0d4p9zq8y3t4lj6sgctwkyr8ua9cwnpuvpspe2gq3vfds89kgaa",
+          "datum": null,
+          "inlineDatum": {
+            "constructor": 0,
+            "fields": [
+              {
+                "list": [
+                  {
+                    "int": 19
+                  },
+                  {
+                    "int": 18
+                  },
+                  {
+                    "int": 17
+                  },
+                  {
+                    "int": 16
+                  },
+                  {
+                    "int": 15
+                  },
+                  {
+                    "int": 14
+                  },
+                  {
+                    "int": 13
+                  },
+                  {
+                    "int": 12
+                  },
+                  {
+                    "int": 11
+                  },
+                  {
+                    "int": 10
+                  },
+                  {
+                    "int": 9
+                  },
+                  {
+                    "int": 8
+                  },
+                  {
+                    "int": 7
+                  },
+                  {
+                    "int": 6
+                  },
+                  {
+                    "int": 5
+                  },
+                  {
+                    "int": 4
+                  },
+                  {
+                    "int": 3
+                  },
+                  {
+                    "int": 2
+                  },
+                  {
+                    "int": 1
+                  },
+                  {
+                    "int": 0
+                  }
+                ]
+              },
+              {
+                "int": 0
+              }
+            ]
+          },
+          "inlineDatumRaw": "d8799f9f131211100f0e0d0c0b0a09080706050403020100ff00ff",
+          "inlineDatumhash": "fcaa96afae4ecfa138b0e6dfcc225b098456a560160ac94888f6e739205d1083",
+          "referenceScript": null,
+          "value": {
+            "lovelace": 3000000
+          }
+        },
+        "58f6bd859e75a08c6c38e5d162c3f8f1eb6768b928cddb845a141a3f337c7e2f#3": {
+          "address": "addr_test1vru2drx33ev6dt8gfq245r5k0tmy7ngqe79va69de9dxkrg09c7d3",
+          "datum": null,
+          "datumhash": null,
+          "inlineDatum": null,
+          "inlineDatumRaw": null,
+          "referenceScript": null,
+          "value": {
+            "lovelace": 97117153
+          }
+        }
+      },
+      "headId": "06615b7e6e6b89881cc85bf7ad6583565e65cfb101b00abcc10f6c19",
+      "seq": 6021,
+      "tag": "HeadIsFinalized",
+      "timestamp": "2026-10-01T11:29:52.878548338Z"
+    }
+  }
+]

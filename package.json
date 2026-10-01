@@ -1,0 +1,31 @@
+{
+  "name": "cardano-agent-arena",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18 <27"
+  },
+  "scripts": {
+    "build:validators": "node scripts/aiken.mjs build",
+    "check:validators": "node scripts/aiken.mjs check",
+    "generate": "node --experimental-strip-types scripts/generate-blueprint.ts",
+    "check:generated": "node --experimental-strip-types scripts/generate-blueprint.ts --check",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test test/*.test.ts",
+    "test:e2e": "node --experimental-strip-types test/devnet.e2e.ts",
+    "devnet": "node --experimental-strip-types scripts/devnet.ts",
+    "index": "node --experimental-strip-types indexer/cli.ts",
+    "verifier": "node --experimental-strip-types verifier/cli.ts",
+    "web": "node --experimental-strip-types web/server.ts"
+  },
+  "devDependencies": {
+    "@aiken-lang/aiken": "1.1.24",
+    "@types/node": "22.18.0",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "@lucid-evolution/plutus": "0.1.36",
+    "@scure/base": "1.2.6"
+  }
+}

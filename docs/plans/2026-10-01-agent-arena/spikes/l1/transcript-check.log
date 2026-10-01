@@ -1,0 +1,200 @@
+    Compiling arena/l1-validator 0.0.0 (.)
+    Compiling aiken-lang/stdlib v4.0.0 (./build/packages/aiken-lang-stdlib)
+   Collecting all tests scenarios across all modules
+      Testing ...
+{
+  "seed": 1121762396,
+  "summary": {
+    "total": 17,
+    "passed": 17,
+    "failed": 0,
+    "kind": {
+      "unit": 17,
+      "property": 0
+    }
+  },
+  "modules": [
+    {
+      "name": "placeholder",
+      "summary": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "kind": {
+          "unit": 3,
+          "property": 0
+        }
+      },
+      "tests": [
+        {
+          "title": "empty_cell",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 9693,
+            "cpu": 2571837
+          }
+        },
+        {
+          "title": "occupied_cell_rejected",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 8630,
+            "cpu": 2273229
+          }
+        },
+        {
+          "title": "outside_board_rejected",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 4003,
+            "cpu": 852247
+          }
+        }
+      ]
+    },
+    {
+      "name": "signed_vectors",
+      "summary": {
+        "total": 14,
+        "passed": 14,
+        "failed": 0,
+        "kind": {
+          "unit": 14,
+          "property": 0
+        }
+      },
+      "tests": [
+        {
+          "title": "signed_1",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 32604,
+            "cpu": 68644635
+          }
+        },
+        {
+          "title": "signed_2",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 65274,
+            "cpu": 138047356
+          }
+        },
+        {
+          "title": "signed_4",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 136736,
+            "cpu": 278677350
+          }
+        },
+        {
+          "title": "signed_8",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 317220,
+            "cpu": 571060534
+          }
+        },
+        {
+          "title": "signed_16",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 828428,
+            "cpu": 1200319686
+          }
+        },
+        {
+          "title": "signed_25",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 1641348,
+            "cpu": 1978682816
+          }
+        },
+        {
+          "title": "signed_32",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 2451804,
+            "cpu": 2636923790
+          }
+        },
+        {
+          "title": "signed_64",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 8102396,
+            "cpu": 6222245870
+          }
+        },
+        {
+          "title": "signed_96",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 16958108,
+            "cpu": 10756747342
+          }
+        },
+        {
+          "title": "signed_128",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 29018940,
+            "cpu": 16240428206
+          }
+        },
+        {
+          "title": "signed_160",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 44284892,
+            "cpu": 22673288462
+          }
+        },
+        {
+          "title": "signed_192",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 62755964,
+            "cpu": 30055328110
+          }
+        },
+        {
+          "title": "signed_208",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 73193420,
+            "cpu": 34102290206
+          }
+        },
+        {
+          "title": "signed_224",
+          "status": "pass",
+          "on_failure": "fail_immediately",
+          "execution_units": {
+            "mem": 84432156,
+            "cpu": 38386547150
+          }
+        }
+      ]
+    }
+  ]
+}
+      Summary 17 checks, 0 errors, 0 warnings

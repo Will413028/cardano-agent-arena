@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@aiken-lang/aiken": "^1.1.24",
+    "@lucid-evolution/lucid": "^0.6.5"
+  }
+}

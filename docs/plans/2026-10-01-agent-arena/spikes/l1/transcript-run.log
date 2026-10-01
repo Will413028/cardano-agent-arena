@@ -1,0 +1,26 @@
+{"n": 1, "accepted": true, "bytes": 1067, "units": {"memory": 59725, "steps": 77256086}, "fee": "220366 Lovelace", "illegal": false}
+{"n": 2, "accepted": true, "bytes": 1140, "units": {"memory": 99545, "steps": 148993154}, "fee": "231048 Lovelace", "illegal": false}
+{"n": 4, "accepted": true, "bytes": 1282, "units": {"memory": 185507, "steps": 294323842}, "fee": "252734 Lovelace", "illegal": false}
+{"n": 8, "accepted": true, "bytes": 1566, "units": {"memory": 394991, "steps": 596108414}, "fee": "299076 Lovelace", "illegal": false}
+{"n": 16, "accepted": true, "bytes": 2134, "units": {"memory": 964199, "steps": 1244170342}, "fee": "403636 Lovelace", "illegal": false}
+{"n": 25, "accepted": true, "bytes": 2774, "units": {"memory": 1842469, "steps": 2043702595}, "fee": "540119 Lovelace", "illegal": false}
+{"n": 32, "accepted": true, "bytes": 3278, "units": {"memory": 2703575, "steps": 2718379998}, "fee": "660625 Lovelace", "illegal": false}
+{"n": 64, "accepted": true, "bytes": 5586, "units": {"memory": 8586167, "steps": 6378913182}, "fee": "1365527 Lovelace", "illegal": false}
+{"n": 96, "accepted": false, "illegal": false}
+{"n": 128, "accepted": false, "illegal": false}
+{"n": 160, "accepted": false, "illegal": false}
+{"n": 192, "accepted": false, "illegal": false}
+{"n": 208, "accepted": false, "illegal": false}
+{"n": 224, "accepted": false, "illegal": false}
+{"n": 129, "accepted": false, "illegal": false}
+{"n": 65, "accepted": true, "bytes": 5658, "units": {"memory": 8820109, "steps": 6508137115}, "fee": "1391510 Lovelace", "illegal": false}
+{"n": 97, "accepted": false, "illegal": false}
+{"n": 81, "accepted": true, "bytes": 6810, "units": {"memory": 13013405, "steps": 8709176907}, "fee": "1842847 Lovelace", "illegal": false}
+{"n": 89, "accepted": false, "illegal": false}
+{"n": 85, "accepted": false, "illegal": false}
+{"n": 83, "accepted": true, "bytes": 6954, "units": {"memory": 13593907, "steps": 9000991675}, "fee": "1903717 Lovelace", "illegal": false}
+{"n": 84, "accepted": true, "bytes": 7026, "units": {"memory": 13890387, "steps": 9148751582}, "fee": "1934646 Lovelace", "illegal": false}
+{"n": 85, "accepted": false, "illegal": false}
+{"n": 2, "accepted": false, "illegal": true}
+{"n": 84, "accepted": true, "bytes": 7026, "units": {"memory": 13890387, "steps": 9148751582}, "fee": "1934646 Lovelace", "illegal": false}
+confirmed maximum 84 f42e3561b2b27ba7304178502691df796d38c04a786cea10471929f95997355f

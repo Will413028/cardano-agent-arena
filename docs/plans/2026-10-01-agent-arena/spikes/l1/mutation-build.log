@@ -1,0 +1,25 @@
+    Compiling arena/l1-validator 0.0.0 (.)
+    Compiling aiken-lang/stdlib v4.0.0 (./build/packages/aiken-lang-stdlib)
+   Generating project's blueprint (./plutus.json)
+
+  ⚠ I came across an unused variable: board
+   ╭─[./validators/placeholder.ak:8:14]
+ 7 │ 
+ 8 │ pub fn legal(board: Board, cell: Int) -> Bool {
+   ·              ──────┬─────
+   ·                    ╰── unused identifier
+ 9 │   cell >= 0 && cell < 25 
+   ╰────
+  help: No big deal, but you might want to remove it or use a discard _board
+        to get rid of that warning.
+        
+        You should also know that, unlike in typical imperative languages,
+        unused let-bindings are fully_ignored in Aiken.
+        They will not produce any side-effect (such as error calls). Programs
+        with or without unused variables are semantically equivalent.
+        
+        If you do want to enforce some side-effects, use expect with a discard
+        _board instead of let.
+        
+
+      Summary 0 errors, 1 warning

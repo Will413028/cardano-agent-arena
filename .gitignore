@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Disposable spike dependencies and local devnet state
+node_modules/
+**/build/
+**/spikes/alt/hydra/
+**/devnet/
+
+__pycache__/
+*.pyc
+
+# Local chain state and generated test artifacts
+.local/

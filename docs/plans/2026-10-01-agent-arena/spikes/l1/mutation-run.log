@@ -1,0 +1,16 @@
+[
+  {
+    "cell": 0,
+    "txid": "1022e8de17a22981bfcd9d172f3682c04ce535eff7e78cf45e0f9925631de82e",
+    "bytes": 944,
+    "submit_to_observed_seconds": 0.23814116697758436,
+    "build": "Estimated transaction fee: 211259 Lovelace"
+  },
+  {
+    "cell": 0,
+    "txid": "ab0f81929bba23d1db5657f7a7f7af736e26c430c0b2591175082bb3af610e3f",
+    "bytes": 945,
+    "submit_to_observed_seconds": 0.34064787498209625,
+    "build": "Estimated transaction fee: 211496 Lovelace"
+  }
+]

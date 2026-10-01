@@ -1,0 +1,96 @@
+{
+  "services": {
+    "alice": {
+      "image": "ghcr.io/cardano-scaling/hydra-node:2.4.1",
+      "volumes": [
+        "/Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/alt/hydra/demo:/keys:ro",
+        "/Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/alt/hydra/demo/devnet:/devnet"
+      ],
+      "ports": [
+        "127.0.0.1:4401:4001"
+      ],
+      "command": [
+        "--node-id",
+        "1",
+        "--api-host",
+        "0.0.0.0",
+        "--listen",
+        "0.0.0.0:5001",
+        "--peer",
+        "bob:5001",
+        "--hydra-scripts-tx-id",
+        "5afc8e027e3b246f1f8cc8d458b4fc57fa1ff2232929ac4b22cb9f91d2102b0f,86d8fdc7c5a610edb30c679f4bd0b61cd1230a538911551ad31db3b7b931c316",
+        "--hydra-signing-key",
+        "/keys/alice.sk",
+        "--hydra-verification-key",
+        "/keys/bob.vk",
+        "--cardano-signing-key",
+        "/devnet/credentials/alice.sk",
+        "--cardano-verification-key",
+        "/devnet/credentials/bob.vk",
+        "--ledger-protocol-parameters",
+        "/devnet/hydra-parameters.json",
+        "--testnet-magic",
+        "42",
+        "--node-socket",
+        "/devnet/node.socket",
+        "--persistence-dir",
+        "/devnet/arena-hydra/alice",
+        "--contestation-period",
+        "3s",
+        "--deposit-period",
+        "10s",
+        "--deposit-activation",
+        "10s",
+        "--advertise",
+        "alice:5001"
+      ]
+    },
+    "bob": {
+      "image": "ghcr.io/cardano-scaling/hydra-node:2.4.1",
+      "volumes": [
+        "/Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/alt/hydra/demo:/keys:ro",
+        "/Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/alt/hydra/demo/devnet:/devnet"
+      ],
+      "ports": [
+        "127.0.0.1:4402:4001"
+      ],
+      "command": [
+        "--node-id",
+        "2",
+        "--api-host",
+        "0.0.0.0",
+        "--listen",
+        "0.0.0.0:5001",
+        "--peer",
+        "alice:5001",
+        "--hydra-scripts-tx-id",
+        "5afc8e027e3b246f1f8cc8d458b4fc57fa1ff2232929ac4b22cb9f91d2102b0f,86d8fdc7c5a610edb30c679f4bd0b61cd1230a538911551ad31db3b7b931c316",
+        "--hydra-signing-key",
+        "/keys/bob.sk",
+        "--hydra-verification-key",
+        "/keys/alice.vk",
+        "--cardano-signing-key",
+        "/devnet/credentials/bob.sk",
+        "--cardano-verification-key",
+        "/devnet/credentials/alice.vk",
+        "--ledger-protocol-parameters",
+        "/devnet/hydra-parameters.json",
+        "--testnet-magic",
+        "42",
+        "--node-socket",
+        "/devnet/node.socket",
+        "--persistence-dir",
+        "/devnet/arena-hydra/bob",
+        "--contestation-period",
+        "3s",
+        "--deposit-period",
+        "10s",
+        "--deposit-activation",
+        "10s",
+        "--advertise",
+        "bob:5001"
+      ]
+    }
+  }
+}

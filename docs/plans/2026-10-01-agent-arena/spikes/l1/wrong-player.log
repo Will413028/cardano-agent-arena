@@ -1,0 +1,49 @@
+Command failed: transaction build
+Error: The following scripts have execution failures:
+the script for transaction input 1 (in ascending order of the TxIds) failed with: 
+Script hash: 581c40a6e5e784f4041a166ef40fabcaccf754ce5aadd1ab72cb12b75fd1
+Script language: PlutusV3
+Protocol version: Version 11
+Script arguments: 
+   ScriptInfo: SpendingScript (TxOutRef {txOutRefId = de7690d34bbed8fc470e383e6e27860b5369b56457436a82c54fd68d65cc75ff, txOutRefIdx = 0}) (Just (Datum {getDatum = Constr 0 [List [I 0],I 1,List [B "\248\166\140\209\142Y\166\172\232H\NAKZ\SO\150z\246OM\NUL\207\138\206\232\173\201Zk\r",B "\DLER8a6\179G\243\187|g\254?.\228\239\DC2\SO\CAN6\229\210p{\176h\175\166"],B "D\244\ACK\185hQ\201:\f\ENQO\199\\\DLE}\169xAc\198\214N\225\DC2]\172\250\""]}))
+   TxInfo:
+     TxId: 5dd76b0cc85a10a1f3b773b02c81e684b8cf6a878472e3894669cc2883480343
+     Inputs: [ d0e8da2a65436b5097aaf6802159cac7ec13918d9ad841f75f76fdd7cedda503!2 -> - Value {getValue = Map {unMap = [(,Map {unMap = [(0x,100000000)]})]}} addressed to
+                                                                                       PubKeyCredential: 1052386136b347f3bb7c67fe3f2ee4ef120e1836e5d2707bb068afa6 (no staking credential)
+                                                                                       with datum
+                                                                                       no datum
+                                                                                       with referenceScript
+
+             , de7690d34bbed8fc470e383e6e27860b5369b56457436a82c54fd68d65cc75ff!0 -> - Value {getValue = Map {unMap = [(,Map {unMap = [(0x,3000000)]}),(44f406b96851c93a0c054fc75c107da9784163c6d64ee1125dacfa22,Map {unMap = [(0x6172656e61,1)]})]}} addressed to
+                                                                                       ScriptCredential: 40a6e5e784f4041a166ef40fabcaccf754ce5aadd1ab72cb12b75fd1 (no staking credential)
+                                                                                       with datum
+                                                                                       inline datum :  <[0],
+                                                                                       1,
+                                                                                       [+KaM0Y5ZpqzoSBVaDpZ69k9NAM+KzuityVprDQ==,
+                                                                                       EFI4YTazR/O7fGf+Py7k7xIOGDbl0nB7sGivpg==],
+                                                                                       RPQGuWhRyToMBU/HXBB9qXhBY8bWTuESXaz6Ig==>
+                                                                                       with referenceScript
+                                                                                        ]
+     Reference inputs: []
+     Outputs: [ - Value {getValue = Map {unMap = [(,Map {unMap = [(0x,3000000)]}),(44f406b96851c93a0c054fc75c107da9784163c6d64ee1125dacfa22,Map {unMap = [(0x6172656e61,1)]})]}} addressed to
+                  ScriptCredential: 40a6e5e784f4041a166ef40fabcaccf754ce5aadd1ab72cb12b75fd1 (no staking credential)
+                  with datum
+                  inline datum :  <[1, 0],
+                  0,
+                  [+KaM0Y5ZpqzoSBVaDpZ69k9NAM+KzuityVprDQ==,
+                  EFI4YTazR/O7fGf+Py7k7xIOGDbl0nB7sGivpg==],
+                  RPQGuWhRyToMBU/HXBB9qXhBY8bWTuESXaz6Ig==>
+                  with referenceScript
+
+              , - Value {getValue = Map {unMap = [(,Map {unMap = [(0x,100000000)]})]}} addressed to
+                  PubKeyCredential: 1052386136b347f3bb7c67fe3f2ee4ef120e1836e5d2707bb068afa6 (no staking credential)
+                  with datum
+                  no datum
+                  with referenceScript
+                   ]
+     Fee: 0
+     Value minted: UnsafeMintValue {unMintValue = Map {unMap = []}}
+     TxCerts: []
+     Wdrl: []
+     Valid range: (-
+cardano-cli: <stderr>: commitBuffer: invalid argument (cannot encode character '\8734')

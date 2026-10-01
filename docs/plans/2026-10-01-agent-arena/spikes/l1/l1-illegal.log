@@ -1,0 +1,48 @@
+Traceback (most recent call last):
+  File "/Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/l1/run.py", line 48, in <module>
+    output=cli("transaction","build","--testnet-magic",42,"--tx-in",funding,"--tx-in",state,"--tx-in-script-file",script,"--tx-in-inline-datum-present","--tx-in-redeemer-file",redeemer,"--tx-in-collateral",collateral,"--tx-out",address+"+3000000","--tx-out-inline-datum-file",d,"--change-address",faucet,"--out-file","/devnet/"+name+".body")
+  File "/Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/l1/run.py", line 8, in cli
+    if p.returncode: raise RuntimeError(p.stderr)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Command failed: transaction build
+Error: The following scripts have execution failures:
+the script for transaction input 0 (in ascending order of the TxIds) failed with: 
+Script hash: 581c9eda84a201c915d7f2d41185bac419f9d2e1d30f1818072a4022c4b6
+Script language: PlutusV3
+Protocol version: Version 11
+Script arguments: 
+   ScriptInfo: SpendingScript (TxOutRef {txOutRefId = 7eb850c0f9febb17c1f545572a07048b69b5127a25e8c86bf111af9b170d0e5c, txOutRefIdx = 0}) (Just (Datum {getDatum = Constr 0 [List [I 0],I 1]}))
+   TxInfo:
+     TxId: 8d468177dcf3ca74c4c5c2b63adb3ba6ab2f4e7472ab9b9f222f9a74e45439b4
+     Inputs: [ 7eb850c0f9febb17c1f545572a07048b69b5127a25e8c86bf111af9b170d0e5c!0 -> - Value {getValue = Map {unMap = [(,Map {unMap = [(0x,3000000)]})]}} addressed to
+                                                                                       ScriptCredential: 9eda84a201c915d7f2d41185bac419f9d2e1d30f1818072a4022c4b6 (no staking credential)
+                                                                                       with datum
+                                                                                       inline datum :  <[0],
+                                                                                       1>
+                                                                                       with referenceScript
+
+             , 7eb850c0f9febb17c1f545572a07048b69b5127a25e8c86bf111af9b170d0e5c!1 -> - Value {getValue = Map {unMap = [(,Map {unMap = [(0x,899959839651)]})]}} addressed to
+                                                                                       PubKeyCredential: 9783be7d3c54f11377966dfabc9284cd6c32fca1cd42ef0a4f1cc45b (no staking credential)
+                                                                                       with datum
+                                                                                       no datum
+                                                                                       with referenceScript
+                                                                                        ]
+     Reference inputs: []
+     Outputs: [ - Value {getValue = Map {unMap = [(,Map {unMap = [(0x,3000000)]})]}} addressed to
+                  ScriptCredential: 9eda84a201c915d7f2d41185bac419f9d2e1d30f1818072a4022c4b6 (no staking credential)
+                  with datum
+                  inline datum :  <[0, 0], 0>
+                  with referenceScript
+
+              , - Value {getValue = Map {unMap = [(,Map {unMap = [(0x,899959839651)]})]}} addressed to
+                  PubKeyCredential: 9783be7d3c54f11377966dfabc9284cd6c32fca1cd42ef0a4f1cc45b (no staking credential)
+                  with datum
+                  no datum
+                  with referenceScript
+                   ]
+     Fee: 0
+     Value minted: UnsafeMintValue {unMintValue = Map {unMap = []}}
+     TxCerts: []
+     Wdrl: []
+     Valid range: (-
+cardano-cli: <stderr>: commitBuffer: invalid argument (cannot encode character '\8734')

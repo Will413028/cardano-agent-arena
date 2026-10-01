@@ -1,0 +1,277 @@
+{
+  "policy": "44f406b96851c93a0c054fc75c107da9784163c6d64ee1125dacfa22",
+  "minimum": "Coin 1495570",
+  "rows": [
+    {
+      "actor": "alice",
+      "txid": "de7690d34bbed8fc470e383e6e27860b5369b56457436a82c54fd68d65cc75ff",
+      "bytes": 1681,
+      "seconds": 0.42951479204930365,
+      "view": {
+        "auxiliary scripts": null,
+        "certificates": null,
+        "collateral inputs": [
+          "d0e8da2a65436b5097aaf6802159cac7ec13918d9ad841f75f76fdd7cedda503#3"
+        ],
+        "currentTreasuryValue": null,
+        "datums": [],
+        "era": "Conway",
+        "fee": "254656 Lovelace",
+        "governance actions": [],
+        "inputs": [
+          "d0e8da2a65436b5097aaf6802159cac7ec13918d9ad841f75f76fdd7cedda503#0",
+          "d0e8da2a65436b5097aaf6802159cac7ec13918d9ad841f75f76fdd7cedda503#1"
+        ],
+        "metadata": null,
+        "mint": null,
+        "outputs": [
+          {
+            "address": "addr_test1wpq2de08sn6qgxskdm6ql272enm4fnj64hg6kuktz2m4l5g43qcvz",
+            "address era": "Shelley",
+            "amount": {
+              "lovelace": 3000000,
+              "policy 44f406b96851c93a0c054fc75c107da9784163c6d64ee1125dacfa22": {
+                "asset 6172656e61 (arena)": 1
+              }
+            },
+            "datum": {
+              "constructor": 0,
+              "fields": [
+                {
+                  "list": [
+                    {
+                      "int": 0
+                    }
+                  ]
+                },
+                {
+                  "int": 1
+                },
+                {
+                  "list": [
+                    {
+                      "bytes": "f8a68cd18e59a6ace848155a0e967af64f4d00cf8acee8adc95a6b0d"
+                    },
+                    {
+                      "bytes": "1052386136b347f3bb7c67fe3f2ee4ef120e1836e5d2707bb068afa6"
+                    }
+                  ]
+                },
+                {
+                  "bytes": "44f406b96851c93a0c054fc75c107da9784163c6d64ee1125dacfa22"
+                }
+              ]
+            },
+            "network": "Testnet",
+            "payment credential script hash": "40a6e5e784f4041a166ef40fabcaccf754ce5aadd1ab72cb12b75fd1",
+            "reference script": null,
+            "stake reference": null
+          },
+          {
+            "address": "addr_test1vru2drx33ev6dt8gfq245r5k0tmy7ngqe79va69de9dxkrg09c7d3",
+            "address era": "Shelley",
+            "amount": {
+              "lovelace": 99745344
+            },
+            "datum": null,
+            "network": "Testnet",
+            "payment credential key hash": "f8a68cd18e59a6ace848155a0e967af64f4d00cf8acee8adc95a6b0d",
+            "reference script": null,
+            "stake reference": null
+          }
+        ],
+        "redeemers": [
+          {
+            "purpose": {
+              "spending script witnessed input": "d0e8da2a65436b5097aaf6802159cac7ec13918d9ad841f75f76fdd7cedda503#0"
+            },
+            "redeemer": {
+              "data": "I 0",
+              "execution units": {
+                "memory": 142643,
+                "steps": 50151968
+              }
+            }
+          }
+        ],
+        "reference inputs": [],
+        "required signers (payment key hashes needed for scripts)": [
+          "f8a68cd18e59a6ace848155a0e967af64f4d00cf8acee8adc95a6b0d"
+        ],
+        "return collateral": {
+          "address": "addr_test1vru2drx33ev6dt8gfq245r5k0tmy7ngqe79va69de9dxkrg09c7d3",
+          "address era": "Shelley",
+          "amount": {
+            "lovelace": 9618016
+          },
+          "datum": null,
+          "network": "Testnet",
+          "payment credential key hash": "f8a68cd18e59a6ace848155a0e967af64f4d00cf8acee8adc95a6b0d",
+          "reference script": null,
+          "stake reference": null
+        },
+        "scripts": [
+          {
+            "script data": {
+              "plutus version": "PlutusV3",
+              "script": "59043959043601010029800aba2aba1aba0aab9faab9eaab9dab9a488888896600264653001300830090019b874800a60100049112cc004c008c01cdd5001c4ca60026018003300c300d0019b87480026eb4c030015222259800980118061baa0038cc004c040c034dd5001c8c044c0480064602260246024003374a90002444464b300130073011375400313259800980418091baa001899192cc004c06400626464b30013370e9002180b1baa001899912cc004c038c060dd500144c8c8c8ca60026eb8c0800066eb4c08000e6eb0c08000922259800981200244cc020dd61811803912cc00400a26601400644b30010028acc004cdc4a400003115980099b88018480ca2b3001980099198008009bac30283025375403044b30010018a508acc004cdc39bad302900101a8a518998010011815000a048409d4a14a281122b3001323322330020020012259800800c528456600266e3cdd71815000801c528c4cc008008c0ac00502520503758605060526052605260526052605260526052604a6ea8078dd7181398121baa013899912cc004c08260026eacc060c098dd5180c18131baa0139bae300230263754033489056172656e6100400515980098104c004dd5980c18131baa0119bae3002302637540334881056172656e6100400513375e01e602c660506e9ccc0a0dd400d1bac302930263754032660506ea0cdc0a40046eb4c060c098dd500c9815181518131baa0198a50409114a081208c0a0c0a4c0a4c0a4004888c8cc88cc0080080048966002003003899192cc004cdc8803000c56600266e3c01800626eb4c0b000a00a815226600800860600068150dd718150009816800a0563232330010010062259800800c00e26464b30013372201000315980099b8f00800189bab302d002802a0568998020021818801a056375c6056002605c002816052f5bded8c029000452820448a50408914a08112294102244c8c008c0a400cdd71813801204a899180118138019bad3025002408d1640843020001301f001301e0013019375400516405c6034602e6ea800488c8cc00400400c88cc00c004c00800a2c80a8c01cc058dd5000980c000c5901619198008009bac30063015375401c44b30010018a5eb8226644b30013375e603660306ea8008c06cc060dd51805180c1baa00589980d00119802002000c4cc010010005016180c800980d000a02e30163013375400316404464660020026eb0c058c04cdd5006112cc004006298103d87a80008992cc004cdd7980c180a9baa00100c898029980b800a5eb8226600600660320048098c05c005015459010194c004c0040066eb4c010c048dd5002cdd6180198091baa00548896600266e2000920008a6103d87a800089980180080120261112cc00400a298103d87a80008acc004c024006260086602c602e00497ae08cc00400e6030005337009000800a006404880a916402c3008375400714a08030601000260066ea802229344d9590011",
+              "type": "plutus"
+            },
+            "script hash": "40a6e5e784f4041a166ef40fabcaccf754ce5aadd1ab72cb12b75fd1"
+          }
+        ],
+        "total collateral": 381984,
+        "treasuryDonation": 0,
+        "validity range": {
+          "lower bound": null,
+          "upper bound": null
+        },
+        "voters": {},
+        "withdrawals": null,
+        "witnesses": [
+          {
+            "key": "VKey (VerKeyEd25519DSIGN \"eb94e8236e2099357fa499bfbc415968691573f25ec77435b7949f5fdfaa5da0\")",
+            "signature": "SignedDSIGN (SigEd25519DSIGN \"ff7a1014156f8403950da558d158933edf2562b166bed31a40103bd3caf176e87f960a92d7a3b836bd807ee9edc6f8b25b610bb815a4303b46f7d6d18e098c01\")"
+          }
+        ]
+      }
+    },
+    {
+      "actor": "bob",
+      "txid": "87ec1d7c58ba64a3c04c58fe617f4cd1ab5fb1691dbf7e8f979ec89e00dc658e",
+      "bytes": 1682,
+      "seconds": 0.49254270805977285,
+      "view": {
+        "auxiliary scripts": null,
+        "certificates": null,
+        "collateral inputs": [
+          "d0e8da2a65436b5097aaf6802159cac7ec13918d9ad841f75f76fdd7cedda503#4"
+        ],
+        "currentTreasuryValue": null,
+        "datums": [],
+        "era": "Conway",
+        "fee": "255836 Lovelace",
+        "governance actions": [],
+        "inputs": [
+          "d0e8da2a65436b5097aaf6802159cac7ec13918d9ad841f75f76fdd7cedda503#2",
+          "de7690d34bbed8fc470e383e6e27860b5369b56457436a82c54fd68d65cc75ff#0"
+        ],
+        "metadata": null,
+        "mint": null,
+        "outputs": [
+          {
+            "address": "addr_test1wpq2de08sn6qgxskdm6ql272enm4fnj64hg6kuktz2m4l5g43qcvz",
+            "address era": "Shelley",
+            "amount": {
+              "lovelace": 3000000,
+              "policy 44f406b96851c93a0c054fc75c107da9784163c6d64ee1125dacfa22": {
+                "asset 6172656e61 (arena)": 1
+              }
+            },
+            "datum": {
+              "constructor": 0,
+              "fields": [
+                {
+                  "list": [
+                    {
+                      "int": 1
+                    },
+                    {
+                      "int": 0
+                    }
+                  ]
+                },
+                {
+                  "int": 0
+                },
+                {
+                  "list": [
+                    {
+                      "bytes": "f8a68cd18e59a6ace848155a0e967af64f4d00cf8acee8adc95a6b0d"
+                    },
+                    {
+                      "bytes": "1052386136b347f3bb7c67fe3f2ee4ef120e1836e5d2707bb068afa6"
+                    }
+                  ]
+                },
+                {
+                  "bytes": "44f406b96851c93a0c054fc75c107da9784163c6d64ee1125dacfa22"
+                }
+              ]
+            },
+            "network": "Testnet",
+            "payment credential script hash": "40a6e5e784f4041a166ef40fabcaccf754ce5aadd1ab72cb12b75fd1",
+            "reference script": null,
+            "stake reference": null
+          },
+          {
+            "address": "addr_test1vqg9ywrpx6e50uam03nlu0ewunh3yrscxmjayurmkp52lfskgkq5k",
+            "address era": "Shelley",
+            "amount": {
+              "lovelace": 99744164
+            },
+            "datum": null,
+            "network": "Testnet",
+            "payment credential key hash": "1052386136b347f3bb7c67fe3f2ee4ef120e1836e5d2707bb068afa6",
+            "reference script": null,
+            "stake reference": null
+          }
+        ],
+        "redeemers": [
+          {
+            "purpose": {
+              "spending script witnessed input": "de7690d34bbed8fc470e383e6e27860b5369b56457436a82c54fd68d65cc75ff#0"
+            },
+            "redeemer": {
+              "data": "I 1",
+              "execution units": {
+                "memory": 155663,
+                "steps": 55483571
+              }
+            }
+          }
+        ],
+        "reference inputs": [],
+        "required signers (payment key hashes needed for scripts)": [
+          "1052386136b347f3bb7c67fe3f2ee4ef120e1836e5d2707bb068afa6"
+        ],
+        "return collateral": {
+          "address": "addr_test1vqg9ywrpx6e50uam03nlu0ewunh3yrscxmjayurmkp52lfskgkq5k",
+          "address era": "Shelley",
+          "amount": {
+            "lovelace": 9616246
+          },
+          "datum": null,
+          "network": "Testnet",
+          "payment credential key hash": "1052386136b347f3bb7c67fe3f2ee4ef120e1836e5d2707bb068afa6",
+          "reference script": null,
+          "stake reference": null
+        },
+        "scripts": [
+          {
+            "script data": {
+              "plutus version": "PlutusV3",
+              "script": "59043959043601010029800aba2aba1aba0aab9faab9eaab9dab9a488888896600264653001300830090019b874800a60100049112cc004c008c01cdd5001c4ca60026018003300c300d0019b87480026eb4c030015222259800980118061baa0038cc004c040c034dd5001c8c044c0480064602260246024003374a90002444464b300130073011375400313259800980418091baa001899192cc004c06400626464b30013370e9002180b1baa001899912cc004c038c060dd500144c8c8c8ca60026eb8c0800066eb4c08000e6eb0c08000922259800981200244cc020dd61811803912cc00400a26601400644b30010028acc004cdc4a400003115980099b88018480ca2b3001980099198008009bac30283025375403044b30010018a508acc004cdc39bad302900101a8a518998010011815000a048409d4a14a281122b3001323322330020020012259800800c528456600266e3cdd71815000801c528c4cc008008c0ac00502520503758605060526052605260526052605260526052604a6ea8078dd7181398121baa013899912cc004c08260026eacc060c098dd5180c18131baa0139bae300230263754033489056172656e6100400515980098104c004dd5980c18131baa0119bae3002302637540334881056172656e6100400513375e01e602c660506e9ccc0a0dd400d1bac302930263754032660506ea0cdc0a40046eb4c060c098dd500c9815181518131baa0198a50409114a081208c0a0c0a4c0a4c0a4004888c8cc88cc0080080048966002003003899192cc004cdc8803000c56600266e3c01800626eb4c0b000a00a815226600800860600068150dd718150009816800a0563232330010010062259800800c00e26464b30013372201000315980099b8f00800189bab302d002802a0568998020021818801a056375c6056002605c002816052f5bded8c029000452820448a50408914a08112294102244c8c008c0a400cdd71813801204a899180118138019bad3025002408d1640843020001301f001301e0013019375400516405c6034602e6ea800488c8cc00400400c88cc00c004c00800a2c80a8c01cc058dd5000980c000c5901619198008009bac30063015375401c44b30010018a5eb8226644b30013375e603660306ea8008c06cc060dd51805180c1baa00589980d00119802002000c4cc010010005016180c800980d000a02e30163013375400316404464660020026eb0c058c04cdd5006112cc004006298103d87a80008992cc004cdd7980c180a9baa00100c898029980b800a5eb8226600600660320048098c05c005015459010194c004c0040066eb4c010c048dd5002cdd6180198091baa00548896600266e2000920008a6103d87a800089980180080120261112cc00400a298103d87a80008acc004c024006260086602c602e00497ae08cc00400e6030005337009000800a006404880a916402c3008375400714a08030601000260066ea802229344d9590011",
+              "type": "plutus"
+            },
+            "script hash": "40a6e5e784f4041a166ef40fabcaccf754ce5aadd1ab72cb12b75fd1"
+          }
+        ],
+        "total collateral": 383754,
+        "treasuryDonation": 0,
+        "validity range": {
+          "lower bound": null,
+          "upper bound": null
+        },
+        "voters": {},
+        "withdrawals": null,
+        "witnesses": [
+          {
+            "key": "VKey (VerKeyEd25519DSIGN \"fb1e80f6b5c0ef33d1b68215389d0ac836412a99edfac8bb203eb1d782342ab3\")",
+            "signature": "SignedDSIGN (SigEd25519DSIGN \"6d428f7912e9ab3285268ef5ce0cfffc663746a59e3053c9b5b077da7a19c71a8eb383a31503ebfe6d2f03b29690ecb8dd2de5e7e5e7f1aeb80d4ccefcc54b00\")"
+          }
+        ]
+      }
+    }
+  ]
+}

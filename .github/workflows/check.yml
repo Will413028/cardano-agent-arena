@@ -1,0 +1,31 @@
+name: check
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  walking-skeleton:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Pinned local-chain images
+        run: |
+          docker pull ghcr.io/intersectmbo/cardano-node:11.1.2
+          docker pull cardanosolutions/ogmios:v7.0.0
+      - run: make check
+      - name: Preserve acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: devnet-evidence
+          path: |
+            .local/devnet/*/acceptance.json
+            .local/devnet/*/*.index.json
+          if-no-files-found: ignore

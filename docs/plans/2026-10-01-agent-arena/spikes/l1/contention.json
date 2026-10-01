@@ -1,0 +1,26 @@
+{
+  "shared_state": "87dcf68a8c2784034a2652880fe26c95185cb0a033e28d62457fb1ecf383f97d#0",
+  "distinct_funding": [
+    "87dcf68a8c2784034a2652880fe26c95185cb0a033e28d62457fb1ecf383f97d#1",
+    "208f5358fda905ccdf1f71d6c0998ec29218c44e6d563f331a4be80778088d19#1"
+  ],
+  "attempts": [
+    {
+      "actor": 0,
+      "accepted": true,
+      "response": "{\"txhash\":\"44898b98b8b40040ab67db17862e70fb6b5ddabb2d7e57956bbc084078a3a76f\"}"
+    },
+    {
+      "actor": 1,
+      "accepted": false,
+      "error": "Command failed: transaction submit\nError: Error while submitting tx: ShelleyTxValidationError ShelleyBasedEraConway (ConwayApplyTxError (ConwayUtxowFailure (UtxoFailure (BadInputsUTxO (NonEmptySet (fromList [TxIn (TxId {unTxId = SafeHash \"87dcf68a8c2784034a2652880fe26c95185cb0a033e28d62457fb1ecf383f97d\"}) (TxIx {unTxIx = 0})])))) :| [ConwayUtxowFailure (UtxoFailure (ValueNotConservedUTxO Mismatch (RelEQ) {supplied: MaryValue (Coin 10000000) (MultiAsset (fromList [])), expected: MaryValue (Coin 13000000) (MultiAsset (fromList []))})),ConwayUtxowFailure (ScriptIntegrityHashMismatch Mismatch (RelEQ) {supplied: SJust (SafeHash \"5032a5f0ca64f0f55c8d64fb4a68f9f36e46649605f1b98a0c6238c5351104fa\"), expected: SJust (SafeHash \"06bb0d48c4a64c88757bc8c3ae640cbea33236c0b618f8038abb877a900dc725\")} (SJust \"\\161\\130\\NUL\\SOH\\130\\ETX\\130\\SUB\\NUL\\SOH6\\DLE\\SUB\\SOH\\237\\\\Q\\160\")),ConwayUtxowFailure (ExtraRedeemers (ConwaySpending (AsIx {unAsIx = 1}) :| [])),ConwayUtxowFailure (ExtraneousScriptWitnessesUTXOW (NonEmptySet (fromList [ScriptHash \"9eda84a201c915d7f2d41185bac419f9d2e1d30f1818072a4022c4b6\"])))]))\nCallStack (from HasCallStack):\n  fromExceptTCli, called at src/Cardano/CLI/EraBased/Transaction/Run.hs:109:36 in cardano-cli-11.2.3.0-LlJQ5yOwyKlAELO3N5FRir:Cardano.CLI.EraBased.Transaction.Run\n  runTransactionCmds, called at src/Cardano/CLI/EraBased/Run.hs:61:5 in cardano-cli-11.2.3.0-LlJQ5yOwyKlAELO3N5FRir:Cardano.CLI.EraBased.Run\n  runCmds, called at src/Cardano/CLI/EraBased/Run.hs:35:35 in cardano-cli-11.2.3.0-LlJQ5yOwyKlAELO3N5FRir:Cardano.CLI.EraBased.Run\n  runAnyEraCommand, called at src/Cardano/CLI/Run.hs:56:5 in cardano-cli-11.2.3.0-LlJQ5yOwyKlAELO3N5FRir:Cardano.CLI.Run\n  runClientCommand, called at app/cardano-cli.hs:58:14 in cardano-cli-11.2.3.0-JfDlXR1dSad3SJ7DZRzVJ2-cardano-cli:Main\n\n"
+    }
+  ],
+  "retry": {
+    "actor": 1,
+    "accepted": true,
+    "response": "{\"txhash\":\"81dfaf7607afbc164194e7d82df045a09ed5f812666fffe73f358868455f8649\"}"
+  },
+  "retry_count": 1,
+  "total_seconds": 0.9204940419876948
+}

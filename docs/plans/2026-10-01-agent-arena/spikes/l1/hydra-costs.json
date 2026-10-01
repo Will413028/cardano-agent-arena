@@ -1,0 +1,14 @@
+{
+  "init_fee_lovelace": 518266,
+  "deposit_fee_lovelace": 183321,
+  "close_fee_lovelace": 676477,
+  "fanout_fee_lovelace": 1250127,
+  "total_lovelace": 2628191,
+  "basis": "Alice fuel wallet delta; init datum holds 2538590 lovelace and is returned by fanout; no external transfer to Alice during head lifecycle",
+  "wallet_initial": 109745344,
+  "wallet_final": 107117153,
+  "init_txid": "216b108fbd9fc7024dc79bbefafe75b13e79de3ce324249e7f23a4132c4e117e",
+  "deposit_txid": "0a13cd49732024c984f2ef232135419a32c7b9f2aca9867b0d9caea0a50ab5f9",
+  "close_txid": "ade9d3633d3ae21108ccabed36a35c0c378fc0f8f9ddbe355b8b651087d4abab",
+  "fanout_txid": "58f6bd859e75a08c6c38e5d162c3f8f1eb6768b928cddb845a141a3f337c7e2f"
+}
