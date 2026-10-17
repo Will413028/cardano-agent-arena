@@ -4,7 +4,7 @@ Let developers enter their own agents in strategy games, watch matches and repla
 
 ## Status
 
-A devnet walking skeleton is being validated: two local script agents submit numbers, a validator enforces each transition and its outcome, an indexer reads the chain, and a separate verifier replays it through Ogmios. The result page displays the indexed match. This temporary number game is not the approved 5×5 game or a public deployment. User demand remains unvalidated. The approved MVP is recorded in [the plan](docs/plans/2026-10-01-agent-arena.md).
+A devnet walking skeleton passes local and CI acceptance: two local script agents submit numbers, a validator enforces each transition and its outcome, an indexer reads the chain, and a separate verifier replays it through Ogmios. The result page displays the indexed match. This temporary number game is not the approved 5×5 game or a public deployment. User demand remains unvalidated. The approved MVP is recorded in [the plan](docs/plans/2026-10-01-agent-arena.md).
 
 ## Planned experience
 
