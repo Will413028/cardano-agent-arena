@@ -449,7 +449,7 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
 
 | 發現 | 處理 |
 |---|---|
-| ADR 的預期成果寫「`scripts/`、`test/` 沒有任何 `child_process`」，但 4.5b 驗收的 rg 只禁 `cardano-cli`／`docker exec`，harness 仍要起容器、E2E 仍要開獨立行程重播 | 提。兩份權威文件互相牴觸，交給 Will；4.5b 先照計畫的驗收做（docker CLI 改成非同步 `execFile` 加 AbortSignal） |
+| ADR 的預期成果寫「`scripts/`、`test/` 沒有任何 `child_process`」，但 4.5b 驗收的 rg 只禁 `cardano-cli`／`docker exec`，harness 仍要起容器、E2E 仍要開獨立行程重播 | 提。Will 2026-10-18 選修正 ADR：子程序只禁於 `offchain/` 與 `verifier/`；harness 的 docker CLI 改成非同步 `execFile` 加 AbortSignal |
 | 當機或被殺時會留下整套 Yaci 的孤兒容器 | 記。E2E 攔 SIGINT／SIGTERM 時移除自己的容器（實測中斷後無殘留）；SIGKILL 仍會殘留，README 寫明依 label 清除的指令。觸發條件：本機累積殘留成為常態時改用 reaper |
 | `.local/devnet-session.json` 是全域單檔，連續兩次 `devnet-up` 會讓第一個實例變孤兒 | 改。`devnet-up` 遇到既有 session 就拒絕啟動；手動 session 一個 checkout 一個，並行實例只屬於測試 |
 | `Devnet.directory` 與 `ROOT` 是 cardano-cli bind mount 時代的殘留，產生器因 `ROOT` 依賴 harness | 改。harness 只回傳容器名與 Ogmios／Kupo endpoint；證據目錄由 E2E 管理；產生器自己算路徑 |

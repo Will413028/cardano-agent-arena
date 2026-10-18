@@ -60,7 +60,7 @@ Walking skeleton（`7d750cf`）為了快，交易全部在 devnet node 容器內
 
 ## Expected Outcome
 
-- `offchain/`、`scripts/`、`test/` 裡沒有任何 `cardano-cli`、`docker exec` 或 `child_process` 呼叫（用 `rg` 驗證）；devnet 就緒只看 Ogmios 和 Kupo 的健康狀態。
+- `offchain/`、`scripts/`、`test/` 裡沒有任何 `cardano-cli` 或 `docker exec` 呼叫，`offchain/` 與 `verifier/` 裡沒有 `child_process`（用 `rg` 驗證）；devnet harness 起停容器、E2E 以獨立行程重播 verifier 仍可用子程序，因為禁用的理由（玩家端沒有 node socket、CLI 阻塞逾時）不適用於它們（2026-10-18 Will 確認）。devnet 就緒只看 Ogmios 和 Kupo 的健康狀態。
 - `make check` 在本機與 CI 都綠燈，兩個 devnet 實例並行也能過；每次 E2E 都輸出呼叫耗時摘要。
 - verifier 用 `npm pack` 打包、在乾淨目錄安裝後，能重播 devnet 戰局；在 verifier 裡加一行 import 交易建構 SDK，`make check` 就會失敗。
 - 偽造 policy 的建局，以及 token 沒送到 match 地址的建局，在鏈上都被拒絕；拿掉對應檢查後，對應的 Aiken 測試會失敗。
