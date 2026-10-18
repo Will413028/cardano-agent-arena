@@ -132,7 +132,7 @@ Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain
   - 停止條件：所有 SDK 候選都無法完成測項 (1)–(4)，或 Yaci DevKit 與自建 compose 都無法在 ubuntu-latest 啟動時停下，回報選項。
   - 需要人做的事：無（下載屬 session 授權範圍）。
 
-- [ ] **4.5b. devnet 與程式內交易建構**（被擋於：步驟 4.5a；必須在同一批完成：換掉 devnet 後舊的 `cli()` 交易路徑就不能用）
+- [x] **4.5b. devnet 與程式內交易建構**（被擋於：步驟 4.5a；必須在同一批完成：換掉 devnet 後舊的 `cli()` 交易路徑就不能用）
   - 範圍：
     - devnet：依 D13 換掉 `scripts/devnet.ts` 的 `docker run`／`docker exec` 啟動，改用 Yaci DevKit 0.12.0 的 Docker image（`--entrypoint /app/yaci-cli … up --enable-kupomios`）起 node、Ogmios、Kupo；容器生命週期由 harness 自己管理，不用 Yaci 的 npm 啟動器（全域 PID 檔會殺掉別人的實例）也不用 `devkit.sh`。Kupo 設定為 match 全部、不 prune、從 origin（步驟 7 的完整歷史）。每次啟動用唯一的實例名與動態 port，`down` 只移除自己的實例。
     - 就緒條件：Ogmios `/health` 的 `connectionStatus` 為 `connected` 且 `lastKnownTip.height > 0`（Ogmios v7 的欄位，4.5a 實測），加上 Kupo `/health`（帶 `Accept: application/json`）的 `most_recent_checkpoint` ≥ Ogmios tip 的 slot。全部非同步並以 AbortSignal 設逾時，逾時錯誤帶最近的服務 log。
@@ -368,7 +368,7 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
 | 3 Spike：替代執行方式 | 完成 | Hydra 20 步 confirmed snapshots、L1 開關與 deposit 成本、Bob 離線 Close/Fanout；簽章 transcript 曲線與最大 N=84 的 devnet 真實交易、合法／非法與 source mutation；19 Aiken checks；見 spike-alternatives.md | 無（N=84 只適用本 fixture 與 devnet 14M memory，不是 preprod 上限） | |
 | 4 Walking skeleton | 完成 | `48aa0be` 的 CI `make check` 全部通過（run `36868324868`，walking-skeleton job success）：Aiken 4 checks、blueprint 漂移、TS、unit 2 tests、三種勝負、非法交易拒絕、獨立重播、結果頁與 verifier mutation；超時清理修正 `85c7830` 的 CI run `36870994814` 全部 success。2026-10-18 本機（Docker Desktop 29.1.3、linux/arm64 image、8 CPU）在 `858e125` 跑完整 `make check` exit 0，另跑 3 次 `test:e2e` 與 1 次 8 核 CPU 滿載下的 `test:e2e` 皆通過，單次 docker 呼叫最長 894ms | 無。2026-10-01 本機 query tip／transaction build 的 60 秒 timeout 未能重現，根因未證實；當時的 Docker 執行環境已無法核對，CPU 滿載已排除 | `7d750cf`、`48aa0be`、`85c7830` |
 | 4.5a Spike：SDK、Ogmios client、devnet 選型 | 完成 | 三個 SDK 各 9 項（含 mint mutation，mutant 重建後重跑）、官方 Ogmios client 對 devnet 的 chain-sync 與 bigint、Yaci DevKit 在 macOS arm64 與 ubuntu-latest（CI run `39090704534`、`39090888319`）的並行與健康檢查；見 spike-offchain.md | 瀏覽器 bundle 只在 Node 裡載入過，沒有在真的瀏覽器跑；devnet 單一出塊者，真正的 rollback 沒測到 | |
-| 4.5b devnet 與程式內交易建構 | 程式完成待驗收 | 2026-10-18 本機（load 80–150）：改動前基線 `make check` exit 0；改動後 `make check` 兩個同時並行皆 exit 0（各自的 Yaci 容器）；三個非法案例建構時 Ogmios 3010、強行送出 3136，無 `MissingVKeyWitnesses`；mutation：拿掉簽章檢查後錯簽測試在建構層失敗，再略過建構層則在強行送出層失敗；就緒改成只看 HTTP 200 後就緒單元測試 2/3 失敗；`rg -n "cardano-cli\|docker\(['\"]exec\|cli\(net" offchain/ scripts/ test/` 無輸出 | CI `make check`（推上去後補 run id）。就緒 mutation 用 stub 回應：Yaci 0.12.0 的 Ogmios 實測要到已有 block 才連得上，「200 但無 block」在真實 devnet 觀察不到 | |
+| 4.5b devnet 與程式內交易建構 | 完成 | `2fef09d` 的 CI `make check` success（run `39102747529`）。2026-10-18 本機（load 80–150）：改動前基線 `make check` exit 0；改動後 `make check` 兩個同時並行皆 exit 0（各自的 Yaci 容器）；三個非法案例建構時 Ogmios 3010、強行送出 3136，無 `MissingVKeyWitnesses`；mutation：拿掉簽章檢查後錯簽測試在建構層失敗，再略過建構層則在強行送出層失敗；就緒改成只看 HTTP 200 後就緒單元測試 2/3 失敗；`rg -n "cardano-cli\|docker\(['\"]exec\|cli\(net" offchain/ scripts/ test/` 無輸出 | 就緒 mutation 用 stub 回應：Yaci 0.12.0 的 Ogmios 實測要到已有 block 才連得上，「200 但無 block」在真實 devnet 觀察不到 | `2fef09d`、`6cc13ad` |
 | 4.5c verifier 套件、Ogmios client、固定 policy | 未開始 | | 步驟 4.5b | |
 | 4.5d 測試分層與逾時觀測 | 未開始 | | 步驟 4.5c | |
 | 5 規則引擎與測試向量 | 未開始 | | 尚未開工 | |
