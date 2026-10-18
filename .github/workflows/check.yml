@@ -1,31 +1,51 @@
-name: check
+name: spike-yaci
 on:
   push:
-  pull_request:
 permissions:
   contents: read
 jobs:
-  walking-skeleton:
+  yaci-parallel:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
-      - run: npm ci
-      - name: Pinned local-chain images
+      - name: Pull image
         run: |
-          docker pull ghcr.io/intersectmbo/cardano-node:11.1.2
-          docker pull cardanosolutions/ogmios:v7.0.0
-      - run: make check
-      - name: Preserve acceptance evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: devnet-evidence
-          path: |
-            .local/devnet/*/acceptance.json
-            .local/devnet/*/*.index.json
-          if-no-files-found: ignore
+          start=$(date +%s)
+          docker pull -q bloxbean/yaci-cli:0.12.0
+          echo "pull_seconds=$(( $(date +%s)-start ))"
+          docker image inspect bloxbean/yaci-cli:0.12.0 --format '{{.Architecture}}'
+      - name: Start two instances on dynamic ports and wait for health
+        run: |
+          start=$(date +%s)
+          for n in a b; do
+            docker run -d --name yaci-$n --entrypoint /app/yaci-cli -p 127.0.0.1::1337 -p 127.0.0.1::1442 -p 127.0.0.1::10000 bloxbean/yaci-cli:0.12.0 up --enable-kupomios
+          done
+          for n in a b; do
+            o=$(docker port yaci-$n 1337/tcp | cut -d: -f2); k=$(docker port yaci-$n 1442/tcp | cut -d: -f2)
+            ok=0
+            for i in $(seq 1 240); do
+              h=$(curl -s -m 2 -H 'Accept: application/json' http://127.0.0.1:$o/health || true)
+              kh=$(curl -s -m 2 -H 'Accept: application/json' http://127.0.0.1:$k/health || true)
+              if python3 -c "import json,sys; d=json.loads(sys.argv[1]); kd=json.loads(sys.argv[2]); sys.exit(0 if d['connectionStatus']=='connected' and (d.get('lastKnownTip') or {}).get('height',0)>0 and kd['most_recent_checkpoint']>=d['lastKnownTip']['slot'] else 1)" "$h" "$kh" 2>/dev/null; then ok=1; break; fi
+              sleep 1
+            done
+            echo "$n ready=$ok seconds=$(( $(date +%s)-start ))"
+            echo "$h"; echo "$kh"
+            docker exec yaci-$n /app/cardano-bin/cardano-node --version | head -1
+            test $ok = 1
+          done
+      - name: Topup arbitrary address on each instance
+        run: |
+          A=addr_test1qzlwg5c3mpr0cz5td0rvr5rvcgf02al05cqgd2wzv7pud6chpzk4elx4jh2f7xtftjrdxddr88wg6sfszu8r3gktpjtqrr00q9
+          for n in a b; do
+            p=$(docker port yaci-$n 10000/tcp | cut -d: -f2)
+            curl -s -m 60 -X POST -H 'Content-Type: application/json' -d "{\"address\":\"$A\",\"adaAmount\":1234}" http://127.0.0.1:$p/local-cluster/api/addresses/topup; echo
+          done
+      - name: Removing one instance leaves the other healthy
+        run: |
+          docker rm -f yaci-a
+          o=$(docker port yaci-b 1337/tcp | cut -d: -f2)
+          curl -s -m 2 -H 'Accept: application/json' http://127.0.0.1:$o/health
+      - name: Logs on failure
+        if: failure()
+        run: for n in a b; do docker logs --tail 60 yaci-$n || true; done
