@@ -1,0 +1,9 @@
+Failure
+message: Kupmios getProtocolParameters failed
+cause[0]: (parseJson <-> JSONRPCSchema)
+└─ Type side transformation failure
+   └─ JSONRPCSchema
+      └─ ["result"]
+         └─ ProtocolParametersSchema
+            └─ ["maxReferenceScriptsSize"]
+               └─ is missing

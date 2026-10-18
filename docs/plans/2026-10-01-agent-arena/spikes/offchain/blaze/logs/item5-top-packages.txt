@@ -1,0 +1,15 @@
+@emurgo/cardano-message-signing-browser 434473
+libsodium-sumo 413692
+@cardano-sdk/core 305573
+libsodium-wrappers-sumo 121967
+@sinclair/typebox 47576
+@blaze-cardano/tx 38518
+ip-address 33214
+buffer 25301
+readable-stream 24987
+@noble/curves 21843
+blake2b-wasm 14711
+@noble/hashes 14294
+@blaze-cardano/core 14266
+@scure/bip39 14115
+sha.js 11692

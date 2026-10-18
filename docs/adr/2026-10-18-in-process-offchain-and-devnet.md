@@ -48,7 +48,7 @@ Walking skeleton（`7d750cf`）為了快，交易全部在 devnet node 容器內
 
 ## Decision
 
-- **D13**：選 C，而非 A、B。SDK 由 spike 依固定規則選定：(1)–(8) 項全部通過、採用版本發布滿 14 天、provider 不需修補；同分時取依賴較少者。Yaci DevKit 只要有任一條件不成立（兩平台啟動、PlutusV3、任意地址撥款、並行隔離、Kupo 全部／不 prune／從 origin、免註冊），就自動改用 B。
+- **D13**：選 C，而非 A、B。SDK 由 spike 依固定規則選定：(1)–(8) 項全部通過、採用版本發布滿 14 天、provider 不需修補；同分時取依賴較少者。Yaci DevKit 只要有任一條件不成立（兩平台啟動、PlutusV3、任意地址撥款、並行隔離、Kupo 全部／不 prune／從 origin、免註冊），就自動改用 B。步驟 4.5a 實測後（`docs/plans/2026-10-01-agent-arena/spike-offchain.md`）三個 SDK 都沒有全過，Will 在 2026-10-18 選 Blaze 0.3.1：它是唯一一個 Emulator 送出時會跑 phase-2 的，且自帶 provider 接 Ogmios v7 不需修補；代價是 141 個遞移依賴要靠 lockfile 鎖住、瀏覽器打包要加 shim。備案為依賴最少、但沒有 Emulator 的 Evolution SDK 0.5.16。devnet 用 Yaci DevKit 0.12.0 的 Docker image，容器生命週期自己管理。
 - **D14**：選 E，而非 D、F。verifier 是獨立的 workspace 套件，依允許清單管理依賴，由 `dependency-cruiser` 規則守住。
 - **D15**：選 I，而非 G、H。mint 時驗證 seed 已花用、只鑄一個、送到本地址、初始 datum 合法；spend 時驗證 token 屬於本 policy。burn（G1）在步驟 6 的結算一併做。
 

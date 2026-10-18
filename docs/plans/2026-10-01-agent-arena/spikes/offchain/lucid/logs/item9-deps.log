@@ -1,0 +1,32 @@
+$ (clean dir, package.json deps = {"@lucid-evolution/lucid":"0.6.5"}) npm install --ignore-scripts
+$ npm ls --all --omit=dev --parseable | wc -l
+     150
+$ npm ls --all --omit=dev --parseable | sort -u | wc -l
+     150
+$ du -sh node_modules
+139M	node_modules
+$ npm ls --depth=0
+item9@ /private/tmp/claude-501/-Users-will-second-brain--projects-personal-cardano-agent-arena/***/scratchpad/item9
+└── @lucid-evolution/lucid@0.6.5
+
+$ npm ls effect @effect/schema @cardano-sdk/core @harmoniclabs/uplc libsodium-wrappers-sumo
+item9@ /private/tmp/claude-501/-Users-will-second-brain--projects-personal-cardano-agent-arena/***/scratchpad/item9
+└─┬ @lucid-evolution/lucid@0.6.5
+  ├─┬ @effect/schema@0.66.16
+  │ └── effect@3.22.3 deduped
+  ├─┬ @lucid-evolution/provider@0.2.4
+  │ ├─┬ @effect/platform@0.71.7
+  │ │ └── effect@3.22.3 deduped
+  │ ├─┬ @effect/schema@0.68.27
+  │ │ └── effect@3.22.3 deduped
+  │ └── effect@3.22.3 deduped
+  ├─┬ @lucid-evolution/utils@0.1.74
+  │ ├─┬ @cardano-sdk/core@0.46.15
+  │ │ └─┬ @cardano-sdk/crypto@0.4.7
+  │ │   └── libsodium-wrappers-sumo@0.8.4
+  │ ├─┬ @effect/schema@0.68.27
+  │ │ └── effect@3.22.3 deduped
+  │ ├── @harmoniclabs/uplc@1.4.1
+  │ └── effect@3.22.3 deduped
+  └── effect@3.22.3
+

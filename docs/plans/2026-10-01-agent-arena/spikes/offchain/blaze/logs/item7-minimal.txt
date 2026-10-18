@@ -1,0 +1,28 @@
+$ node build-minimal.mjs
+bundle bytes 449231 gzip 99281 packages 23
+  @cardano-sdk/core 304686
+  ip-address 33214
+  buffer 25301
+  blake2b-wasm 14707
+  @scure/bip39 13144
+  b4a 10167
+  lodash 8383
+  blakejs 7050
+  @blaze-cardano/core 6657
+  @scure/base 5602
+  fraction.js 4917
+  blake2b 4376
+  bech32 2318
+  @cardano-sdk/util 2216
+  base64-js 1473
+  @foxglove/crc 951
+  ieee754 897
+  ts-custom-error 856
+  @cardano-sdk/crypto 333
+  entries/minimal-core.mjs 222
+  nanoassert 208
+  out/buffer-shim.mjs 73
+  web-encoding 23
+cbor d8799f5820000000000000000000000000000000000000000000000000000000000000000102ff == Aiken vector
+name 202f389e4341378fbe9324fa771f648c0bffa23ee7b77d452ebb9a4865b0d918 == Aiken vector
+STATUS PASS

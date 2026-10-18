@@ -1,0 +1,28 @@
+39:[0;93m[💡 Download] [0mDownloading cardano-node from https://github.com/IntersectMBO/cardano-node/releases/download/11.0.1/cardano-node-11.0.1-macos-amd64.tar.gz
+40:  Downloading cardano-node ...
+106:[0;93m[💡 Download] [0mDownloading ogmios from https://github.com/CardanoSolutions/ogmios/releases/download/v7.0.0/ogmios-v7.0.0-aarch64-macos.zip
+107:  Downloading ogmios ...
+108:  Downloading ogmios: 46.0 MB (4s)
+114:[0;93m[💡 Download] [0mDownloading kupo from https://github.com/CardanoSolutions/kupo/releases/download/v2.12/kupo-v2.12.0-aarch64-macos.zip
+115:  Downloading kupo ...
+116:  Downloading kupo: 50.2 MB (4s)
+123:[0;93m[💡 Download] [0mDownloading yano from https://github.com/bloxbean/yano/releases/download/v0.1.0-pre17/yano-native-0.1.0-pre17-macos-arm64.zip
+124:  Downloading yano ...
+125:  Downloading yano: 11% (20.5 MB / 177.4 MB)
+126:  Downloading yano: 32% (58.0 MB / 177.4 MB)
+127:  Downloading yano: 51% (91.6 MB / 177.4 MB)
+128:  Downloading yano: 74% (133.0 MB / 177.4 MB)
+129:  Downloading yano: 177.4 MB (24s)
+265:[0;34m✅ [0mYano is ready
+271:[0;93m💡 [0mUsing Plutus cost models file: plutus-costmodels-v11.json
+275:Submitting Plutus cost models governance proposal...
+276:[0;34m✅ [0mPlutus cost models governance proposal submitted. Tx# : 5f0114373aab878949a2707b885d5a38e9e3156bd3b10873aaaabac5ed12c827
+278:Voting YES on Plutus cost models proposal...
+279:[0;34m✅ [0mDRep voted YES on Plutus cost models proposal. Tx# : 24252a78e1d13f74ceeb97018ca857f4ef72b092554096ccde6e42c2850395af
+281:[0;93m💡 [0mPlutus cost models will be enacted at the next epoch boundary.
+304:[0;34m✅ [0mHaskell node restarted as block producer.
+305:[0;34m✅ [0mStarted submit api : http://localhost:8090
+307:[0;93m💡 [0mSkipping Plutus cost models update - already submitted via Yano bootstrap
+456:[0;34m✅ [0mStarted ogmios : http://localhost:1337
+457:[0;34m✅ [0mStarted kupo : http://localhost:1442
+kupo args (npm distro, measured 2026-10-18): --ogmios-host 0.0.0.0 --ogmios-port 1337 --host 0.0.0.0 --port 1442 --since origin --match * --workdir ~/.yaci-cli/local-clusters/default/kupo_db

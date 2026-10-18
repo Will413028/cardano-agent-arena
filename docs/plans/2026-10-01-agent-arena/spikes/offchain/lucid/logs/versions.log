@@ -1,0 +1,32 @@
+$ npm ls --depth=0
+lucid-spike@ /Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid
+├── @lucid-evolution/lucid@0.6.5
+├── buffer@6.0.3
+├── esbuild-plugin-wasm@1.1.0
+├── esbuild@0.25.10
+└── events@3.3.0
+
+$ npm ls --depth=1 @lucid-evolution/lucid
+lucid-spike@ /Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid
+└── @lucid-evolution/lucid@0.6.5
+
+$ node --version
+v26.10.0
+@anastasia-labs/cardano-multiplatform-lib-browser@6.2.0-1
+@anastasia-labs/cardano-multiplatform-lib-nodejs@6.2.0-1
+@effect/platform@0.71.7
+@effect/schema@0.66.16
+@emurgo/cardano-message-signing-browser@1.1.0
+@emurgo/cardano-message-signing-nodejs@1.1.0
+@lucid-evolution/core-types@0.3.0
+@lucid-evolution/core-utils@0.1.17
+@lucid-evolution/crc8@0.1.8
+@lucid-evolution/lucid@0.6.5
+@lucid-evolution/plutus@0.1.36
+@lucid-evolution/provider@0.2.4
+@lucid-evolution/sign_data@0.1.32
+@lucid-evolution/tx-graph@0.0.6
+@lucid-evolution/uplc@0.2.23
+@lucid-evolution/utils@0.1.74
+@lucid-evolution/wallet@0.2.2
+effect@3.22.3

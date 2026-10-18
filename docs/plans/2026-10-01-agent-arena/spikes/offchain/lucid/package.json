@@ -1,0 +1,14 @@
+{
+  "name": "lucid-spike",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@lucid-evolution/lucid": "0.6.5"
+  },
+  "devDependencies": {
+    "buffer": "6.0.3",
+    "esbuild": "0.25.10",
+    "esbuild-plugin-wasm": "1.1.0",
+    "events": "3.3.0"
+  }
+}

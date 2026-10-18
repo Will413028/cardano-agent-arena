@@ -1,0 +1,17 @@
+$ node build-browser.mjs
+{
+  "full": {
+    "ok": true,
+    "bytes": 1672764,
+    "gzipBytes": 510480,
+    "warnings": 0,
+    "packages": 81
+  },
+  "nosign": {
+    "ok": true,
+    "bytes": 1237561,
+    "gzipBytes": 364360,
+    "warnings": 0,
+    "packages": 80
+  }
+}

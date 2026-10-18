@@ -1,0 +1,11 @@
+{
+  faucet: 'addr_test1qpqy3lufef8c3en9nrnzp2svwy5vy9zangvp46dy4qw23clgfxhn3pqv243d6wptud7fuaj5tjqer7wc7m036gx0emsqaqa8te',
+  txHash: 'd23faa81d69401350ba9726e56da55e011408ee44d6652dd729f7749a2416791'
+}
+[
+  [
+    "d23faa81d69401350ba9726e56da55e011408ee44d6652dd729f7749a2416791",
+    0,
+    20000000
+  ]
+]

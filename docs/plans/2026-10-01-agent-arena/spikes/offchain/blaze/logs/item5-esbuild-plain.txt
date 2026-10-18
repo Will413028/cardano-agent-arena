@@ -1,0 +1,49 @@
+$ esbuild entries/browser-full.mjs --bundle --platform=browser --format=esm --outfile=out/browser-full.js --metafile=out/browser-full.meta.json
+✘ [ERROR] No loader is configured for ".wasm" files: node_modules/@emurgo/cardano-message-signing-browser/cardano_message_signing_bg.wasm
+
+    node_modules/@emurgo/cardano-message-signing-browser/cardano_message_signing.js:1:22:
+      1 │ import * as wasm from "./cardano_message_signing_bg.wasm";
+        ╵                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "path"
+
+    node_modules/@emurgo/cardano-message-signing-nodejs/cardano_message_signing.js:3702:21:
+      3702 │ const path = require('path').join(__dirname, 'cardano_message_si...
+           ╵                      ~~~~~~
+
+  The package "path" wasn't found on the file system but is built into node. Are you trying to bundle for node? You can use "--platform=node" to do that, which will remove this error.
+
+✘ [ERROR] Could not resolve "fs"
+
+    node_modules/@emurgo/cardano-message-signing-nodejs/cardano_message_signing.js:3703:22:
+      3703 │ const bytes = require('fs').readFileSync(path);
+           ╵                       ~~~~
+
+  The package "fs" wasn't found on the file system but is built into node. Are you trying to bundle for node? You can use "--platform=node" to do that, which will remove this error.
+
+✘ [ERROR] Could not resolve "buffer"
+
+    node_modules/safe-buffer/index.js:3:21:
+      3 │ var buffer = require('buffer')
+        ╵                      ~~~~~~~~
+
+  The package "buffer" wasn't found on the file system but is built into node. Are you trying to bundle for node? You can use "--platform=node" to do that, which will remove this error.
+
+✘ [ERROR] Could not resolve "buffer"
+
+    node_modules/ripemd160/index.js:3:21:
+      3 │ var Buffer = require('buffer').Buffer;
+        ╵                      ~~~~~~~~
+
+  The package "buffer" wasn't found on the file system but is built into node. Are you trying to bundle for node? You can use "--platform=node" to do that, which will remove this error.
+
+✘ [ERROR] Could not resolve "events"
+
+    node_modules/readable-stream/lib/_stream_readable.js:42:17:
+      42 │ var EE = require('events').EventEmitter;
+         ╵                  ~~~~~~~~
+
+  The package "events" wasn't found on the file system but is built into node. Are you trying to bundle for node? You can use "--platform=node" to do that, which will remove this error.
+
+6 of 10 errors shown (disable the message limit with --log-limit=0)
+exit=1

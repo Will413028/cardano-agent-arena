@@ -1,0 +1,2 @@
+$ curl -X POST -H 'Content-Type: application/json' -d '{"address":"addr_test1vzd00tvhr57khwuleppwnfth9ww8r9y8xxsw5kdytda409sp69tfg","adaAmount":1000}' http://127.0.0.1:57779/local-cluster/api/addresses/topup
+{"address":"addr_test1vzd00tvhr57khwuleppwnfth9ww8r9y8xxsw5kdytda409sp69tfg","adaAmount":1000.0,"status":false,"message":"Topup failed"}

@@ -1,0 +1,100 @@
+$ KUPMIOS_TIMEOUT_MS=180000 node item8-provider.mjs
+[2026-10-18T03:26:00.789Z] 8a Lucid(Kupmios) init error: ProtocolParametersSchema | └─ ["plutusCostModels"] |    └─ { readonly plutus:v1: ReadonlyArray<number>; readonly plutus:v2: ReadonlyArray<number>; readonly plutus:v3: ReadonlyArray<number> } |       └─ ["plutus:v2"] |          └─ is missing
+[2026-10-18T03:26:21.642Z] 8a getProtocolParameters error: ProtocolParametersSchema | └─ ["plutusCostModels"] |    └─ { readonly plutus:v1: ReadonlyArray<number>; readonly plutus:v2: ReadonlyArray<number>; readonly plutus:v3: ReadonlyArray<number> } |       └─ ["plutus:v2"] |          └─ is missing
+[2026-10-18T03:26:21.648Z] Kupmios requestTimeoutMs for 8b: 180000
+[2026-10-18T03:27:04.770Z] getUtxos(addr) [
+  {
+    "txHash": "88e5334453c3f77720cd201de977077e4b59c1ac25768f8a6f0d65d260f1fe71",
+    "outputIndex": 0,
+    "address": "addr_test1vpfhl74htq50gjguwdu8n8ala59kaaupu2z3y2a5d8u8alcyk2tey",
+    "assets": {
+      "lovelace": "100000000n"
+    }
+  }
+]
+[2026-10-18T03:27:05.130Z] getUtxos(credential) [
+  {
+    "txHash": "88e5334453c3f77720cd201de977077e4b59c1ac25768f8a6f0d65d260f1fe71",
+    "outputIndex": 0,
+    "address": "addr_test1vpfhl74htq50gjguwdu8n8ala59kaaupu2z3y2a5d8u8alcyk2tey",
+    "assets": {
+      "lovelace": "100000000n"
+    }
+  }
+]
+[2026-10-18T03:27:05.267Z] getUtxosByOutRef [
+  {
+    "txHash": "88e5334453c3f77720cd201de977077e4b59c1ac25768f8a6f0d65d260f1fe71",
+    "outputIndex": 0,
+    "address": "addr_test1vpfhl74htq50gjguwdu8n8ala59kaaupu2z3y2a5d8u8alcyk2tey",
+    "assets": {
+      "lovelace": "100000000n"
+    }
+  }
+]
+[2026-10-18T03:27:05.406Z] getTransactionStatus {
+  "status": "confirmed",
+  "txHash": "88e5334453c3f77720cd201de977077e4b59c1ac25768f8a6f0d65d260f1fe71",
+  "confirmation": {
+    "txHash": "88e5334453c3f77720cd201de977077e4b59c1ac25768f8a6f0d65d260f1fe71",
+    "blockHash": "22b9f6497fb7211078763b6f7b80a6fe1ac0e1b38e15fd1c7a8e551a292a2b60",
+    "slot": 3934
+  }
+}
+[2026-10-18T03:27:06.257Z] getTreasury "104386654511653n"
+[2026-10-18T03:27:46.558Z] complete() with provider evaluation took ms: 39996
+[2026-10-18T03:28:10.153Z] mint via provider evaluateTx + submitTx + awaitTx "42352673b5893fddfbd177e949dbdb2c808784ab6b7df1dc69fa4fe6492f9b18"
+[2026-10-18T03:28:10.290Z] getUtxosWithUnit {
+  "txHash": "42352673b5893fddfbd177e949dbdb2c808784ab6b7df1dc69fa4fe6492f9b18",
+  "outputIndex": 0,
+  "address": "addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm",
+  "assets": {
+    "lovelace": "2000000n",
+    "83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550dea1b8c84b184f67d2fd37e5b9a94b451ff15a9baa663d840bb46b70e0a0fbdd86": "1n"
+  },
+  "datum": "d8799f9f581c537ffab75828f4
+[2026-10-18T03:28:10.323Z] getUtxoByUnit {
+  "txHash": "42352673b5893fddfbd177e949dbdb2c808784ab6b7df1dc69fa4fe6492f9b18",
+  "outputIndex": 0,
+  "address": "addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm",
+  "assets": {
+    "lovelace": "2000000n",
+    "83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550dea1b8c84b184f67d2fd37e5b9a94b451ff15a9baa663d840bb46b70e0a0fbdd86": "1n"
+  },
+  "datum": "d8799f9f581c537ffab75828f4
+[2026-10-18T03:28:10.371Z] getUtxosWithPolicy [
+  {
+    "txHash": "42352673b5893fddfbd177e949dbdb2c808784ab6b7df1dc69fa4fe6492f9b18",
+    "outputIndex": 0,
+    "address": "addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm",
+    "assets": {
+      "lovelace": "2000000n",
+      "83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550dea1b8c84b184f67d2fd37e5b9a94b451ff15a9baa663d840bb46b70e0a0fbdd86": "1n"
+    },
+    "datum": "d8799f
+[2026-10-18T03:28:10.387Z] datum decodes (inline via Kupo) {
+  "players": [
+    "537ffab75828f4491c7378799fbfed0b6ef781e285122bb469f87eff",
+    "217d59ee162cc40d07b002605738b8cf9c545b68b6d813aa71a02103"
+  ],
+  "moves": [],
+  "name": "a1b8c84b184f67d2fd37e5b9a94b451ff15a9baa663d840bb46b70e0a0fbdd86",
+  "result": "-1n"
+}
+[2026-10-18T03:28:14.091Z] bob move rejected by provider evaluateTx "Ogmios JSON-RPC error 3010: Some scripts of the transactions terminated with error(s).: [{\"validator\":{\"index\":0,\"purpose\":\"spend\"},\"error\":{\"code\":3012,\"message\":\"Some of the scripts failed to evaluate to a positive outcome. The field 'data.validationError' informs about the nature of the error, and 'data.traces' lists all the execution traces collected during the script execution
+[2026-10-18T03:28:14.104Z] SUMMARY {
+  "init": "FAIL",
+  "getProtocolParameters": "FAIL",
+  "getUtxos(addr)": "ok",
+  "getUtxos(credential)": "ok",
+  "getUtxosByOutRef": "ok",
+  "getTransactionStatus": "ok",
+  "getTreasury": "ok",
+  "mint via provider evaluateTx + submitTx + awaitTx": "ok",
+  "getUtxosWithUnit": "ok",
+  "getUtxoByUnit": "ok",
+  "getUtxosWithPolicy": "ok",
+  "datum decodes (inline via Kupo)": "ok",
+  "bob move rejected by provider evaluateTx": "ok"
+}
+exit=0

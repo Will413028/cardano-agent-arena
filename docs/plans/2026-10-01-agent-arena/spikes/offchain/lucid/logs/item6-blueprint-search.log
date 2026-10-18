@@ -1,0 +1,25 @@
+$ grep -rli "blueprint\|cip-57\|cip57\|plutus.json" node_modules/@lucid-evolution/*/dist node_modules/@lucid-evolution/*/package.json
+exit=1
+$ ls node_modules/.bin
+download-cbor-prebuilds
+esbuild
+node-gyp-build-optional-packages
+node-gyp-build-optional-packages-optional
+node-gyp-build-optional-packages-test
+sha.js
+$ grep -n "bin" node_modules/@lucid-evolution/*/package.json
+exit=1
+$ npm view @lucid-evolution/blueprint version
+npm error code E404
+npm error 404 Not Found - GET https://registry.npmjs.org/@lucid-evolution%2fblueprint - Not found
+npm error 404
+$ npm view @lucid-evolution/codegen version
+npm error code E404
+npm error 404 Not Found - GET https://registry.npmjs.org/@lucid-evolution%2fcodegen - Not found
+npm error 404
+$ npm view @lucid-evolution/experimental version
+0.1.2
+$ node item6-blueprint.mjs
+generated-schema cbor == hand-written cbor: true
+roundtrip: {"players":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"],"moves":["7n"],"name":"cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd","result":"-1n"}
+exit=0

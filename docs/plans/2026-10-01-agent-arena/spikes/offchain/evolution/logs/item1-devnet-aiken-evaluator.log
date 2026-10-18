@@ -1,0 +1,12 @@
+evaluator: aiken
+script 83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550de addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm
+alice addr_test1vqd5c40yyyad0axjptkyf4ty82za4r24986ec8540r5x7wchd04lc 1b4c55e4213ad7f4d20aec44d5643a85da8d5529f59c1e9578e86f3b 
+bob   addr_test1vr42z2l9zrnhn9hn545lntzk57l0j3ynggyga9e6ewwvgxqhpg9vg eaa12be510e77996f3a569f9ac56a7bef9449342088e973acb9cc418
+fund tx 7281d730676eb8016655129931bd613342399bf88d8f13fb81be2cf993202c00 from faucet addr_test1qpqy3lufef8c3en9nrnzp2svwy5vy9zangvp46dy4qw23clgfxhn3pqv243d6wptud7fuaj5tjqer7wc7m036gx0emsqaqa8te
+seed 7281d730676eb8016655129931bd613342399bf88d8f13fb81be2cf993202c00#2
+MINT BUILD FAIL
+TransactionBuilderError: Script evaluation failed: UPLC evaluation failed
+  cause[0]: Script evaluation failed
+  failures: [{"purpose":"unknown","index":0,"validationError":"failed script execution\n      Mint[0] the validator crashed / exited prematurely","traces":[]}]
+  cause[1]: failed script execution
+      Mint[0] the validator crashed / exited prematurely

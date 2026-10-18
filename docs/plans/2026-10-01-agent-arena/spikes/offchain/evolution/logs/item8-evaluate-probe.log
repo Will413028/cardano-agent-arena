@@ -1,0 +1,34 @@
+[no additionalUtxo] 455ms OK [
+  {
+    "validator": {
+      "index": 0,
+      "purpose": "mint"
+    },
+    "budget": {
+      "memory": 122351,
+      "cpu": 44332249
+    }
+  }
+]
+[additionalUtxo: [] (as SDK sends)] 262ms OK [
+  {
+    "validator": {
+      "index": 0,
+      "purpose": "mint"
+    },
+    "budget": {
+      "memory": 122351,
+      "cpu": 44332249
+    }
+  }
+]
+[KupmiosProvider.evaluateTx] [
+  {
+    "ex_units": {
+      "mem": "122351",
+      "steps": "44332249"
+    },
+    "redeemer_index": 0,
+    "redeemer_tag": "mint"
+  }
+] 306ms

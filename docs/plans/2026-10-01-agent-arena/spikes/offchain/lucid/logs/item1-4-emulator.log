@@ -1,0 +1,70 @@
+[2026-10-18T02:57:48.897Z] mode emulator policyId 83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550de scriptAddr addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm
+[2026-10-18T02:57:48.981Z] alice addr_test1vrqqefekvurkzrtfvrl9w2unvca0em52nzvvskeg6jkve3c2390rf c00ca7366707610d6960fe572b93663afcee8a9898c85b28d4acccc7
+[2026-10-18T02:57:48.982Z] bob   addr_test1vr0ff6x4nytvec45xguc3sqhnc9edg2dyrptxk6wvg8nlrcpmfc3y de94e8d59916cce2b4323988c0179e0b96a14d20c2b35b4e620f3f8f
+[2026-10-18T02:57:53.255Z] mint game1 confirmed=true tx=02dd24e315e6461cd3f618d7002875b8b1efdd33a19a1035ec77cc1169491e9b
+[2026-10-18T02:57:53.262Z] game1 datum after mint {
+  "players": [
+    "c00ca7366707610d6960fe572b93663afcee8a9898c85b28d4acccc7",
+    "de94e8d59916cce2b4323988c0179e0b96a14d20c2b35b4e620f3f8f"
+  ],
+  "moves": [],
+  "name": "a2e5e227858e84f1a8f9b0c1246e6cbc9336d707d43ba43d0e1cb7c51c45f4c9",
+  "result": "-1n"
+}
+[2026-10-18T02:57:56.002Z] alice move 7 confirmed=true tx=13d8e858bd5529a5cfbb439ce445ff6baa69bb1b7e3184e308be3856b6707974
+[2026-10-18T02:57:56.127Z] game1 datum after alice move {
+  "players": [
+    "c00ca7366707610d6960fe572b93663afcee8a9898c85b28d4acccc7",
+    "de94e8d59916cce2b4323988c0179e0b96a14d20c2b35b4e620f3f8f"
+  ],
+  "moves": [
+    "7n"
+  ],
+  "name": "a2e5e227858e84f1a8f9b0c1246e6cbc9336d707d43ba43d0e1cb7c51c45f4c9",
+  "result": "-1n"
+}
+[2026-10-18T02:57:56.127Z] RESULT 1-mint+move: PASS mint=02dd24e315e6461cd3f618d7002875b8b1efdd33a19a1035ec77cc1169491e9b move=13d8e858bd5529a5cfbb439ce445ff6baa69bb1b7e3184e308be3856b6707974
+[2026-10-18T02:57:57.782Z] mint game2 confirmed=true tx=01e2fcd50237b94b1f5b19fcc0650976e9bbbd1feea8c09071729f9f6cfab929
+[2026-10-18T02:57:59.010Z] bob build error: "failed script execution Spend[1] the validator crashed / exited prematurely"
+[2026-10-18T02:57:59.011Z] RESULT 2-bob-build-rejected: PASS "failed script execution Spend[1] the validator crashed / exited prematurely"
+[2026-10-18T02:57:59.485Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":1,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T02:57:59.492Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":1,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T02:57:59.802Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":1,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T02:57:59.888Z] bob forced tx 58cfd30593bed4ad60ec2b1256a24e62603d60d4044fe0b943e170b3f7ff6805 isValid true
+[2026-10-18T02:57:59.990Z] RESULT 3-bob-forced-emulator: FAIL emulator accepted submit hash=58cfd30593bed4ad60ec2b1256a24e62603d60d4044fe0b943e170b3f7ff6805; token moved=true (emulator phase-2 check?)
+[2026-10-18T02:58:00.979Z] mint game3 confirmed=true tx=2885f79380ec105742d866f42847d470c7cc528eb8625bf95b2d72d12fe7a537
+[2026-10-18T02:58:01.245Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":0,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T02:58:01.394Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":0,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T02:58:01.795Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":0,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T02:58:02.113Z] alice forced move confirmed=true tx=dcb6f11b1ee16105219ad700977512e62ccefb90b2ce6b4c9a030a97dd213c9d
+[2026-10-18T02:58:02.131Z] RESULT 3m-alice-forced-accepted: PASS tx=dcb6f11b1ee16105219ad700977512e62ccefb90b2ce6b4c9a030a97dd213c9d
+[2026-10-18T02:58:03.388Z] 4a unsigned tx 35670932a41176059bb64fede16e288ee0f7c035a99cbee79a958a1eb290b779 vkey witnesses in unsigned: 0 cbor bytes: 2040
+[2026-10-18T02:58:03.422Z] 4a witness set from mock signTx: a100d9010281825820b652a4846d9374ed3864a0e1c09fd4031ad1a622195f7fc6b0be121321920a...
+[2026-10-18T02:58:03.886Z] 4a bob move via CIP-30 mock confirmed=true tx=35670932a41176059bb64fede16e288ee0f7c035a99cbee79a958a1eb290b779
+[2026-10-18T02:58:03.890Z] 4a datum moves 7,3
+[2026-10-18T02:58:04.098Z] 4b alice payment via withPrivateKey confirmed=true tx=012a46f5ff8d85dd69f88ace2c49581e082809752e6b8ba28dca3f7aa863d4fa
+[2026-10-18T02:58:04.189Z] 4c bob payment via fromAPI(mock).sign.withWallet confirmed=true tx=8a10ac72f0b81e5119d4ec026d499662fc0491df85f3a6a673ef26cd9421c15a
+[2026-10-18T02:58:04.192Z] RESULT 4-unsigned+external-signer: PASS 4a=35670932a41176059bb64fede16e288ee0f7c035a99cbee79a958a1eb290b779 4b=012a46f5ff8d85dd69f88ace2c49581e082809752e6b8ba28dca3f7aa863d4fa 4c(fromAPI)=true
+[2026-10-18T02:58:04.192Z] SUMMARY {
+  "1-mint+move": {
+    "ok": true,
+    "detail": "mint=02dd24e315e6461cd3f618d7002875b8b1efdd33a19a1035ec77cc1169491e9b move=13d8e858bd5529a5cfbb439ce445ff6baa69bb1b7e3184e308be3856b6707974"
+  },
+  "2-bob-build-rejected": {
+    "ok": true,
+    "detail": "\"failed script execution Spend[1] the validator crashed / exited prematurely\""
+  },
+  "3-bob-forced-emulator": {
+    "ok": false,
+    "detail": "emulator accepted submit hash=58cfd30593bed4ad60ec2b1256a24e62603d60d4044fe0b943e170b3f7ff6805; token moved=true (emulator phase-2 check?)"
+  },
+  "3m-alice-forced-accepted": {
+    "ok": true,
+    "detail": "tx=dcb6f11b1ee16105219ad700977512e62ccefb90b2ce6b4c9a030a97dd213c9d"
+  },
+  "4-unsigned+external-signer": {
+    "ok": true,
+    "detail": "4a=35670932a41176059bb64fede16e288ee0f7c035a99cbee79a958a1eb290b779 4b=012a46f5ff8d85dd69f88ace2c49581e082809752e6b8ba28dca3f7aa863d4fa 4c(fromAPI)=true"
+  }
+}
+exit=1

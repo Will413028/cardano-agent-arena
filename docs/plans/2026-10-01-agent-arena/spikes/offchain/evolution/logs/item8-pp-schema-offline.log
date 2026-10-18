@@ -1,0 +1,13 @@
+[as returned by Ogmios v7.0.0 on this devnet] ProtocolParametersSchema
+├─ ["maxReferenceScriptsSize"]
+│  └─ is missing
+└─ ["plutusCostModels"]
+   └─ { readonly plutus:v1: ReadonlyArray<BigInt>; readonly plutus:v2: ReadonlyArray<BigInt>; readonly plutus:v3: ReadonlyArray<BigInt> }
+      └─ ["plutus:v2"]
+         └─ is missing
+[with maxReferenceScriptsSizePerTransaction copied to maxReferenceScriptsSize] ProtocolParametersSchema
+└─ ["plutusCostModels"]
+   └─ { readonly plutus:v1: ReadonlyArray<BigInt>; readonly plutus:v2: ReadonlyArray<BigInt>; readonly plutus:v3: ReadonlyArray<BigInt> }
+      └─ ["plutus:v2"]
+         └─ is missing
+[plus an empty plutus:v2 cost model] decodes OK

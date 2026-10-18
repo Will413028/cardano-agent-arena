@@ -1,0 +1,37 @@
+$ node item8-provider.mjs
+network 0 unknown
+PASS getParameters (818 ms): {
+  "protocolVersion": {
+    "major": 11,
+    "minor": 0
+  },
+  "costModelLens": [
+    [
+      0,
+      166
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      251
+    ]
+  ],
+  "minFeeReferenceScripts": {
+    "base": 15,
+    "range": 25600,
+    "multiplier": 1.2
+  },
+  "maxTxSize": 16384,
+  "coinsPerUtxoByte": 4310,
+  "prices": {
+    "steps": 0.0000721,
+    "memory": 0.0577
+  }
+}
+PASS getUnspentOutputs(faucet) [Kupo; genesis utxo expected missing] (296 ms): []
+PASS getUnspentOutputs(script address) (463 ms): 10 utxos
+FAIL getSlotConfig (0 ms): unsupported network
+Note: evaluateTransaction / postTransactionToChain / awaitTransactionConfirmation are exercised in item1-devnet.mjs

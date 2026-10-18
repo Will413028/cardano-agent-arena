@@ -1,0 +1,56 @@
+chain: {
+  "id": 0,
+  "name": "yaci-devnet",
+  "networkMagic": 42,
+  "epochLength": 600,
+  "slotConfig": {
+    "zeroTime": "1792290066000",
+    "zeroSlot": "0",
+    "slotLength": 1000
+  }
+}
+[FAIL] getProtocolParameters: Kupmios getProtocolParameters failed
+  cause: 
+funded addr_test1vr03wqzzqvv8dy3f2qpmk4eu7qpnppvvxud9zk7v5xvje3su7ys4n d7415049d1a9d54c8fa04503ef91f4823dddd0ce43f05e2bb9437a4e59993741
+[OK] getUtxos(address): [
+  {
+    "_tag": "UTxO",
+    "transactionId": {
+      "_tag": "TransactionHash",
+      "hash": "d7415049d1a9d54c8fa04503ef91f4823dddd0ce43f05e2bb9437a4e59993741"
+    },
+    "index": "0",
+    "address": {
+      "networkId": 0,
+      "paymentCredential": {
+        "_tag": "KeyHash",
+        "hash": "df17004203187692295003bb573cf00330858c371a515bcca1992cc6"
+      }
+    },
+    "assets": {
+      "lovelace": "50000000"
+    }
+  }
+]
+[OK] getUtxosByOutRef: [
+  {
+    "_tag": "UTxO",
+    "transactionId": {
+      "_tag": "TransactionHash",
+      "hash": "d7415049d1a9d54c8fa04503ef91f4823dddd0ce43f05e2bb9437a4e59993741"
+    },
+    "index": "0",
+    "address": {
+      "networkId": 0,
+      "paymentCredential": {
+        "_tag": "KeyHash",
+        "hash": "df17004203187692295003bb573cf00330858c371a515bcca1992cc6"
+      }
+    },
+    "assets": {
+      "lovelace": "50000000"
+    }
+  }
+]
+[OK] awaitTx: true
+[OK] getDelegation(faucet stake addr) [not needed by arena]: skipped

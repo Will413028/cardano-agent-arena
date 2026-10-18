@@ -1,0 +1,62 @@
+$ node item1-emulator.mjs
+mint built {
+  "id": "890d74debd6c4a654b7888adc32487c95c0599a142339239c72751599ad931d5",
+  "fee": "261514",
+  "sizeBytes": 2073,
+  "collateral": 1,
+  "requiredSigners": [],
+  "redeemers": [
+    {
+      "tag": 1,
+      "index": "0",
+      "exUnits": {
+        "memory": 122351,
+        "steps": 44332249
+      }
+    }
+  ]
+}
+mint submitted 890d74debd6c4a654b7888adc32487c95c0599a142339239c72751599ad931d5
+thread 890d74debd6c4a654b7888adc32487c95c0599a142339239c72751599ad931d5#0
+bob build (emulator evaluator): rejected: failed script execution
+     Spend[0] the validator crashed / exited prematurely
+"failed script execution\n     Spend[0] the validator crashed / exited prematurely"
+bob forced submit (emulator.submitTransaction): rejected: failed script execution
+     Spend[0] the validator crashed / exited prematurely
+"failed script execution\n     Spend[0] the validator crashed / exited prematurely"
+alice move built {
+  "id": "d07d2c5375fffd2f1f73ee7b7b98c68e28c6cfe4ee32a81ee6d6beb2bc1f8b0a",
+  "fee": "262075",
+  "sizeBytes": 2040,
+  "collateral": 1,
+  "requiredSigners": [
+    "b34567740084f8898dfc703f95eb889c20a1338af190726fa2245077"
+  ],
+  "redeemers": [
+    {
+      "tag": 0,
+      "index": "0",
+      "exUnits": {
+        "memory": 148399,
+        "steps": 51411326
+      }
+    }
+  ]
+}
+alice move submitted d07d2c5375fffd2f1f73ee7b7b98c68e28c6cfe4ee32a81ee6d6beb2bc1f8b0a
+thread after move d07d2c5375fffd2f1f73ee7b7b98c68e28c6cfe4ee32a81ee6d6beb2bc1f8b0a#0 datum d8799f9f581cb34567740084f8898dfc703f95eb889c20a1338af190726fa2245077581c824849a06d65d96d3b72a8859a9f7619625a2bd0c613e4754c94c5c2ff9f07ff5820d0942b30632319e2bf38419d51e6836a187ae5914e84f09a0422d770f5c5d49320ff
+correct mint arbitrary name (build): rejected: failed script execution
+      Mint[0] the validator crashed / exited prematurely
+"failed script execution\n      Mint[0] the validator crashed / exited prematurely"
+correct mint arbitrary name (forced submit): rejected: failed script execution
+      Mint[0] the validator crashed / exited prematurely
+"failed script execution\n      Mint[0] the validator crashed / exited prematurely"
+mutant mint submitted c95942d775ef07561eac1d3a75075a7bf28639e7cf43c8b6b3955d09734ea0b5
+RESULT {
+  "emu_bob_build_rejected": true,
+  "emu_bob_forced_submit_rejected": true,
+  "emu_alice_move": "PASS",
+  "emu_correct_rejects_arbitrary_name_build": true,
+  "emu_correct_rejects_arbitrary_name_submit": true,
+  "emu_mutant_accepts": "PASS"
+}

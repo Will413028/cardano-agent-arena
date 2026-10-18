@@ -1,0 +1,27 @@
+$ node --import ./trace-hook.mjs item7-minimal.mjs
+cbor d8799f5820000000000000000000000000000000000000000000000000000000000000000102ff
+name 202f389e4341378fbe9324fa771f648c0bffa23ee7b77d452ebb9a4865b0d918 MATCH
+rss MiB 79
+modules resolved: 202; packages: 5
+  (local) (1)
+  (node builtin) (2)
+  @anastasia-labs/cardano-multiplatform-lib-nodejs (1)
+  @lucid-evolution/core-utils (1)
+  @lucid-evolution/plutus (1)
+  @noble/hashes (7)
+  @sinclair/typebox (189)
+real 2.69
+user 0.21
+sys 0.08
+
+$ node --import ./trace-hook.mjs item7-full.mjs
+full lucid import ok function rss MiB 103
+modules resolved: 1713; packages: 85
+real 18.29
+user 1.44
+sys 0.86
+$ node build-minimal.mjs
+packages in minimal browser bundle: @anastasia-labs/cardano-multiplatform-lib-browser, @lucid-evolution/core-utils, @lucid-evolution/plutus, @noble/hashes, @sinclair/typebox, base64-js, buffer, ieee754
+cardano_multiplatform_lib_bg-W3RAHROS.wasm         3.04 MiB
+item7-minimal-browser.js                           0.68 MiB
+exit=0

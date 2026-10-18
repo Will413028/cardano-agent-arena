@@ -1,0 +1,6 @@
+[valid #0] 4484 ms: OK [{"validator":{"index":0,"purpose":"mint"},"budget":{"memory":122351,"cpu":44332249}}]
+[valid #1] 11248 ms: OK [{"validator":{"index":0,"purpose":"mint"},"budget":{"memory":122351,"cpu":44332249}}]
+[valid #2] 10624 ms: OK [{"validator":{"index":0,"purpose":"mint"},"budget":{"memory":122351,"cpu":44332249}}]
+[arbitrary token name #0] 4573 ms: ERR ogmios evaluateTransaction: {"code":3010,"message":"Some scripts of the transactions terminated with error(s).","data":[{"validator":{"index":0,"purpose":"mint"},"error":{"code":3012,"message":"Some of the scripts failed to evaluate to a positive out
+[arbitrary token name #1] 6627 ms: ERR ogmios evaluateTransaction: {"code":3010,"message":"Some scripts of the transactions terminated with error(s).","data":[{"validator":{"index":0,"purpose":"mint"},"error":{"code":3012,"message":"Some of the scripts failed to evaluate to a positive out
+[arbitrary token name #2] 916 ms: ERR ogmios evaluateTransaction: {"code":3010,"message":"Some scripts of the transactions terminated with error(s).","data":[{"validator":{"index":0,"purpose":"mint"},"error":{"code":3012,"message":"Some of the scripts failed to evaluate to a positive out

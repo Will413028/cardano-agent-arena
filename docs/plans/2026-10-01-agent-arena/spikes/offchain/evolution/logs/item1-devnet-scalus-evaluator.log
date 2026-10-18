@@ -1,0 +1,67 @@
+evaluator: scalus
+script 83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550de addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm
+alice addr_test1vqzu4p33936afx7clqslajmee2tc6nz7968en4rjt2wha3sv4daec 05ca86312c75d49bd8f821fecb79ca978d4c5e2e8f99d4725a9d7ec6 
+bob   addr_test1vpp68edetse4ulkefr83yfkql4teruluqsqlw5q6wl6rapqjry6aw 43a3e5b95c335e7ed948cf1226c0fd5791f3fc0401f7501a77f43e84
+fund tx ac426cda789d8966706db707ef85aee639f09d867c6938fe283abe140efe5831 from faucet addr_test1qpqy3lufef8c3en9nrnzp2svwy5vy9zangvp46dy4qw23clgfxhn3pqv243d6wptud7fuaj5tjqer7wc7m036gx0emsqaqa8te
+seed ac426cda789d8966706db707ef85aee639f09d867c6938fe283abe140efe5831#2
+mint redeemers: {
+  "_tag": "RedeemerMap",
+  "entries": [
+    {
+      "key": {
+        "tag": "mint",
+        "index": "0"
+      },
+      "value": {
+        "data": {
+          "index": "0",
+          "fields": [
+            "ac426cda789d8966706db707ef85aee639f09d867c6938fe283abe140efe5831",
+            "2"
+          ]
+        },
+        "exUnits": {
+          "mem": "122351",
+          "steps": "44332249"
+        }
+      }
+    }
+  ]
+}
+mint tx ba91585bfc0e756a198d03e3b5fe7e07fa95711cd2469fbb51295eeb845e4853 token name 594fb6a1bd5b208f09e3a5dbe4866d670788cac9c17ce941a408dea7f80bfc07
+kupo token match: [
+  {
+    "out": "ba91585bfc0e756a198d03e3b5fe7e07fa95711cd2469fbb51295eeb845e4853#0",
+    "address": "addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm",
+    "assets": {
+      "83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550de.594fb6a1bd5b208f09e3a5dbe4866d670788cac9c17ce941a408dea7f80bfc07": 1
+    },
+    "datum_type": "inline",
+    "datum_hash": "396c9c736ec3864bffd2f64972b55882f8ae920488c45e6f85c47740558c2717"
+  }
+]
+script utxo datum (via Kupmios): d8799f9f581c05ca86312c75d49bd8f821fecb79ca978d4c5e2e8f99d4725a9d7ec6581c43a3e5b95c335e7ed948cf1226c0fd5791f3fc0401f7501a77f43e84ff805820594fb6a1bd5b208f09e3a5dbe4866d670788cac9c17ce941a408dea7f80bfc0720ff
+move redeemers: {
+  "_tag": "RedeemerMap",
+  "entries": [
+    {
+      "key": {
+        "tag": "spend",
+        "index": "1"
+      },
+      "value": {
+        "data": "7",
+        "exUnits": {
+          "mem": "152293",
+          "steps": "53988803"
+        }
+      }
+    }
+  ]
+} collateral inputs: 1 required signers: [ '05ca86312c75d49bd8f821fecb79ca978d4c5e2e8f99d4725a9d7ec6' ]
+move tx e761738481ab6fa7cf74ab27dec00b20e34bf61814c47d424b954d018cd5f648
+kupo after move: [
+  "e761738481ab6fa7cf74ab27dec00b20e34bf61814c47d424b954d018cd5f648#0 addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm"
+] datum: d8799f9f581c05ca86312c75d49bd8f821fecb79ca978d4c5e2e8f99d4725a9d7ec6581c43a3e5b95c335e7ed948cf1226c0fd5791f3fc0401f7501a77f43e84ff9f07ff5820594fb6a1bd5b208f09e3a5dbe4866d670788cac9c17ce941a408dea7f80bfc0720ff
+expected next datum: d8799f9f581c05ca86312c75d49bd8f821fecb79ca978d4c5e2e8f99d4725a9d7ec6581c43a3e5b95c335e7ed948cf1226c0fd5791f3fc0401f7501a77f43e84ff9f07ff5820594fb6a1bd5b208f09e3a5dbe4866d670788cac9c17ce941a408dea7f80bfc0720ff
+PASS

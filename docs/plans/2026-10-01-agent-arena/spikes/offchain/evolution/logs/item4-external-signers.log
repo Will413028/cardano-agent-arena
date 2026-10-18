@@ -1,0 +1,16 @@
+carol (cip30) address from wallet: addr_test1vp7lv36fvz6xvsvh8s6t668xcxj2amvsf7s68zh9ycae2ggnvnwax expected addr_test1vp7lv36fvz6xvsvh8s6t668xcxj2amvsf7s68zh9ycae2ggnvnwax
+unsigned tx: inputs 2 vkey witnesses 0 cbor bytes 164
+carol witness (via CIP-30): 1 dave witness (local key): 1
+cip30 calls: [
+  {
+    "method": "signTx",
+    "partialSign": true,
+    "txCborHexPrefix": "84a300d9010282825820cf9143e8fcbf39ba0a52...",
+    "len": 164
+  }
+]
+submitted 24d4dc37cd47800ed9b619e5b859af1999ff15c3d807a4c7f65beeaba2887d1c
+erin utxos via kupo: [
+  '24d4dc37cd47800ed9b619e5b859af1999ff15c3d807a4c7f65beeaba2887d1c#0 40000000'
+]
+PASS

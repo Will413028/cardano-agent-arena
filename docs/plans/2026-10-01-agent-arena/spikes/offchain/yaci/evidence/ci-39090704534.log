@@ -1,0 +1,90 @@
+yaci-parallel	Set up job	﻿2026-10-18T02:36:40.8538349Z Current runner version: '2.337.0'
+yaci-parallel	Set up job	2026-10-18T02:36:40.8572041Z ##[group]Runner Image Provisioner
+yaci-parallel	Set up job	2026-10-18T02:36:40.8573116Z Hosted Compute Agent
+yaci-parallel	Set up job	2026-10-18T02:36:40.8573748Z Version: 20261012.601
+yaci-parallel	Set up job	2026-10-18T02:36:40.8574532Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+yaci-parallel	Set up job	2026-10-18T02:36:40.8575320Z Build Date: 2026-10-12T17:48:21Z
+yaci-parallel	Set up job	2026-10-18T02:36:40.8576096Z Worker ID: {d795fc32-9afe-423c-880b-4e70c878dd15}
+yaci-parallel	Set up job	2026-10-18T02:36:40.8576946Z Region: northcentralus
+yaci-parallel	Set up job	2026-10-18T02:36:40.8577575Z Cloud: Azure
+yaci-parallel	Set up job	2026-10-18T02:36:40.8578147Z ##[endgroup]
+yaci-parallel	Set up job	2026-10-18T02:36:40.8579920Z ##[group]Operating System
+yaci-parallel	Set up job	2026-10-18T02:36:40.8580705Z Ubuntu
+yaci-parallel	Set up job	2026-10-18T02:36:40.8581389Z 24.04.5
+yaci-parallel	Set up job	2026-10-18T02:36:40.8581950Z LTS
+yaci-parallel	Set up job	2026-10-18T02:36:40.8582498Z ##[endgroup]
+yaci-parallel	Set up job	2026-10-18T02:36:40.8583199Z ##[group]Runner Image
+yaci-parallel	Set up job	2026-10-18T02:36:40.8583881Z Image: ubuntu-24.04
+yaci-parallel	Set up job	2026-10-18T02:36:40.8584554Z Version: 20261012.334.1
+yaci-parallel	Set up job	2026-10-18T02:36:40.8585685Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+yaci-parallel	Set up job	2026-10-18T02:36:40.8587597Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+yaci-parallel	Set up job	2026-10-18T02:36:40.8588652Z ##[endgroup]
+yaci-parallel	Set up job	2026-10-18T02:36:40.8590140Z ##[group]GITHUB_TOKEN Permissions
+yaci-parallel	Set up job	2026-10-18T02:36:40.8592387Z Contents: read
+yaci-parallel	Set up job	2026-10-18T02:36:40.8593159Z Metadata: read
+yaci-parallel	Set up job	2026-10-18T02:36:40.8593778Z ##[endgroup]
+yaci-parallel	Set up job	2026-10-18T02:36:40.8595942Z Secret source: Actions
+yaci-parallel	Set up job	2026-10-18T02:36:40.8597053Z Cache mode: write
+yaci-parallel	Set up job	2026-10-18T02:36:40.8598138Z Prepare workflow directory
+yaci-parallel	Set up job	2026-10-18T02:36:40.8948510Z Prepare all required actions
+yaci-parallel	Set up job	2026-10-18T02:36:40.9058950Z Complete job name: yaci-parallel
+yaci-parallel	Pull image	﻿2026-10-18T02:36:40.9836491Z ##[group]Run start=$(date +%s)
+yaci-parallel	Pull image	2026-10-18T02:36:40.9837293Z ^[[36;1mstart=$(date +%s)^[[0m
+yaci-parallel	Pull image	2026-10-18T02:36:40.9838158Z ^[[36;1mdocker pull -q bloxbean/yaci-cli:0.12.0^[[0m
+yaci-parallel	Pull image	2026-10-18T02:36:40.9839169Z ^[[36;1mecho "pull_seconds=$(( $(date +%s)-start ))"^[[0m
+yaci-parallel	Pull image	2026-10-18T02:36:40.9840491Z ^[[36;1mdocker image inspect bloxbean/yaci-cli:0.12.0 --format '{{.Architecture}}'^[[0m
+yaci-parallel	Pull image	2026-10-18T02:36:41.0788719Z shell: /usr/bin/bash -e {0}
+yaci-parallel	Pull image	2026-10-18T02:36:41.0790106Z ##[endgroup]
+yaci-parallel	Pull image	2026-10-18T02:37:03.0295272Z docker.io/bloxbean/yaci-cli:0.12.0
+yaci-parallel	Pull image	2026-10-18T02:37:03.0306785Z pull_seconds=22
+yaci-parallel	Pull image	2026-10-18T02:37:03.0488653Z amd64
+yaci-parallel	Start two instances on dynamic ports and wait for health	﻿2026-10-18T02:37:03.0621653Z ##[group]Run start=$(date +%s)
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0622089Z ^[[36;1mstart=$(date +%s)^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0622434Z ^[[36;1mfor n in a b; do^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0623136Z ^[[36;1m  docker run -d --name yaci-$n --entrypoint /app/yaci-cli -p 127.0.0.1::1337 -p 127.0.0.1::1442 -p 127.0.0.1::10000 bloxbean/yaci-cli:0.12.0 up --enable-kupomios^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0623832Z ^[[36;1mdone^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0624107Z ^[[36;1mfor n in a b; do^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0624589Z ^[[36;1m  o=$(docker port yaci-$n 1337/tcp | cut -d: -f2); k=$(docker port yaci-$n 1442/tcp | cut -d: -f2)^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0625074Z ^[[36;1m  ok=0^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0625352Z ^[[36;1m  for i in $(seq 1 240); do^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0626002Z ^[[36;1m    h=$(curl -s -m 2 -H 'Accept: application/json' http://127.0.0.1:$o/health || true)^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0626688Z ^[[36;1m    kh=$(curl -s -m 2 -H 'Accept: application/json' http://127.0.0.1:$k/health || true)^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0627932Z ^[[36;1m    if python3 -c "import json,sys; d=json.loads(sys.argv[1]); kd=json.loads(sys.argv[2]); sys.exit(0 if d['connectionStatus']=='connected' and (d.get('lastKnownTip') or {}).get('height',0)>0 and kd['most_recent_checkpoint']>=d['lastKnownTip']['slot'] else 1)" "$h" "$kh" 2>/dev/null; then ok=1; break; fi^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0629156Z ^[[36;1m    sleep 1^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0629437Z ^[[36;1m  done^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0630063Z ^[[36;1m  echo "$n ready=$ok seconds=$(( $(date +%s)-start ))"^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0630463Z ^[[36;1m  echo "$h"; echo "$kh"^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0630974Z ^[[36;1m  docker exec yaci-$n /app/cardano-bin/cardano-node --version | head -1^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0631580Z ^[[36;1m  test $ok = 1^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0632115Z ^[[36;1mdone^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0703558Z shell: /usr/bin/bash -e {0}
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.0703926Z ##[endgroup]
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.1049125Z 72c58b86c99de0f2b368b85230e13ba84810384be8516a15a2e935edfd964191
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:03.8972230Z d012ba4461021e8fa2b869ca34f5af30530003441ec935440f9334bc800dc0cd
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:18.9480815Z a ready=1 seconds=15
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:18.9493283Z {"startTime":"2026-10-18T02:37:17.229821031Z","lastKnownTip":{"slot":13,"id":"39764aa87b8d1ff48370f94f0f6d304134083de4dfb4bc3dda45b18e6729a443","height":13},"lastTipUpdate":"2026-10-18T02:37:17.234558866Z","networkSynchronization":1.00000,"currentEra":"conway","metrics":{"activeConnections":1,"runtimeStats":{"cpuTime":55191137,"currentHeapSize":1188,"gcCpuTime":24313162,"maxHeapSize":1188},"sessionDurations":{"max":0,"mean":19,"min":0},"totalConnections":2,"totalMessages":120,"totalUnrouted":0},"connectionStatus":"connected","currentEpoch":0,"slotInEpoch":13,"version":"v7.0.0 (b3a830a1)","network":"unknown (42)"}
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:18.9498538Z {"connection_status":"connected","most_recent_checkpoint":14,"most_recent_node_tip":14,"seconds_since_last_block":0,"network_synchronization":1.00000,"configuration":{"indexes":"installed"},"version":"v2.12.0+491918"}
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:19.0208025Z cardano-node 11.0.1 - linux-x86_64 - ghc-9.6
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:19.1141720Z b ready=1 seconds=16
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:19.1146874Z {"startTime":"2026-10-18T02:37:17.114302947Z","lastKnownTip":{"slot":13,"id":"39764aa87b8d1ff48370f94f0f6d304134083de4dfb4bc3dda45b18e6729a443","height":13},"lastTipUpdate":"2026-10-18T02:37:17.11891997Z","networkSynchronization":1.00000,"currentEra":"conway","metrics":{"activeConnections":1,"runtimeStats":{"cpuTime":73772727,"currentHeapSize":1181,"gcCpuTime":40078309,"maxHeapSize":1193},"sessionDurations":{"max":0,"mean":11,"min":0},"totalConnections":2,"totalMessages":121,"totalUnrouted":0},"connectionStatus":"connected","currentEpoch":0,"slotInEpoch":13,"version":"v7.0.0 (b3a830a1)","network":"unknown (42)"}
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:19.1151979Z {"connection_status":"connected","most_recent_checkpoint":15,"most_recent_node_tip":15,"seconds_since_last_block":0,"network_synchronization":1.00000,"configuration":{"indexes":"installed"},"version":"v2.12.0+491918"}
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:37:19.1716569Z cardano-node 11.0.1 - linux-x86_64 - ghc-9.6
+yaci-parallel	Topup arbitrary address on each instance	﻿2026-10-18T02:37:19.1881011Z ##[group]Run A=addr_test1qzlwg5c3mpr0cz5td0rvr5rvcgf02al05cqgd2wzv7pud6chpzk4elx4jh2f7xtftjrdxddr88wg6sfszu8r3gktpjtqrr00q9
+yaci-parallel	Topup arbitrary address on each instance	2026-10-18T02:37:19.1882955Z ^[[36;1mA=addr_test1qzlwg5c3mpr0cz5td0rvr5rvcgf02al05cqgd2wzv7pud6chpzk4elx4jh2f7xtftjrdxddr88wg6sfszu8r3gktpjtqrr00q9^[[0m
+yaci-parallel	Topup arbitrary address on each instance	2026-10-18T02:37:19.1884115Z ^[[36;1mfor n in a b; do^[[0m
+yaci-parallel	Topup arbitrary address on each instance	2026-10-18T02:37:19.1884676Z ^[[36;1m  p=$(docker port yaci-$n 10000/tcp | cut -d: -f2)^[[0m
+yaci-parallel	Topup arbitrary address on each instance	2026-10-18T02:37:19.1885975Z ^[[36;1m  curl -s -m 60 -X POST -H 'Content-Type: application/json' -d "{\"address\":\"$A\",\"adaAmount\":1234}" http://127.0.0.1:$p/local-cluster/api/addresses/topup; echo^[[0m
+yaci-parallel	Topup arbitrary address on each instance	2026-10-18T02:37:19.1887161Z ^[[36;1mdone^[[0m
+yaci-parallel	Topup arbitrary address on each instance	2026-10-18T02:37:19.1960899Z shell: /usr/bin/bash -e {0}
+yaci-parallel	Topup arbitrary address on each instance	2026-10-18T02:37:19.1961259Z ##[endgroup]
+yaci-parallel	Topup arbitrary address on each instance	2026-10-18T02:37:19.3631317Z {"address":"addr_test1qzlwg5c3mpr0cz5td0rvr5rvcgf02al05cqgd2wzv7pud6chpzk4elx4jh2f7xtftjrdxddr88wg6sfszu8r3gktpjtqrr00q9","adaAmount":1234.0,"status":false,"message":"Topup failed"}
+yaci-parallel	Topup arbitrary address on each instance	2026-10-18T02:37:19.5013714Z {"address":"addr_test1qzlwg5c3mpr0cz5td0rvr5rvcgf02al05cqgd2wzv7pud6chpzk4elx4jh2f7xtftjrdxddr88wg6sfszu8r3gktpjtqrr00q9","adaAmount":1234.0,"status":false,"message":"Topup failed"}
+yaci-parallel	Removing one instance leaves the other healthy	﻿2026-10-18T02:37:19.5053406Z ##[group]Run docker rm -f yaci-a
+yaci-parallel	Removing one instance leaves the other healthy	2026-10-18T02:37:19.5053783Z ^[[36;1mdocker rm -f yaci-a^[[0m
+yaci-parallel	Removing one instance leaves the other healthy	2026-10-18T02:37:19.5054109Z ^[[36;1mo=$(docker port yaci-b 1337/tcp | cut -d: -f2)^[[0m
+yaci-parallel	Removing one instance leaves the other healthy	2026-10-18T02:37:19.5054595Z ^[[36;1mcurl -s -m 2 -H 'Accept: application/json' http://127.0.0.1:$o/health^[[0m
+yaci-parallel	Removing one instance leaves the other healthy	2026-10-18T02:37:19.5126302Z shell: /usr/bin/bash -e {0}
+yaci-parallel	Removing one instance leaves the other healthy	2026-10-18T02:37:19.5126615Z ##[endgroup]
+yaci-parallel	Removing one instance leaves the other healthy	2026-10-18T02:37:19.7609020Z yaci-a
+yaci-parallel	Removing one instance leaves the other healthy	2026-10-18T02:37:19.7956536Z {"startTime":"2026-10-18T02:37:17.114302947Z","lastKnownTip":{"slot":13,"id":"39764aa87b8d1ff48370f94f0f6d304134083de4dfb4bc3dda45b18e6729a443","height":13},"lastTipUpdate":"2026-10-18T02:37:17.11891997Z","networkSynchronization":1.00000,"currentEra":"conway","metrics":{"activeConnections":1,"runtimeStats":{"cpuTime":100595673,"currentHeapSize":1227,"gcCpuTime":58925319,"maxHeapSize":1236},"sessionDurations":{"max":0,"mean":9,"min":0},"totalConnections":3,"totalMessages":123,"totalUnrouted":0},"connectionStatus":"connected","currentEpoch":0,"slotInEpoch":13,"version":"v7.0.0 (b3a830a1)","network":"unknown (42)"}
+yaci-parallel	Complete job	﻿2026-10-18T02:37:19.8083011Z Cleaning up orphan processes

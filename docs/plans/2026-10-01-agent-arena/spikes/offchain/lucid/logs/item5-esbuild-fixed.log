@@ -1,0 +1,39 @@
+$ node build-browser.mjs
+warnings: 0
+browser-entry.js                                             2.32 MiB
+cardano_message_signing_bg-ENSFHNVT.wasm                     0.26 MiB
+cardano_multiplatform_lib_bg-W3RAHROS.wasm                   3.04 MiB
+uplc_tx_bg-Q56INR4M.wasm                                     0.88 MiB
+TOTAL 6.51 MiB
+exit=0
+inputs 1753 packages 100
+@effect/platform 4775KiB
+@anastasia-labs/cardano-multiplatform-lib-browser 4482KiB
+effect 3395KiB
+@lucid-evolution/uplc 914KiB
+@cardano-sdk/core 848KiB
+@harmoniclabs/crypto 638KiB
+libsodium-sumo 404KiB
+@emurgo/cardano-message-signing-browser 400KiB
+@harmoniclabs/plutus-data 377KiB
+fast-check 374KiB
+@lucid-evolution/utils 325KiB
+bip39 315KiB
+@effect/schema 260KiB
+@lucid-evolution/lucid 229KiB
+@harmoniclabs/uplc 188KiB
+@sinclair/typebox 172KiB
+@lucid-evolution/tx-graph 144KiB
+lodash 136KiB
+@lucid-evolution/provider 120KiB
+libsodium-wrappers-sumo 119KiB
+@harmoniclabs/cbor 108KiB
+ip-address 104KiB
+cbor-x 88KiB
+readable-stream 70KiB
+buffer 57KiB
+nodejs-variant packages in bundle: []
+browser-entry.js gzip=584345
+cardano_message_signing_bg-ENSFHNVT.wasm gzip=94960
+cardano_multiplatform_lib_bg-W3RAHROS.wasm gzip=969165
+uplc_tx_bg-Q56INR4M.wasm gzip=321716

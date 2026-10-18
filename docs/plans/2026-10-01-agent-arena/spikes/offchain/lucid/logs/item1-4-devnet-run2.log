@@ -1,0 +1,101 @@
+[2026-10-18T03:32:39.528Z] mode devnet policyId 83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550de scriptAddr addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm
+[2026-10-18T03:32:39.533Z] alice addr_test1vqfyjckhv0x00ttyy43qd7jlsnyts7zpktg4rcgmqrw7q6gyrqa0f 124962d763ccf7ad64256206fa5f84c8b87841b2d151e11b00dde069
+[2026-10-18T03:32:39.533Z] bob   addr_test1vq4m6flsfr4sauj0uq06n4lh6qs20fz9apvukp48vsg6srqye089t 2bbd27f048eb0ef24fe01fa9d7f7d020a7a445e859cb06a76411a80c
+[2026-10-18T03:33:03.528Z] funded from Yaci test account 0, tx b027ac62d8c304c6cf62ac9245c488d17f23a731f366897de03bf4d3e65bb258
+[2026-10-18T03:33:24.656Z] mint game1 confirmed=true tx=315474b2128aaf439d9c87117e20ac6e2ddfa03c71c559d5b2818bcfb1a49896
+[2026-10-18T03:33:24.692Z] game1 datum after mint {
+  "players": [
+    "124962d763ccf7ad64256206fa5f84c8b87841b2d151e11b00dde069",
+    "2bbd27f048eb0ef24fe01fa9d7f7d020a7a445e859cb06a76411a80c"
+  ],
+  "moves": [],
+  "name": "9b82def821ffff5c19a08f076631d2b12977b6963bf94f2783ec722f8b7b51ef",
+  "result": "-1n"
+}
+[2026-10-18T03:33:24.706Z] kupo after mint [
+  {
+    "address": "addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm",
+    "tx": "315474b2128aaf439d9c87117e20ac6e2ddfa03c71c559d5b2818bcfb1a49896",
+    "value": {
+      "coins": 2000000,
+      "assets": {
+        "83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550de.9b82def821ffff5c19a08f076631d2b12977b6963bf94f2783ec722f8b7b51ef": 1
+      }
+    },
+    "datum_type": "inline",
+    "datum_hash": "a5eff19c1a2c67bbabae06d37e13ced37c462dd31415f194313f1064b0d7c9a2"
+  }
+]
+[2026-10-18T03:33:45.706Z] alice move 7 confirmed=true tx=8b5c3bff6aff8253c15eb26e2f628b8dfbdd555b26dca9151b96c4a0603dcad9
+[2026-10-18T03:33:46.110Z] game1 datum after alice move {
+  "players": [
+    "124962d763ccf7ad64256206fa5f84c8b87841b2d151e11b00dde069",
+    "2bbd27f048eb0ef24fe01fa9d7f7d020a7a445e859cb06a76411a80c"
+  ],
+  "moves": [
+    "7n"
+  ],
+  "name": "9b82def821ffff5c19a08f076631d2b12977b6963bf94f2783ec722f8b7b51ef",
+  "result": "-1n"
+}
+[2026-10-18T03:33:46.284Z] kupo after move {
+  "address": "addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm",
+  "tx": "8b5c3bff6aff8253c15eb26e2f628b8dfbdd555b26dca9151b96c4a0603dcad9",
+  "datum_type": "inline",
+  "datum": "d8799f9f581c124962d763ccf7ad64256206fa5f84c8b87841b2d151e11b00dde069581c2bbd27f048eb0ef24fe01fa9d7f7d020a7a445e859cb06a76411a80cff9f07ff58209b82def821ffff5c19a08f076631d2b12977b6963bf94f2783ec722f8b7b51ef20ff"
+}
+[2026-10-18T03:33:46.290Z] RESULT 1-mint+move: PASS mint=315474b2128aaf439d9c87117e20ac6e2ddfa03c71c559d5b2818bcfb1a49896 move=8b5c3bff6aff8253c15eb26e2f628b8dfbdd555b26dca9151b96c4a0603dcad9
+[2026-10-18T03:34:07.110Z] mint game2 confirmed=true tx=4a371482315aa4ae44a043d5cbc56e0e912ccdd40b7b18fbb419631efcaa51aa
+[2026-10-18T03:34:07.186Z] bob build error: "failed script execution Spend[0] the validator crashed / exited prematurely"
+[2026-10-18T03:34:07.186Z] RESULT 2-bob-build-rejected: PASS "failed script execution Spend[0] the validator crashed / exited prematurely"
+[2026-10-18T03:34:07.199Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":0,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T03:34:07.201Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":0,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T03:34:07.206Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":0,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T03:34:07.213Z] bob forced tx d89761009589bb1802d3c3e1aa82444ba570f3f0845cea13574cf9ef44137682 isValid true
+[2026-10-18T03:34:07.287Z] ogmios submit error (raw): {
+ "code": 3136,
+ "message": "Invalid transaction submitted as valid, or vice-versa. Since Alonzo, the ledger may allow invalid transactions to be submitted and included on-chain, provided that they leave a collateral value as compensation. This prevent certain class of attacks. As a consequence, transactions now have a validity tag with them. Your transaction did not match what that validity tag is stating. The field 'data.declaredSpending' indicates what the transaction is said to consume (collaterals or inputs) and the field 'data.mismatchReason' provides more information about the mismatch.",
+ "data": {
+  "declaredSpending": "inputs",
+  "mismatchReason": "The transaction failed unexpectedly."
+ }
+}
+[2026-10-18T03:34:07.288Z] RESULT 3-bob-forced-node-rejects: PASS code=3136 msg=Invalid transaction submitted as valid, or vice-versa. Since Alonzo, the ledger may allow invalid transactions to be submitted and included on-chain, provided that they leave a collateral value as compensation. This prevent certain class of attacks. As a consequence, transactions now have a validity tag with them. Your transaction did not match what that validity tag is stating. The field 'data.declaredSpending' indicates what the transaction is said to consume (collaterals or inputs) and the field 'data.mismatchReason' provides more information about the mismatch.
+[2026-10-18T03:34:08.466Z] ogmios evaluateTransaction on same tx (script failure detail): {"code":3010,"message":"Some scripts of the transactions terminated with error(s).","data":[{"validator":{"index":0,"purpose":"spend"},"error":{"code":3012,"message":"Some of the scripts failed to evaluate to a positive outcome. The field 'data.validationError' informs about the nature of the error, and 'data.traces' lists all the execution traces collected during the script execution.","data":{"validationError":"An error has occurred:\nThe machine terminated because of an error, either from a built-in function or from an explicit use of 'error'.\nCaused by: (error)","traces":[]}}}]}
+[2026-10-18T03:34:08.494Z] Kupmios submit error surface: OgmiosJsonRpcError: Ogmios JSON-RPC error 3136: Invalid transaction submitted as valid, or vice-versa. Since Alonzo, the ledger may allow invalid transactions to be submitted and included on-chain, provided that they leave a collateral value as compensation. This prevent certain class of attacks. As a consequence, transactions now have a validity tag with them. Your transaction did not match what that validity tag is stating. The field 'data.declaredSpending' indicates what the transaction is said to consume (collaterals or inputs) and the field 'data.mismatchReason' provides more information about the mismatch.: {"declaredSpending":"inputs","mismatchReason":"The transaction failed unexpectedly."}
+[2026-10-18T03:34:28.770Z] mint game3 confirmed=true tx=6642827913a9956b7bd8dbfc028c2a431e817df47727308829cf0297e11e9798
+[2026-10-18T03:34:28.939Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":0,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T03:34:28.940Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":0,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T03:34:28.942Z] fixedEvaluator returning [{"redeemer_tag":"spend","redeemer_index":0,"ex_units":{"mem":2000000,"steps":800000000}}]
+[2026-10-18T03:34:49.226Z] alice forced move confirmed=true tx=830aea7c8370759e752ae1f7ea11c147394e91ebe0657155236b2323124e8388
+[2026-10-18T03:34:49.321Z] RESULT 3m-alice-forced-accepted: PASS tx=830aea7c8370759e752ae1f7ea11c147394e91ebe0657155236b2323124e8388
+[2026-10-18T03:34:49.620Z] 4a unsigned tx cb152e7dfb86a20ed436b388c141aa2b6b371b5b6d65548dd93f42e57ccdc39d vkey witnesses in unsigned: 0 cbor bytes: 2040
+[2026-10-18T03:34:49.622Z] 4a witness set from mock signTx: a100d90102818258208d58d69fcef5b801452fcfb0949846f6727db3692d686e79f296fcdc1bcac4...
+[2026-10-18T03:35:10.066Z] 4a bob move via CIP-30 mock confirmed=true tx=cb152e7dfb86a20ed436b388c141aa2b6b371b5b6d65548dd93f42e57ccdc39d
+[2026-10-18T03:35:10.132Z] 4a datum moves 7,3
+[2026-10-18T03:35:30.848Z] 4b alice payment via withPrivateKey confirmed=true tx=a7d4c5970f4c5d98826782d436a0eb85a472aa5c53ade9d3073a037baba626c3
+[2026-10-18T03:35:51.298Z] 4c bob payment via fromAPI(mock).sign.withWallet confirmed=true tx=c7ed599def63a859faa473e68af2023b4bcb4d95cc874c18f5af822f26ca1462
+[2026-10-18T03:35:51.300Z] RESULT 4-unsigned+external-signer: PASS 4a=cb152e7dfb86a20ed436b388c141aa2b6b371b5b6d65548dd93f42e57ccdc39d 4b=a7d4c5970f4c5d98826782d436a0eb85a472aa5c53ade9d3073a037baba626c3 4c(fromAPI)=true
+[2026-10-18T03:35:51.301Z] SUMMARY {
+  "1-mint+move": {
+    "ok": true,
+    "detail": "mint=315474b2128aaf439d9c87117e20ac6e2ddfa03c71c559d5b2818bcfb1a49896 move=8b5c3bff6aff8253c15eb26e2f628b8dfbdd555b26dca9151b96c4a0603dcad9"
+  },
+  "2-bob-build-rejected": {
+    "ok": true,
+    "detail": "\"failed script execution Spend[0] the validator crashed / exited prematurely\""
+  },
+  "3-bob-forced-node-rejects": {
+    "ok": true,
+    "detail": "code=3136 msg=Invalid transaction submitted as valid, or vice-versa. Since Alonzo, the ledger may allow invalid transactions to be submitted and included on-chain, provided that they leave a collateral value as compensation. This prevent certain class of attacks. As a consequence, transactions now have a validity tag with them. Your transaction did not match what that validity tag is stating. The field 'data.declaredSpending' indicates what the transaction is said to consume (collaterals or inputs) and the field 'data.mismatchReason' provides more information about the mismatch."
+  },
+  "3m-alice-forced-accepted": {
+    "ok": true,
+    "detail": "tx=830aea7c8370759e752ae1f7ea11c147394e91ebe0657155236b2323124e8388"
+  },
+  "4-unsigned+external-signer": {
+    "ok": true,
+    "detail": "4a=cb152e7dfb86a20ed436b388c141aa2b6b371b5b6d65548dd93f42e57ccdc39d 4b=a7d4c5970f4c5d98826782d436a0eb85a472aa5c53ade9d3073a037baba626c3 4c(fromAPI)=true"
+  }
+}
+exit=0

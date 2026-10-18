@@ -1,0 +1,20 @@
+health connected {
+  slot: 868,
+  id: '1ee03572622132611e90730bfeb5e7d7becd6fe455de395efdc0da4d23cd6cd3',
+  height: 861
+} v7.0.0 (b3a830a1)
+networkTip {
+  slot: 871,
+  id: '32fdaf2479c8a2766b397fa0d049b0777dafce14bc0b06e8e437c704c34b8a84'
+}
+intersection {
+  intersection: 'origin',
+  tip: {
+    slot: 872,
+    id: '656a547c73e1c54f31b5feabd92a4f299d48b7072d33d0ec225dd1833d36db91',
+    height: 865
+  }
+}
+{"forwards":200,"backwards":1,"firstRollback":"origin","txs":0,"ms":2134}
+bigint bigint 9007199254740993 true
+native JSON.parse 9007199254740992

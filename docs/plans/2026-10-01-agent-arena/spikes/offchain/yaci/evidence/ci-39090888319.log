@@ -1,0 +1,217 @@
+yaci-parallel	Set up job	﻿2026-10-18T02:39:52.7817259Z Current runner version: '2.337.0'
+yaci-parallel	Set up job	2026-10-18T02:39:52.7838203Z ##[group]Runner Image Provisioner
+yaci-parallel	Set up job	2026-10-18T02:39:52.7838813Z Hosted Compute Agent
+yaci-parallel	Set up job	2026-10-18T02:39:52.7839235Z Version: 20261012.601
+yaci-parallel	Set up job	2026-10-18T02:39:52.7839618Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+yaci-parallel	Set up job	2026-10-18T02:39:52.7840106Z Build Date: 2026-10-12T17:48:21Z
+yaci-parallel	Set up job	2026-10-18T02:39:52.7840579Z Worker ID: {47af8605-3fe8-4883-9683-d34995b52316}
+yaci-parallel	Set up job	2026-10-18T02:39:52.7841021Z Region: southcentralus
+yaci-parallel	Set up job	2026-10-18T02:39:52.7841642Z Cloud: Azure
+yaci-parallel	Set up job	2026-10-18T02:39:52.7841974Z ##[endgroup]
+yaci-parallel	Set up job	2026-10-18T02:39:52.7842936Z ##[group]Operating System
+yaci-parallel	Set up job	2026-10-18T02:39:52.7843438Z Ubuntu
+yaci-parallel	Set up job	2026-10-18T02:39:52.7843778Z 24.04.5
+yaci-parallel	Set up job	2026-10-18T02:39:52.7844131Z LTS
+yaci-parallel	Set up job	2026-10-18T02:39:52.7844464Z ##[endgroup]
+yaci-parallel	Set up job	2026-10-18T02:39:52.7844865Z ##[group]Runner Image
+yaci-parallel	Set up job	2026-10-18T02:39:52.7845309Z Image: ubuntu-24.04
+yaci-parallel	Set up job	2026-10-18T02:39:52.7845693Z Version: 20261012.334.1
+yaci-parallel	Set up job	2026-10-18T02:39:52.7846411Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+yaci-parallel	Set up job	2026-10-18T02:39:52.7847506Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+yaci-parallel	Set up job	2026-10-18T02:39:52.7848207Z ##[endgroup]
+yaci-parallel	Set up job	2026-10-18T02:39:52.7848870Z ##[group]GITHUB_TOKEN Permissions
+yaci-parallel	Set up job	2026-10-18T02:39:52.7850324Z Contents: read
+yaci-parallel	Set up job	2026-10-18T02:39:52.7850679Z Metadata: read
+yaci-parallel	Set up job	2026-10-18T02:39:52.7851080Z ##[endgroup]
+yaci-parallel	Set up job	2026-10-18T02:39:52.7852833Z Secret source: Actions
+yaci-parallel	Set up job	2026-10-18T02:39:52.7853474Z Cache mode: write
+yaci-parallel	Set up job	2026-10-18T02:39:52.7853934Z Prepare workflow directory
+yaci-parallel	Set up job	2026-10-18T02:39:52.8100416Z Prepare all required actions
+yaci-parallel	Set up job	2026-10-18T02:39:52.8181816Z Complete job name: yaci-parallel
+yaci-parallel	Pull image	﻿2026-10-18T02:39:52.8780186Z ##[group]Run start=$(date +%s)
+yaci-parallel	Pull image	2026-10-18T02:39:52.8781007Z ^[[36;1mstart=$(date +%s)^[[0m
+yaci-parallel	Pull image	2026-10-18T02:39:52.8781996Z ^[[36;1mdocker pull -q bloxbean/yaci-cli:0.12.0^[[0m
+yaci-parallel	Pull image	2026-10-18T02:39:52.8782913Z ^[[36;1mecho "pull_seconds=$(( $(date +%s)-start ))"^[[0m
+yaci-parallel	Pull image	2026-10-18T02:39:52.8783840Z ^[[36;1mdocker image inspect bloxbean/yaci-cli:0.12.0 --format '{{.Architecture}}'^[[0m
+yaci-parallel	Pull image	2026-10-18T02:39:52.9585065Z shell: /usr/bin/bash -e {0}
+yaci-parallel	Pull image	2026-10-18T02:39:52.9585754Z ##[endgroup]
+yaci-parallel	Pull image	2026-10-18T02:40:24.1242162Z docker.io/bloxbean/yaci-cli:0.12.0
+yaci-parallel	Pull image	2026-10-18T02:40:24.1249570Z pull_seconds=32
+yaci-parallel	Pull image	2026-10-18T02:40:24.1361566Z amd64
+yaci-parallel	Start two instances on dynamic ports and wait for health	﻿2026-10-18T02:40:24.1459802Z ##[group]Run start=$(date +%s)
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1460110Z ^[[36;1mstart=$(date +%s)^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1460331Z ^[[36;1mfor n in a b; do^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1460717Z ^[[36;1m  docker run -d --name yaci-$n --entrypoint /app/yaci-cli -p 127.0.0.1::1337 -p 127.0.0.1::1442 -p 127.0.0.1::10000 bloxbean/yaci-cli:0.12.0 up --enable-kupomios^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1461093Z ^[[36;1mdone^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1461463Z ^[[36;1mfor n in a b; do^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1461725Z ^[[36;1m  o=$(docker port yaci-$n 1337/tcp | cut -d: -f2); k=$(docker port yaci-$n 1442/tcp | cut -d: -f2)^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1461993Z ^[[36;1m  ok=0^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1462145Z ^[[36;1m  for i in $(seq 1 240); do^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1462564Z ^[[36;1m    h=$(curl -s -m 2 -H 'Accept: application/json' http://127.0.0.1:$o/health || true)^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1462925Z ^[[36;1m    kh=$(curl -s -m 2 -H 'Accept: application/json' http://127.0.0.1:$k/health || true)^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1463617Z ^[[36;1m    if python3 -c "import json,sys; d=json.loads(sys.argv[1]); kd=json.loads(sys.argv[2]); sys.exit(0 if d['connectionStatus']=='connected' and (d.get('lastKnownTip') or {}).get('height',0)>0 and kd['most_recent_checkpoint']>=d['lastKnownTip']['slot'] else 1)" "$h" "$kh" 2>/dev/null; then ok=1; break; fi^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1464250Z ^[[36;1m    sleep 1^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1464532Z ^[[36;1m  done^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1464824Z ^[[36;1m  echo "$n ready=$ok seconds=$(( $(date +%s)-start ))"^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1465043Z ^[[36;1m  echo "$h"; echo "$kh"^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1465285Z ^[[36;1m  docker exec yaci-$n /app/cardano-bin/cardano-node --version | head -1^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1465540Z ^[[36;1m  test $ok = 1^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1465867Z ^[[36;1mdone^[[0m
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1520979Z shell: /usr/bin/bash -e {0}
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1521344Z ##[endgroup]
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.1811459Z e81f7bf90870c56638aa047f95e68e0a91f948e9b0b0fa51d65c77d8e1c3dbe7
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:24.3864459Z 43569b3c2aa5810de14b6655047506a6d6b954bcec3b2cfa3d4944855c8151bc
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:35.6681055Z a ready=1 seconds=11
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:35.6683225Z {"startTime":"2026-10-18T02:40:34.565502924Z","lastKnownTip":{"slot":10,"id":"898e59b3da969618f1c96748f5d5bb8a5917ffb72f7b35ad9194a62e7e8a9bef","height":9},"lastTipUpdate":"2026-10-18T02:40:34.573990785Z","networkSynchronization":1.00000,"currentEra":"conway","metrics":{"activeConnections":1,"runtimeStats":{"cpuTime":46401626,"currentHeapSize":453,"gcCpuTime":23764746,"maxHeapSize":453},"sessionDurations":{"max":0,"mean":9,"min":0},"totalConnections":2,"totalMessages":116,"totalUnrouted":0},"connectionStatus":"connected","currentEpoch":0,"slotInEpoch":10,"version":"v7.0.0 (b3a830a1)","network":"unknown (42)"}
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:35.6685465Z {"connection_status":"connected","most_recent_checkpoint":11,"most_recent_node_tip":11,"seconds_since_last_block":0,"network_synchronization":1.00000,"configuration":{"indexes":"installed"},"version":"v2.12.0+491918"}
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:35.7039457Z cardano-node 11.0.1 - linux-x86_64 - ghc-9.6
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:35.7781232Z b ready=1 seconds=11
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:35.7783503Z {"startTime":"2026-10-18T02:40:34.518443053Z","lastKnownTip":{"slot":10,"id":"898e59b3da969618f1c96748f5d5bb8a5917ffb72f7b35ad9194a62e7e8a9bef","height":9},"lastTipUpdate":"2026-10-18T02:40:34.521450116Z","networkSynchronization":1.00000,"currentEra":"conway","metrics":{"activeConnections":1,"runtimeStats":{"cpuTime":39730961,"currentHeapSize":453,"gcCpuTime":18093702,"maxHeapSize":453},"sessionDurations":{"max":0,"mean":10,"min":0},"totalConnections":2,"totalMessages":116,"totalUnrouted":0},"connectionStatus":"connected","currentEpoch":0,"slotInEpoch":10,"version":"v7.0.0 (b3a830a1)","network":"unknown (42)"}
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:35.7785789Z {"connection_status":"connected","most_recent_checkpoint":11,"most_recent_node_tip":11,"seconds_since_last_block":0,"network_synchronization":1.00000,"configuration":{"indexes":"installed"},"version":"v2.12.0+491918"}
+yaci-parallel	Start two instances on dynamic ports and wait for health	2026-10-18T02:40:35.8131919Z cardano-node 11.0.1 - linux-x86_64 - ghc-9.6
+yaci-parallel	Wait for Yaci status, then topup with retry	﻿2026-10-18T02:40:35.8281817Z ##[group]Run A=addr_test1qzlwg5c3mpr0cz5td0rvr5rvcgf02al05cqgd2wzv7pud6chpzk4elx4jh2f7xtftjrdxddr88wg6sfszu8r3gktpjtqrr00q9
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8282522Z ^[[36;1mA=addr_test1qzlwg5c3mpr0cz5td0rvr5rvcgf02al05cqgd2wzv7pud6chpzk4elx4jh2f7xtftjrdxddr88wg6sfszu8r3gktpjtqrr00q9^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8282870Z ^[[36;1mstart=$(date +%s)^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8283018Z ^[[36;1mfor n in a b; do^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8283199Z ^[[36;1m  p=$(docker port yaci-$n 10000/tcp | cut -d: -f2)^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8283485Z ^[[36;1m  curl -s -m 5 http://127.0.0.1:$p/local-cluster/api/admin/devnet/status; echo^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8283735Z ^[[36;1m  for i in $(seq 1 180); do^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8284116Z ^[[36;1m    r=$(curl -s -m 60 -X POST -H 'Content-Type: application/json' -d "{\"address\":\"$A\",\"adaAmount\":1234}" http://127.0.0.1:$p/local-cluster/api/addresses/topup || true)^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8284618Z ^[[36;1m    if echo "$r" | grep -q '"status":true'; then echo "$n topup ok after $(( $(date +%s)-start ))s attempts=$i"; break; fi^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8284910Z ^[[36;1m    sleep 2^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8285029Z ^[[36;1m  done^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8285150Z ^[[36;1m  echo "$r"^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8285337Z ^[[36;1m  curl -s -m 5 http://127.0.0.1:$p/local-cluster/api/admin/devnet/status; echo^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8285564Z ^[[36;1m  echo "$r" | grep -q '"status":true'^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8285717Z ^[[36;1mdone^[[0m
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8342492Z shell: /usr/bin/bash -e {0}
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8342684Z ##[endgroup]
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:40:35.8630348Z initialized
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:46:56.3518866Z {"address":"addr_test1qzlwg5c3mpr0cz5td0rvr5rvcgf02al05cqgd2wzv7pud6chpzk4elx4jh2f7xtftjrdxddr88wg6sfszu8r3gktpjtqrr00q9","adaAmount":1234.0,"status":false,"message":"Topup failed"}
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:46:56.3583119Z initialized
+yaci-parallel	Wait for Yaci status, then topup with retry	2026-10-18T02:46:56.3606606Z ##[error]Process completed with exit code 1.
+yaci-parallel	Logs on failure	﻿2026-10-18T02:46:56.3646209Z ##[group]Run for n in a b; do docker logs --tail 60 yaci-$n || true; done
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3646523Z ^[[36;1mfor n in a b; do docker logs --tail 60 yaci-$n || true; done^[[0m
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3699885Z shell: /usr/bin/bash -e {0}
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3700042Z ##[endgroup]
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3860023Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3924566Z ^[[1;36mAddress #12^[[0m         : addr_test1qpcf5ursqpwx2tp8maeah00rxxdfpvf8h65k4hk3chac0fvu28duly863yqhgjtl8an2pkksd6mlzv0qv4nejh5u2zjsshr90k
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3925185Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/12'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3925512Z ^[[1;36mStake Address^[[0m       : stake_test1uzw9rk70jragjqt5f9ln7e4qmtgxadl3x8sx2euet6w9pfgnc2aa9
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3926229Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3927207Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3928040Z ^[[1;36mUtxo^[[0m                : ce5179fbf81eb92907e8e5ca7d2180b561871c87c4136a2deaf9dd75f34b51be#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3928271Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3928594Z ^[[1;36mAddress #13^[[0m         : addr_test1qr79wm0n5fucskn6f58u2qph9k4pm9hjd3nkx4pwe54ds4gh2vpy4h4r0sf5ah4mdrwqe7hdtfcqn6pstlslakxsengsgyx75q
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3929001Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/13'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3929312Z ^[[1;36mStake Address^[[0m       : stake_test1uqt4xqj2m63hcy6wm6ak3hqvltk45uqfaqc9lc07mrgve5g0snxf6
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3929875Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3930567Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3931230Z ^[[1;36mUtxo^[[0m                : d9d325322d157b007eb936bbd54968844e6e0f845994ad1843874d82a1521832#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3931485Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3931877Z ^[[1;36mAddress #14^[[0m         : addr_test1qqe5df3su6tjhuuve6rjr8d36ccxre7dxfx2mzxp3egy72vsetrga9el2yjke2fcdql6f6sjzu7h6prajs8mhzpm6r5qpkfq9m
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3932310Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/14'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3932648Z ^[[1;36mStake Address^[[0m       : stake_test1uzgv435wjul4zftv4yuxs0ayagfpw0taq37egram3qaap6q2ag2w7
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3933283Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3934474Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3935398Z ^[[1;36mUtxo^[[0m                : c408f9103ba7e0f207e211b53f5cca42f79f3e9c9d24024731d648be909497a8#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3935744Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3936286Z ^[[1;36mAddress #15^[[0m         : addr_test1qq5tscksq8n2vjszkdtqe0zn9645246ex3mu88x9y0stnlzjwyqgnrq3uuc3jst3hyy244rrwuxke0m7ezr3cn93u5vq0rfv8t
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3936940Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/15'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3937448Z ^[[1;36mStake Address^[[0m       : stake_test1upf8zqyf3sg7wvgeg9cmjz92633hwrtvhalv3pcufjc72xqgl8gja
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3938379Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3939551Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3940479Z ^[[1;36mUtxo^[[0m                : 6712b9e13e7e433397ea2888899b8a5ba57b12c427dc72f1c1c684ac05f32b1a#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3941275Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3941815Z ^[[1;36mAddress #16^[[0m         : addr_test1qp0qu4cypvrwn4c7pu50zf3x9qu2drdsk545l5dnsa7a5gsr6htafuvutm36rm23hdnsw7w7r82q4tljuh55drxqt30q6vm8vs
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3942689Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/16'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3943197Z ^[[1;36mStake Address^[[0m       : stake_test1uqpat4757xw9acapa4gmkec8080pn4q24lewt62x3nq9chs2k9etm
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3944087Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3945231Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3945839Z ^[[1;36mUtxo^[[0m                : 1c2498914a63269e7d4ab7f6b7d493d0d41a87b0cacaab7412c591219dcc21c4#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3946052Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3946481Z ^[[1;36mAddress #17^[[0m         : addr_test1qqm87edtdxc7vu2u34dpf9jzzny4qhk3wqezv6ejpx3vgrwt46dz4zq7vqll88fkaxrm4nac0m5cq50jytzlu0hax5xqwlraql
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3947175Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/17'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3947703Z ^[[1;36mStake Address^[[0m       : stake_test1ur96ax323q0xq0lnn5mwnpa6e7u8a6vq28ez93078m7n2rq9emzd3
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3948646Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3949795Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3950665Z ^[[1;36mUtxo^[[0m                : 8b96680725c4fcf461214054d0b364a86e43d7d6be0475d610e980971b101ad0#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3950995Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3951591Z ^[[1;36mAddress #18^[[0m         : addr_test1qrzufj3g0ua489yt235wtc3mrjrlucww2tqdnt7kt5rs09grsag6vxw5v053atks5a6whke03cf2qx3h3g2nhsmzwv3sgml3ed
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3952090Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/18'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3952437Z ^[[1;36mStake Address^[[0m       : stake_test1uqpcw5dxr82x86g74mg2wa8tmvhcuy4qrgmc59fmcd38xgcmfuasu
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3953078Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3954084Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3954962Z ^[[1;36mUtxo^[[0m                : c7565416e7553cdf8fdac8bf054b4b3de19d06b72efd00c47823335d7156ed1f#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3955295Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3955822Z ^[[1;36mAddress #19^[[0m         : addr_test1qrh3nrahcd0pj6ps3g9htnlw2jjxuylgdhfn2s5rxqyrr43yzewr2766qsfeq6stl65t546cwvclpqm2rpkkxtksgxuq90xn5f
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3956480Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/19'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3956954Z ^[[1;36mStake Address^[[0m       : stake_test1uqjpvhp40ddqgyusdg9la2962av8xv0ssd4psmtr9mgyrwq9gaf6k
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3957825Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3958662Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3959211Z ^[[1;36mUtxo^[[0m                : a6ce90a9a5ef8ef73858effdae375ba50f302d3c6c8b587a15eaa8fa98ddf741#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3959447Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3959512Z Waiting for next block...
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3960007Z ^[[0;34m✅ ^[[0mStarted ogmios : http://localhost:1337
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3960243Z ^[[0;34m✅ ^[[0mStarted kupo : http://localhost:1442
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3968047Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3969560Z ^[[1;36mAddress #12^[[0m         : addr_test1qpcf5ursqpwx2tp8maeah00rxxdfpvf8h65k4hk3chac0fvu28duly863yqhgjtl8an2pkksd6mlzv0qv4nejh5u2zjsshr90k
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3970476Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/12'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3971105Z ^[[1;36mStake Address^[[0m       : stake_test1uzw9rk70jragjqt5f9ln7e4qmtgxadl3x8sx2euet6w9pfgnc2aa9
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3972109Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3973267Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3974131Z ^[[1;36mUtxo^[[0m                : ce5179fbf81eb92907e8e5ca7d2180b561871c87c4136a2deaf9dd75f34b51be#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3974460Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3974978Z ^[[1;36mAddress #13^[[0m         : addr_test1qr79wm0n5fucskn6f58u2qph9k4pm9hjd3nkx4pwe54ds4gh2vpy4h4r0sf5ah4mdrwqe7hdtfcqn6pstlslakxsengsgyx75q
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3975653Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/13'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3976248Z ^[[1;36mStake Address^[[0m       : stake_test1uqt4xqj2m63hcy6wm6ak3hqvltk45uqfaqc9lc07mrgve5g0snxf6
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3977194Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3978403Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3979449Z ^[[1;36mUtxo^[[0m                : d9d325322d157b007eb936bbd54968844e6e0f845994ad1843874d82a1521832#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3979814Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3980346Z ^[[1;36mAddress #14^[[0m         : addr_test1qqe5df3su6tjhuuve6rjr8d36ccxre7dxfx2mzxp3egy72vsetrga9el2yjke2fcdql6f6sjzu7h6prajs8mhzpm6r5qpkfq9m
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3981002Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/14'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3981598Z ^[[1;36mStake Address^[[0m       : stake_test1uzgv435wjul4zftv4yuxs0ayagfpw0taq37egram3qaap6q2ag2w7
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3982559Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3983691Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3984562Z ^[[1;36mUtxo^[[0m                : c408f9103ba7e0f207e211b53f5cca42f79f3e9c9d24024731d648be909497a8#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3984889Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3985376Z ^[[1;36mAddress #15^[[0m         : addr_test1qq5tscksq8n2vjszkdtqe0zn9645246ex3mu88x9y0stnlzjwyqgnrq3uuc3jst3hyy244rrwuxke0m7ezr3cn93u5vq0rfv8t
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3985890Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/15'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3986197Z ^[[1;36mStake Address^[[0m       : stake_test1upf8zqyf3sg7wvgeg9cmjz92633hwrtvhalv3pcufjc72xqgl8gja
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3986745Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3987430Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3987965Z ^[[1;36mUtxo^[[0m                : 6712b9e13e7e433397ea2888899b8a5ba57b12c427dc72f1c1c684ac05f32b1a#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3988166Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3988478Z ^[[1;36mAddress #16^[[0m         : addr_test1qp0qu4cypvrwn4c7pu50zf3x9qu2drdsk545l5dnsa7a5gsr6htafuvutm36rm23hdnsw7w7r82q4tljuh55drxqt30q6vm8vs
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3988875Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/16'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3989178Z ^[[1;36mStake Address^[[0m       : stake_test1uqpat4757xw9acapa4gmkec8080pn4q24lewt62x3nq9chs2k9etm
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3989717Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3990509Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3991337Z ^[[1;36mUtxo^[[0m                : 1c2498914a63269e7d4ab7f6b7d493d0d41a87b0cacaab7412c591219dcc21c4#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3991625Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3991943Z ^[[1;36mAddress #17^[[0m         : addr_test1qqm87edtdxc7vu2u34dpf9jzzny4qhk3wqezv6ejpx3vgrwt46dz4zq7vqll88fkaxrm4nac0m5cq50jytzlu0hax5xqwlraql
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3992344Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/17'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3992643Z ^[[1;36mStake Address^[[0m       : stake_test1ur96ax323q0xq0lnn5mwnpa6e7u8a6vq28ez93078m7n2rq9emzd3
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3993181Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3993871Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3994409Z ^[[1;36mUtxo^[[0m                : 8b96680725c4fcf461214054d0b364a86e43d7d6be0475d610e980971b101ad0#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3994611Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3994921Z ^[[1;36mAddress #18^[[0m         : addr_test1qrzufj3g0ua489yt235wtc3mrjrlucww2tqdnt7kt5rs09grsag6vxw5v053atks5a6whke03cf2qx3h3g2nhsmzwv3sgml3ed
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3995313Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/18'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3995610Z ^[[1;36mStake Address^[[0m       : stake_test1uqpcw5dxr82x86g74mg2wa8tmvhcuy4qrgmc59fmcd38xgcmfuasu
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3996151Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3996835Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3997370Z ^[[1;36mUtxo^[[0m                : c7565416e7553cdf8fdac8bf054b4b3de19d06b72efd00c47823335d7156ed1f#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3997574Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3997894Z ^[[1;36mAddress #19^[[0m         : addr_test1qrh3nrahcd0pj6ps3g9htnlw2jjxuylgdhfn2s5rxqyrr43yzewr2766qsfeq6stl65t546cwvclpqm2rpkkxtksgxuq90xn5f
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3998294Z ^[[1;36mDerivation Path^[[0m     : m/1852'/1815'/19'/0/0
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3998595Z ^[[1;36mStake Address^[[0m       : stake_test1uqjpvhp40ddqgyusdg9la2962av8xv0ssd4psmtr9mgyrwq9gaf6k
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3999144Z ^[[1;36mPayment Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.3999840Z ^[[1;36mStaking Key^[[0m         : <REDACTED-public-yaci-default-key>
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.4000386Z ^[[1;36mUtxo^[[0m                : a6ce90a9a5ef8ef73858effdae375ba50f302d3c6c8b587a15eaa8fa98ddf741#0 - 10000 Ada
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.4000595Z 
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.4000656Z Waiting for next block...
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.4000869Z ^[[0;34m✅ ^[[0mStarted ogmios : http://localhost:1337
+yaci-parallel	Logs on failure	2026-10-18T02:46:56.4001096Z ^[[0;34m✅ ^[[0mStarted kupo : http://localhost:1442
+yaci-parallel	Complete job	﻿2026-10-18T02:46:56.4063433Z Cleaning up orphan processes

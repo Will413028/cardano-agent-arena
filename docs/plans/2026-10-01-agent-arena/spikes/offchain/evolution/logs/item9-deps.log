@@ -1,0 +1,31 @@
+$ cat package.json
+{"name":"item9","version":"1.0.0","private":true,"dependencies":{"@evolution-sdk/evolution":"0.5.16"}}
+$ npm install --omit=dev --ignore-scripts
+
+added 10 packages, and audited 11 packages in 5s
+
+7 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+$ npm ls --all --omit=dev --parseable | wc -l
+      11
+$ npm ls --all --omit=dev
+item9@1.0.0 /private/tmp/claude-501/-Users-will-second-brain--projects-personal-cardano-agent-arena/***/scratchpad/item9
+└─┬ @evolution-sdk/evolution@0.5.16
+  ├─┬ @noble/curves@2.4.0
+  │ └── @noble/hashes@2.4.0 deduped
+  ├── @noble/hashes@2.4.0
+  ├── @scure/base@2.4.0
+  ├─┬ @scure/bip32@2.4.0
+  │ ├── @noble/curves@2.4.0 deduped
+  │ ├── @noble/hashes@2.4.0 deduped
+  │ └── @scure/base@2.4.0 deduped
+  ├─┬ @scure/bip39@2.4.0
+  │ └── @noble/hashes@2.4.0 deduped
+  └─┬ effect@3.22.3
+    ├── @standard-schema/spec@1.1.0
+    └─┬ fast-check@3.23.2
+      └── pure-rand@6.1.0
+
+ 48M	node_modules

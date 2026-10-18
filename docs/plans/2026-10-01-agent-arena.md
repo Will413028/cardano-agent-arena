@@ -134,9 +134,9 @@ Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain
 
 - [ ] **4.5b. devnet 與程式內交易建構**（被擋於：步驟 4.5a；必須在同一批完成：換掉 devnet 後舊的 `cli()` 交易路徑就不能用）
   - 範圍：
-    - devnet：依 D13 換掉 `scripts/devnet.ts` 的 `docker run`／`docker exec` 啟動，用選定工具起 node、Ogmios、Kupo。Kupo 設定為 match 全部、不 prune、從 origin（步驟 7 的完整歷史）。每次啟動用唯一的實例名與動態 port，`down` 只移除自己的實例。
-    - 就緒條件：Ogmios `/health` 的 `connectionStatus` 為 `connected` 且 `lastKnownTip.blockNo > 0`，加上 Kupo `/health` 回報的最近 checkpoint slot ≥ Ogmios tip 的 slot。全部非同步並以 AbortSignal 設逾時，逾時錯誤帶最近的服務 log。
-    - 交易：`offchain/tx-builder.ts` 改用 D13 選定的 SDK，建構、平衡、評估、簽章、送出、等確認都在程式內；provider 直接用 SDK 的 Ogmios＋Kupo 實作，不另包自訂介面。金鑰在程式內每次產生、由 devnet 撥款。
+    - devnet：依 D13 換掉 `scripts/devnet.ts` 的 `docker run`／`docker exec` 啟動，改用 Yaci DevKit 0.12.0 的 Docker image（`--entrypoint /app/yaci-cli … up --enable-kupomios`）起 node、Ogmios、Kupo；容器生命週期由 harness 自己管理，不用 Yaci 的 npm 啟動器（全域 PID 檔會殺掉別人的實例）也不用 `devkit.sh`。Kupo 設定為 match 全部、不 prune、從 origin（步驟 7 的完整歷史）。每次啟動用唯一的實例名與動態 port，`down` 只移除自己的實例。
+    - 就緒條件：Ogmios `/health` 的 `connectionStatus` 為 `connected` 且 `lastKnownTip.height > 0`（Ogmios v7 的欄位，4.5a 實測），加上 Kupo `/health`（帶 `Accept: application/json`）的 `most_recent_checkpoint` ≥ Ogmios tip 的 slot。全部非同步並以 AbortSignal 設逾時，逾時錯誤帶最近的服務 log。
+    - 交易：`offchain/tx-builder.ts` 改用 D13 選定的 SDK，建構、平衡、評估、簽章、送出、等確認都在程式內；provider 直接用 SDK 的 Ogmios＋Kupo 實作，不另包自訂介面。金鑰在程式內每次產生，由 Yaci 公開預設測試帳號在程式內轉帳撥款（topup REST 在 Docker 模式失敗；genesis UTxO 要從 Ogmios 讀，Kupo 不索引）。Blaze 對自訂網路要自己提供 slot config。
     - 選定 Yaci DevKit 時刪除 `infra/cardano-fixtures` 與 README 裡的 fixture 說明；選定自建 compose 時保留，並在 `infra/cardano-fixtures/README.md` 寫明用途。
     - 編碼：`offchain/codec.ts` 與 `offchain/generated/` 改成選定 SDK 的型別化 schema，不再輸出 cardano-cli 的 detailed JSON。4.5a 測項 (6) 通過就改用 SDK 的 CIP-57 產生方式並刪掉 `scripts/generate-blueprint.ts` 的自寫輸出；不通過就保留自寫產生器但改輸出 SDK schema。I8 的漂移檢查沿用。
     - 非法交易保留兩層：建構時被擋，以及 4.5a 測項 (3) 那種跳過本機評估後強行送出、以 phase-2 被拒。
@@ -332,7 +332,7 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
   - B：程式內 TypeScript SDK（Lucid Evolution、Evolution SDK、Blaze、Mesh）經 provider 建構、評估、簽章、送出：這是業界基線。代價是 SDK 為 0.x、發版頻繁。
   - devnet 的選項：自建 `docker run`＋`docker exec` 輪詢（現況）／自建 compose（node＋Ogmios＋Kupo、健康就緒）／Yaci DevKit（內建 Ogmios、Kupo、相容 Blockfrost 的 Yaci Store 與 CIP-30 錢包，由 4.5a 查證）。
   - 建議：B，加 Yaci DevKit 與健康就緒；先做步驟 4.5a 的 spike 再定 SDK。
-  - 結論：B＋Yaci DevKit。選型規則如下，步驟 4.5a 依此落地，不再回頭問：
+  - 結論：B＋Yaci DevKit。步驟 4.5a 的實測結果：三個 SDK 都沒有 (1)–(8) 全過，規則選不出贏家，Will 在 2026-10-18 看過比較表後選 **Blaze 0.3.1**（整套版本鎖定），備案 Evolution SDK 0.5.16；devnet 為 Yaci DevKit 0.12.0 的 Docker image；證據在 `2026-10-01-agent-arena/spike-offchain.md`。原先的選型規則保留如下：
     - SDK：取 4.5a 測項 (1)–(8) 全部通過、採用版本發布滿 14 天者；都通過時取測項 (9) 依賴數較少者；排名第二的通過者為備案。
     - devnet：取 Yaci DevKit，條件是在 macOS arm64 與 ubuntu-latest 都能啟動、Conway 時代可跑 PlutusV3、能為任意地址撥款、兩個實例可並行且 `down` 只影響自己、Kupo 可設為全部／不 prune／從 origin、免註冊。任一不成立就改用自建 compose（node＋Ogmios＋Kupo，版本鎖定），不停下。
     - 理由與取捨見 ADR `docs/adr/2026-10-18-in-process-offchain-and-devnet.md`。
@@ -367,7 +367,7 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
 | 2 Spike：L1 成本與延遲 | 完成 | devnet 合法／非法與 mutation、UTxO contention、雙玩家簽章與 state token、最低 ADA；preprod 20 筆入塊與索引延遲，全部驗證為有效 script spend；見 spike-l1.md | 無（只完成 spike 的驗收，不代表正式產品） | |
 | 3 Spike：替代執行方式 | 完成 | Hydra 20 步 confirmed snapshots、L1 開關與 deposit 成本、Bob 離線 Close/Fanout；簽章 transcript 曲線與最大 N=84 的 devnet 真實交易、合法／非法與 source mutation；19 Aiken checks；見 spike-alternatives.md | 無（N=84 只適用本 fixture 與 devnet 14M memory，不是 preprod 上限） | |
 | 4 Walking skeleton | 完成 | `48aa0be` 的 CI `make check` 全部通過（run `36868324868`，walking-skeleton job success）：Aiken 4 checks、blueprint 漂移、TS、unit 2 tests、三種勝負、非法交易拒絕、獨立重播、結果頁與 verifier mutation；超時清理修正 `85c7830` 的 CI run `36870994814` 全部 success。2026-10-18 本機（Docker Desktop 29.1.3、linux/arm64 image、8 CPU）在 `858e125` 跑完整 `make check` exit 0，另跑 3 次 `test:e2e` 與 1 次 8 核 CPU 滿載下的 `test:e2e` 皆通過，單次 docker 呼叫最長 894ms | 無。2026-10-01 本機 query tip／transaction build 的 60 秒 timeout 未能重現，根因未證實；當時的 Docker 執行環境已無法核對，CPU 滿載已排除 | `7d750cf`、`48aa0be`、`85c7830` |
-| 4.5a Spike：SDK、Ogmios client、devnet 選型 | 未開始 | | 尚未開工 | |
+| 4.5a Spike：SDK、Ogmios client、devnet 選型 | 完成 | 三個 SDK 各 9 項（含 mint mutation，mutant 重建後重跑）、官方 Ogmios client 對 devnet 的 chain-sync 與 bigint、Yaci DevKit 在 macOS arm64 與 ubuntu-latest（CI run `39090704534`、`39090888319`）的並行與健康檢查；見 spike-offchain.md | 瀏覽器 bundle 只在 Node 裡載入過，沒有在真的瀏覽器跑；devnet 單一出塊者，真正的 rollback 沒測到 | |
 | 4.5b devnet 與程式內交易建構 | 未開始 | | 步驟 4.5a | |
 | 4.5c verifier 套件、Ogmios client、固定 policy | 未開始 | | 步驟 4.5b | |
 | 4.5d 測試分層與逾時觀測 | 未開始 | | 步驟 4.5c | |

@@ -1,0 +1,16 @@
+ogmios evaluate: [
+  {
+    "validator": {
+      "index": 0,
+      "purpose": "mint"
+    },
+    "budget": {
+      "memory": 122351,
+      "cpu": 44332249
+    }
+  }
+]
+devnet V3 cost model length: 251
+[aiken, devnet V3 (251)] {"cause":"failed script execution\n      Mint[0] the validator crashed / exited prematurely","message":"UPLC evaluation failed","failures":[{"purpose":"unknown","index":0,"validationError":"failed script execution\n      Mint[0] the validator crashed / exited prematurely","traces":[]}],"_tag":"EvaluationError"}
+[aiken, V3 padded to 297 with 0] {"cause":"failed script execution\n      Mint[0] the validator crashed / exited prematurely","message":"UPLC evaluation failed","failures":[{"purpose":"unknown","index":0,"validationError":"failed script execution\n      Mint[0] the validator crashed / exited prematurely","traces":[]}],"_tag":"EvaluationError"}
+[aiken, V3 padded to 297 with 1e9] {"cause":"failed script execution\n      Mint[0] the validator crashed / exited prematurely","message":"UPLC evaluation failed","failures":[{"purpose":"unknown","index":0,"validationError":"failed script execution\n      Mint[0] the validator crashed / exited prematurely","traces":[]}],"_tag":"EvaluationError"}

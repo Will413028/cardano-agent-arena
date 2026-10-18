@@ -1,0 +1,74 @@
+$ node item8-provider.mjs
+[2026-10-18T03:16:43.036Z] 8a Lucid(Kupmios) init error: ProtocolParametersSchema | └─ ["plutusCostModels"] |    └─ { readonly plutus:v1: ReadonlyArray<number>; readonly plutus:v2: ReadonlyArray<number>; readonly plutus:v3: ReadonlyArray<number> } |       └─ ["plutus:v2"] |          └─ is missing
+[2026-10-18T03:16:57.148Z] 8a getProtocolParameters error: ProtocolParametersSchema | └─ ["plutusCostModels"] |    └─ { readonly plutus:v1: ReadonlyArray<number>; readonly plutus:v2: ReadonlyArray<number>; readonly plutus:v3: ReadonlyArray<number> } |       └─ ["plutus:v2"] |          └─ is missing
+[2026-10-18T03:17:27.402Z] getUtxos(addr) [
+  {
+    "txHash": "89d068eadce8da709567cf76c93b4eee5439cc65d1e4fe52d1230b1e8de7060d",
+    "outputIndex": 0,
+    "address": "addr_test1vpnkrp49s6d4r9h9dmchjrxrjcnnacdjsjecdqrtasckd8c5slhhh",
+    "assets": {
+      "lovelace": "100000000n"
+    }
+  }
+]
+[2026-10-18T03:17:27.654Z] getUtxos(credential) [
+  {
+    "txHash": "89d068eadce8da709567cf76c93b4eee5439cc65d1e4fe52d1230b1e8de7060d",
+    "outputIndex": 0,
+    "address": "addr_test1vpnkrp49s6d4r9h9dmchjrxrjcnnacdjsjecdqrtasckd8c5slhhh",
+    "assets": {
+      "lovelace": "100000000n"
+    }
+  }
+]
+[2026-10-18T03:17:28.355Z] getUtxosByOutRef [
+  {
+    "txHash": "89d068eadce8da709567cf76c93b4eee5439cc65d1e4fe52d1230b1e8de7060d",
+    "outputIndex": 0,
+    "address": "addr_test1vpnkrp49s6d4r9h9dmchjrxrjcnnacdjsjecdqrtasckd8c5slhhh",
+    "assets": {
+      "lovelace": "100000000n"
+    }
+  }
+]
+[2026-10-18T03:17:31.688Z] getTransactionStatus {
+  "status": "confirmed",
+  "txHash": "89d068eadce8da709567cf76c93b4eee5439cc65d1e4fe52d1230b1e8de7060d",
+  "confirmation": {
+    "txHash": "89d068eadce8da709567cf76c93b4eee5439cc65d1e4fe52d1230b1e8de7060d",
+    "blockHash": "a6f5ee8d1375738b3032197c93be71beb9a52afa61c018caa7d84fa282f92238",
+    "slot": 3358
+  }
+}
+[2026-10-18T03:17:41.370Z] getTreasury "84956551879076n"
+[2026-10-18T03:18:40.550Z] mint via provider evaluateTx + submitTx + awaitTx ERROR ogmios evaluateTransaction failed
+[2026-10-18T03:18:48.188Z] getUtxosWithUnit ERROR Cannot read properties of undefined (reading 'slice')
+[2026-10-18T03:18:51.726Z] getUtxoByUnit ERROR Unit not found.
+[2026-10-18T03:18:52.777Z] getUtxosWithPolicy [
+  {
+    "txHash": "f157930fbf9be4a1f3be0ad968bc5b3dde5d62e19860a0e36e7fe63159472da0",
+    "outputIndex": 0,
+    "address": "addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm",
+    "assets": {
+      "lovelace": "2000000n",
+      "83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550deb62349b825aaca9a752ff3de6a0c16cd3088256774efe05cfaa38e54e32553f9": "1n"
+    },
+    "datum": "d8799f
+[2026-10-18T03:18:52.777Z] datum decodes (inline via Kupo) ERROR Cannot read properties of undefined (reading 'datum')
+[2026-10-18T03:18:52.901Z] bob move rejected by provider evaluateTx "Cannot read properties of undefined (reading 'assets')"
+[2026-10-18T03:18:52.902Z] SUMMARY {
+  "init": "FAIL",
+  "getProtocolParameters": "FAIL",
+  "getUtxos(addr)": "ok",
+  "getUtxos(credential)": "ok",
+  "getUtxosByOutRef": "ok",
+  "getTransactionStatus": "ok",
+  "getTreasury": "ok",
+  "mint via provider evaluateTx + submitTx + awaitTx": "FAIL",
+  "getUtxosWithUnit": "FAIL",
+  "getUtxoByUnit": "FAIL",
+  "getUtxosWithPolicy": "ok",
+  "datum decodes (inline via Kupo)": "FAIL",
+  "bob move rejected by provider evaluateTx": "ok"
+}
+exit=0

@@ -1,0 +1,23 @@
+[arbitrary-name mint, correct blueprint, scalus] REJECTED:
+TransactionBuilderError: Script evaluation failed: Error evaluated
+at :1:0 - 1:0
+spent budget: { mem: 0.030325, cpu: 13.535373 }
+logs: 
+  cause[0]: Script evaluation failed
+  failures: []
+  cause[1]: Error evaluated
+at :1:0 - 1:0
+spent budget: { mem: 0.030325, cpu: 13.535373 }
+logs: 
+[bob first move, scalus] REJECTED:
+TransactionBuilderError: Script evaluation failed: Error evaluated
+at :1:0 - 1:0
+spent budget: { mem: 0.142418, cpu: 47.401237 }
+logs: 
+  cause[0]: Script evaluation failed
+  failures: []
+  cause[1]: Error evaluated
+at :1:0 - 1:0
+spent budget: { mem: 0.142418, cpu: 47.401237 }
+logs: 
+PASS

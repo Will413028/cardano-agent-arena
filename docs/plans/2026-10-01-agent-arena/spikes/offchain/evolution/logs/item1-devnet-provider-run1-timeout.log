@@ -1,0 +1,11 @@
+# First run of `node item1-devnet.mjs provider` (output copied from terminal before log was overwritten by run 2)
+evaluator: provider
+script 83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550de addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm
+fund tx 8f412882af588eb1ca512d1f479ed341aca3ded4b8d58ac3a4d8a01a9b6383db from faucet addr_test1qpqy3lufef8c3en9nrnzp2svwy5vy9zangvp46dy4qw23clgfxhn3pqv243d6wptud7fuaj5tjqer7wc7m036gx0emsqaqa8te
+seed 8f412882af588eb1ca512d1f479ed341aca3ded4b8d58ac3a4d8a01a9b6383db#2
+MINT BUILD FAIL
+TransactionBuilderError: Script evaluation failed: Provider evaluation failed: Kupmios evaluateTx failed
+  cause[0]: Script evaluation failed
+  failures: []
+  cause[1]: Kupmios evaluateTx failed
+  cause[2]: Operation timed out after '10s'

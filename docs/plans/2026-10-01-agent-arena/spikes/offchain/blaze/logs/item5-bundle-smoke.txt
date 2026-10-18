@@ -1,0 +1,11 @@
+$ node item5-bundle-smoke.mjs full; node item5-bundle-smoke.mjs nosign
+url ws://127.0.0.1:57772
+(node:7401) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+full OK params.protocolVersion {"major":11,"minor":0} costModels [ 0, 1, 2 ]
+full blake2b_256('') 0e5751c026e543b2e8ab2eb06099daa1d1e5df47778f7787faab45cdf12fe3a8
+url ws://127.0.0.1:57772
+(node:7400) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+nosign OK params.protocolVersion {"major":11,"minor":0} costModels [ 0, 1, 2 ]
+nosign blake2b_256('') 0e5751c026e543b2e8ab2eb06099daa1d1e5df47778f7787faab45cdf12fe3a8

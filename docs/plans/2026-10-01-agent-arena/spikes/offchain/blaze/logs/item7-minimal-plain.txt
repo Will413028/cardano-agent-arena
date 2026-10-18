@@ -1,0 +1,4 @@
+$ esbuild entries/minimal-core.mjs --bundle --platform=browser --format=esm --minify --outfile=out/minimal-plain.js  # no shims
+  out/minimal-plain.js  409.8kb
+⚡ Done in 252ms
+exit=0

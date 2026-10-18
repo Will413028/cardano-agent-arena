@@ -1,0 +1,70 @@
+[2026-10-18T02:57:16.921Z] mode devnet policyId 83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550de scriptAddr addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm
+[2026-10-18T02:57:16.955Z] alice addr_test1vqz86mg59psvydkkcv5t90vgfmylmj903qazdw4sk8en02cd8es0y 047d6d142860c236d6c328b2bd884ec9fdc8af883a26bab0b1f337ab
+[2026-10-18T02:57:16.955Z] bob   addr_test1vrwj3c8cqycyrar8k44m6mfr5x9l2gmd2wqc7eu7sgaj7ucp0esk3 dd28e0f8013041f467b56bbd6d23a18bf5236d53818f679e823b2f73
+[2026-10-18T02:58:20.198Z] funded from Yaci test account 0, tx 873cda2643d8edad5d6dacfde3af37773ee4fa77f1597d30572cd109ca963776
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+TxSubmitError: OgmiosJsonRpcError: Ogmios JSON-RPC error 3997: The transaction couldn't be added to the mempool. A justification is given as 'data.error'.: {"error":"MempoolTxTooSlow (1.945712251s) HardForkGenTxId {getHardForkGenTxId = S (S (S (S (S (S (Z (WrapGenTxId {unwrapGenTxId = txid: TxId {unTxId = SafeHash \"43769dcd27997e94216661b5b53cdae704b91c07e00fb33f27081d06e3e46457\"}})))))))}"}
+    at catch (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/@lucid-evolution/lucid/dist/index.js:1768:23)
+    at file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/internal/core-effect.js:579:51
+    at file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/internal/fiberRuntime.js:945:41 {
+  name: '(FiberFailure) TxSubmitError',
+  Symbol(effect/Runtime/FiberFailure): Symbol(effect/Runtime/FiberFailure),
+  Symbol(effect/Runtime/FiberFailure/Cause): {
+    _tag: 'Fail',
+    error: TxSubmitError: OgmiosJsonRpcError: Ogmios JSON-RPC error 3997: The transaction couldn't be added to the mempool. A justification is given as 'data.error'.: {"error":"MempoolTxTooSlow (1.945712251s) HardForkGenTxId {getHardForkGenTxId = S (S (S (S (S (S (Z (WrapGenTxId {unwrapGenTxId = txid: TxId {unTxId = SafeHash \"43769dcd27997e94216661b5b53cdae704b91c07e00fb33f27081d06e3e46457\"}})))))))}"}
+        at catch (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/@lucid-evolution/lucid/dist/index.js:1768:23)
+        at EffectPrimitive.effect_instruction_i0 (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/internal/core-effect.js:579:51)
+        at file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/internal/fiberRuntime.js:945:41
+        at effect_internal_function (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/Utils.js:333:12)
+        at FiberRuntime.Sync (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/internal/fiberRuntime.js:945:19)
+        at file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/internal/fiberRuntime.js:1151:31
+        at Object.context (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/internal/tracer.js:80:17)
+        at FiberRuntime.runLoop (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/internal/fiberRuntime.js:1142:34)
+        at FiberRuntime.evaluateEffect (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/internal/fiberRuntime.js:746:27)
+        at FiberRuntime.evaluateMessageWhileSuspended (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/effect/dist/esm/internal/fiberRuntime.js:721:16) {
+      _tag: 'TxSubmitError',
+      [cause]: OgmiosJsonRpcError: Ogmios JSON-RPC error 3997: The transaction couldn't be added to the mempool. A justification is given as 'data.error'.: {"error":"MempoolTxTooSlow (1.945712251s) HardForkGenTxId {getHardForkGenTxId = S (S (S (S (S (S (Z (WrapGenTxId {unwrapGenTxId = txid: TxId {unTxId = SafeHash \"43769dcd27997e94216661b5b53cdae704b91c07e00fb33f27081d06e3e46457\"}})))))))}"}
+          at getJSONRPCResult (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/@lucid-evolution/provider/dist/index.js:592:11)
+          at Kupmios.submitTx (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/@lucid-evolution/provider/dist/index.js:1352:20)
+          at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+          at async Object.submitTx (file:///Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/lucid/node_modules/@lucid-evolution/wallet/dist/index.js:487:14) {
+        cause: {
+          body: {
+            jsonrpc: '2.0',
+            method: 'submitTransaction',
+            id: null,
+            error: [Object]
+          },
+          status: 400,
+          headers: Object <[Object: null prototype]> {
+            'access-control-allow-origin': '*',
+            'content-type': 'application/json; charset=utf-8',
+            date: 'Sun, 18 Oct 2026 02:58:35 GMT',
+            server: 'Warp/3.4.13',
+            'transfer-encoding': 'chunked'
+          }
+        },
+        _tag: 'OgmiosJsonRpcError',
+        provider: 'Kupmios',
+        protocol: 'ogmios',
+        operation: 'submitTransaction',
+        kind: 'json_rpc',
+        status: 400,
+        retryable: false,
+        retryAfterMs: undefined,
+        code: 3997,
+        data: {
+          error: 'MempoolTxTooSlow (1.945712251s) HardForkGenTxId {getHardForkGenTxId = S (S (S (S (S (S (Z (WrapGenTxId {unwrapGenTxId = txid: TxId {unTxId = SafeHash "43769dcd27997e94216661b5b53cdae704b91c07e00fb33f27081d06e3e46457"}})))))))}'
+        },
+        method: 'submitTransaction',
+        id: null
+      }
+    }
+  }
+}
+
+Node.js v26.10.0
+exit=1

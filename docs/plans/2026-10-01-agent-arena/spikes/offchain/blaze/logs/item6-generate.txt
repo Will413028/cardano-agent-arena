@@ -1,0 +1,7 @@
+$ npx blueprint ../validator/plutus.json -o generated/plutus.ts
+Blueprint generated at generated/plutus.ts
+exit=0
+total 32
+drwxr-xr-x@ 3 will  staff     96 Oct 18 11:46 .
+drwxr-xr-x@ 8 will  staff    256 Oct 18 11:46 ..
+-rw-r--r--@ 1 will  staff  12431 Oct 18 11:46 plutus.ts

@@ -1,0 +1,33 @@
+$ npm ls --depth=0
+blaze-spike@ /Users/will/second-brain/.projects/personal/cardano-agent-arena/docs/plans/2026-10-01-agent-arena/spikes/offchain/blaze
+├── @blaze-cardano/blueprint@0.9.0
+├── @blaze-cardano/core@0.9.0 overridden
+├── @blaze-cardano/data@0.6.8 overridden
+├── @blaze-cardano/emulator@0.5.1
+├── @blaze-cardano/query@0.6.1 overridden
+├── @blaze-cardano/sdk@0.3.1 overridden
+├── @blaze-cardano/tx@0.15.1 overridden
+├── @blaze-cardano/uplc@0.5.1 overridden
+├── @blaze-cardano/vm@0.3.1 overridden
+├── @blaze-cardano/wallet@0.6.1 overridden
+├── buffer@6.0.3
+├── esbuild-plugin-wasm@1.1.0
+├── esbuild@0.25.9
+└── events@3.3.0
+
+
+$ npm ls --all | grep -o "@blaze-cardano/[a-z]*@[0-9.]*" | sort -u
+@blaze-cardano/blueprint@0.9.0
+@blaze-cardano/core@0.9.0
+@blaze-cardano/data@0.6.8
+@blaze-cardano/emulator@0.5.1
+@blaze-cardano/ogmios@0.0.7
+@blaze-cardano/query@0.6.1
+@blaze-cardano/sdk@0.3.1
+@blaze-cardano/tx@0.15.1
+@blaze-cardano/uplc@0.5.1
+@blaze-cardano/vm@0.3.1
+@blaze-cardano/wallet@0.6.1
+$ npm ls @cardano-sdk/core @cardano-ogmios/schema
+@cardano-ogmios/schema@6.14.0
+@cardano-sdk/core@0.46.15

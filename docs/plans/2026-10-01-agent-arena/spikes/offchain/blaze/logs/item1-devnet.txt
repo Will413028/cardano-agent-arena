@@ -1,0 +1,92 @@
+$ node item1-devnet.mjs
+alice addr_test1vqjjydawnr8p8v64pql95h00qacut0e77tknxh9tgpwe6ccakemhp pkh 252237ae98ce13b355083e5a5def0771c5bf3ef2ed335cab405d9d63
+bob   addr_test1vz4fguyg2nqpg9dv40pxdqmmu25ewe5ku0s0wz2wxlx0d2qkxqldt pkh aa94708854c01415acabc266837be2a9976696e3e0f7094e37ccf6a8
+1.2s fund tx {
+  "faucet": "addr_test1qr9xuxclxgx4gw3y4h4tcz4yvfmrt3e5nd3elphhf00a67xnrv5vjcv6tzehj2nnjj4cth4ndzyuf4asvvkgzeac2hfqk0za93",
+  "txHash": "a8a8348b340f8ce661d0bff1caad47da540c00cd63b6eae35ea72475f48b4a44"
+}
+2.2s fund confirmed in Kupo
+3.4s mint built {
+  "id": "751137b29eb963b0377c26c63503a3204d79d8a2b2505cd4924fbcfad46a54cb",
+  "fee": "261514",
+  "sizeBytes": 2073,
+  "collateral": 1,
+  "requiredSigners": [],
+  "redeemers": [
+    {
+      "tag": 1,
+      "index": "0",
+      "exUnits": {
+        "memory": 122351,
+        "steps": 44332249
+      }
+    }
+  ]
+} seed {
+  "txHash": "a8a8348b340f8ce661d0bff1caad47da540c00cd63b6eae35ea72475f48b4a44",
+  "index": 1
+} name 7c67441d7b6c810d7c54f23ec3e3a5c325261ac3bef1907ea812ae886957f984
+3.4s mint submitted 751137b29eb963b0377c26c63503a3204d79d8a2b2505cd4924fbcfad46a54cb
+4.7s mint in Kupo [
+  {
+    "out": "751137b29eb963b0377c26c63503a3204d79d8a2b2505cd4924fbcfad46a54cb#1",
+    "address": "addr_test1vqjjydawnr8p8v64pql95h00qacut0e77tknxh9tgpwe6ccakemhp",
+    "value": {
+      "coins": 7738486,
+      "assets": {}
+    }
+  },
+  {
+    "out": "751137b29eb963b0377c26c63503a3204d79d8a2b2505cd4924fbcfad46a54cb#0",
+    "address": "addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm",
+    "value": {
+      "coins": 2000000,
+      "assets": {
+        "83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550de.7c67441d7b6c810d7c54f23ec3e3a5c325261ac3bef1907ea812ae886957f984": 1
+      }
+    },
+    "datum_type": "inline"
+  }
+]
+4.9s thread utxo via Kupmios 751137b29eb963b0377c26c63503a3204d79d8a2b2505cd4924fbcfad46a54cb#0 inline datum == built: true
+7.2s alice move built (evaluated by Ogmios) {
+  "id": "f56e1167dd8eba8c8842a2491e6ece5cd25fb127d38a6a013a721505f76d37e8",
+  "fee": "262075",
+  "sizeBytes": 2040,
+  "collateral": 1,
+  "requiredSigners": [
+    "252237ae98ce13b355083e5a5def0771c5bf3ef2ed335cab405d9d63"
+  ],
+  "redeemers": [
+    {
+      "tag": 0,
+      "index": "0",
+      "exUnits": {
+        "memory": 148399,
+        "steps": 51411326
+      }
+    }
+  ]
+}
+7.4s move submitted f56e1167dd8eba8c8842a2491e6ece5cd25fb127d38a6a013a721505f76d37e8
+8.5s move in Kupo [
+  {
+    "out": "f56e1167dd8eba8c8842a2491e6ece5cd25fb127d38a6a013a721505f76d37e8#1",
+    "address": "addr_test1vqjjydawnr8p8v64pql95h00qacut0e77tknxh9tgpwe6ccakemhp",
+    "value": {
+      "coins": 49737925,
+      "assets": {}
+    }
+  },
+  {
+    "out": "f56e1167dd8eba8c8842a2491e6ece5cd25fb127d38a6a013a721505f76d37e8#0",
+    "address": "addr_test1wzpmsgx9f2yql06f7zaz499pr5a9sr9dhauac58rcw64phsnl73tm",
+    "value": {
+      "coins": 2000000,
+      "assets": {
+        "83b820c54a880fbf49f0ba2a94a11d3a580cadbf79dc50e3c3b550de.7c67441d7b6c810d7c54f23ec3e3a5c325261ac3bef1907ea812ae886957f984": 1
+      }
+    }
+  }
+] next datum (Kupo): d8799f9f581c252237ae98ce13b355083e5a5def0771c5bf3ef2ed335cab405d9d63581caa94708854c01415acabc266837be2a9976696e3e0f7094e37ccf6a8ff9f07ff58207c67441d7b6c810d7c54f23ec3e3a5c325261ac3bef1907ea812ae886957f98420ff
+STATUS PASS

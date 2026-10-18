@@ -1,0 +1,30 @@
+$ rg -il "emulator" node_modules/@evolution-sdk/evolution/dist --glob "*.js"
+node_modules/@evolution-sdk/evolution/dist/SlotConfig.js
+$ rg -n -i "emulator" node_modules/@evolution-sdk/evolution/dist/SlotConfig.js
+7: * - **Custom**: Customizable for emulator/devnet (initialized with zeros)
+$ ls node_modules/@evolution-sdk/evolution/dist/sdk/provider
+Blockfrost.d.ts
+Blockfrost.js
+internal
+Koios.d.ts
+Koios.js
+Kupmios.d.ts
+Kupmios.js
+Maestro.d.ts
+Maestro.js
+Provider.d.ts
+Provider.js
+$ npm view @evolution-sdk/evolution@0.5.16 exports --json
+{
+  ".": "./dist/index.js",
+  "./*": "./dist/*.js",
+  "./cose": "./dist/cose/index.js",
+  "./cose/*": null,
+  "./plutus": "./dist/plutus/index.js",
+  "./plutus/*": null,
+  "./blueprint": "./dist/blueprint/index.js",
+  "./internal/*": null,
+  "./blueprint/*": null,
+  "./package.json": "./package.json",
+  "./sdk/client/internal/*": null
+}

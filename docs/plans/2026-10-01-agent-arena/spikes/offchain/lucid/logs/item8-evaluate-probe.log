@@ -1,0 +1,6 @@
+$ node item8-evaluate-probe.mjs
+[2026-10-18T03:22:37.612Z] raw ogmios evaluateTransaction: [{"validator":{"index":0,"purpose":"mint"},"budget":{"memory":122351,"cpu":44332249}}]
+[2026-10-18T03:23:11.337Z] raw ogmios with additionalUtxo:[] and id:null (Kupmios request shape): {"jsonrpc":"2.0","method":"evaluateTransaction","result":[{"validator":{"index":0,"purpose":"mint"},"budget":{"memory":122351,"cpu":44332249}}],"id":null}
+[2026-10-18T03:23:42.496Z] cause[0] KupmiosError ogmios evaluateTransaction failed
+[2026-10-18T03:23:42.501Z] cause[1] TimeoutException Operation timed out after '30s'
+exit=0

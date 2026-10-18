@@ -1,0 +1,45 @@
+alice 3113df007f4f1088a7e508e936492a6b2e0ac6347d6075a852f63dfe bob 51c505186ce9671cdeba076c0c7537ba9f9cb9c90e753c5fd22c75a3
+thread minted ec39320e58299e0be71517382c1009350a2a54740001dc0c9a9638c44accd7e6 dd16ba390bae9024b1004017dbfa04cdab99e394005829cfbdf5434ffd02734d
+
+=== Item 2: bob first move, provider (Ogmios) evaluation at build time ===
+build rejected (expected):
+TransactionBuilderError: Script evaluation failed: Provider evaluation failed: Kupmios evaluateTx failed
+  cause[0]: Script evaluation failed
+  failures: [{"purpose":"spend","index":1,"validationError":"An error has occurred:\nThe machine terminated because of an error, either from a built-in function or from an explicit use of 'error'.\nCaused by: (error)","traces":[],"label":"move","redeemerKey":"ec39320e58299e0be71517382c1009350a2a54740001dc0c9a9638c44accd7e6#0","utxoRef":"ec39320e58299e0be71517382c1009350a2a54740001dc0c9a9638c44accd7e6#0"}]
+  cause[1]: Kupmios evaluateTx failed
+  cause[2]: non 2xx status code : {"jsonrpc":"2.0","method":"evaluateTransaction","error":{"code":3010,"message":"Some scripts of the transactions terminated with error(s).","data":[{"validator":{"index":1,"purpose":"spend"},"error":{"code":3012,"message":"Some of the scripts failed to evaluate to a positive outcome. The field 'data.validationError' informs about the nature of the error, and 'data.traces' lists all the execution traces collected during the script execution.","data":{"validationError":"An error has occurred:\nThe machine terminated because of an error, either from a built-in function or from an explicit use of 'error'.\nCaused by: (error)","traces":[]}}}]},"id":null}
+
+=== Item 3: bob first move, evaluation bypassed with fixed ex-units, force submit ===
+tx3 required signers: [ '51c505186ce9671cdeba076c0c7537ba9f9cb9c90e753c5fd22c75a3' ] vkey witnesses: 1 isValid: true redeemers: [
+  [
+    [
+      "spend",
+      "1"
+    ],
+    {
+      "data": "7",
+      "exUnits": {
+        "mem": "2000000",
+        "steps": "800000000"
+      }
+    }
+  ]
+]
+raw Ogmios submitTransaction error:
+{
+ "code": 3136,
+ "message": "Invalid transaction submitted as valid, or vice-versa. Since Alonzo, the ledger may allow invalid transactions to be submitted and included on-chain, provided that they leave a collateral value as compensation. This prevent certain class of attacks. As a consequence, transactions now have a validity tag with them. Your transaction did not match what that validity tag is stating. The field 'data.declaredSpending' indicates what the transaction is said to consume (collaterals or inputs) and the field 'data.mismatchReason' provides more information about the mismatch.",
+ "data": {
+  "declaredSpending": "inputs",
+  "mismatchReason": "The transaction failed unexpectedly."
+ }
+}
+SDK SubmitBuilder.submit error:
+(FiberFailure) TransactionBuilderError: Failed to submit transaction: Kupmios submitTx failed: non 2xx status code : {"jsonrpc":"2.0","method":"submitTransaction","error":{"code":3136,"message":"Invalid transaction submitted as valid, or vice-versa. Since Alonzo, the ledger may allow invalid transactions to be submitted and included on-chain, provided that they leave a collateral value as compensation. This prevent certain class of attacks. As a consequence, transactions now have a validity tag with them. Your transaction did not match what that validity tag is stating. The field 'data.declaredSpending' indicates what the transaction is said to consume (collaterals or inputs) and the field 'data.mismatchReason' provides more information about the mismatch.","data":{"declaredSpending":"inputs","mismatchReason":"The transaction failed unexpectedly."}},"id":null}
+
+=== Item 3 mutation: alice (correct player), same bypass, force submit ===
+alice move accepted 97fa602ea8829e596b01ab04393b2002a53c5ba978b6257fb96b2ebb8680f35f kupo token now at: [
+  '97fa602ea8829e596b01ab04393b2002a53c5ba978b6257fb96b2ebb8680f35f#0'
+]
+
+ITEM2 PASS | ITEM3 PASS | ITEM3-MUTATION PASS

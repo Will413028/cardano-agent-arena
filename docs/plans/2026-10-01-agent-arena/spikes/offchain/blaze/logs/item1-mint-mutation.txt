@@ -1,0 +1,48 @@
+$ node item1-mint-mutation.mjs
+--- correct blueprint, arbitrary name, default evaluation
+build rejected: {"code":3010,"message":"Some scripts of the transactions terminated with error(s).","data":[{"validator":{"index":0,"purpose":"mint"},"error":{"code":3012,"message":"Some of the scripts failed to evaluate to a positive outcome. The field 'data.validationError' informs about the nature of the error, and 'data.traces' lists all the execution traces collected during the script execution.","data":{"validationError":"An error has occurred:\nThe machine terminated because of an error, either from a built-in function or from an explicit use of 'error'.\nCaused by: (error)","traces":[]}}}]}
+--- correct blueprint, arbitrary name, evaluation bypassed, submit
+submit rejected: {"code":3136,"message":"Invalid transaction submitted as valid, or vice-versa. Since Alonzo, the ledger may allow invalid transactions to be submitted and included on-chain, provided that they leave a collateral value as compensation. This prevent certain class of attacks. As a consequence, transactions now have a validity tag with them. Your transaction did not match what that validity tag is stating. The field 'data.declaredSpending' indicates what the transaction is said to consume (collaterals or inputs) and the field 'data.mismatchReason' provides more information about the mismatch.","data":{"declaredSpending":"inputs","mismatchReason":"The transaction failed unexpectedly."}}
+--- mutant blueprint, arbitrary name, default evaluation
+built {
+  "id": "08031359f8d9f73e1c2f89b880878db7ae1004004944dc3183b7afddef39fe08",
+  "fee": "260348",
+  "sizeBytes": 2057,
+  "collateral": 1,
+  "requiredSigners": [],
+  "redeemers": [
+    {
+      "tag": 1,
+      "index": "0",
+      "exUnits": {
+        "memory": 120811,
+        "steps": 39161655
+      }
+    }
+  ]
+} policy d0ff06cade22417d9395be91a976d1f07e7ad4678f7b966106712d2f unit d0ff06cade22417d9395be91a976d1f07e7ad4678f7b966106712d2fdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef
+mutant mint confirmed in Kupo [
+  {
+    "out": "08031359f8d9f73e1c2f89b880878db7ae1004004944dc3183b7afddef39fe08#1",
+    "address": "addr_test1vrmfrku5ttvpggkax0qh9lmxhrxl9c9qrrsfawh3h0dswus6s3z9z",
+    "value": {
+      "coins": 7739652,
+      "assets": {}
+    }
+  },
+  {
+    "out": "08031359f8d9f73e1c2f89b880878db7ae1004004944dc3183b7afddef39fe08#0",
+    "address": "addr_test1wrg07pk2mc3yzlvnjklfr2tk68c8u7k5v78hh9npqecj6tc2k0l0z",
+    "value": {
+      "coins": 2000000,
+      "assets": {
+        "d0ff06cade22417d9395be91a976d1f07e7ad4678f7b966106712d2f.deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef": 1
+      }
+    }
+  }
+]
+RESULT {
+  "correct_rejects_build": "PASS",
+  "correct_rejects_node": "PASS",
+  "mutant_accepts": "PASS"
+}

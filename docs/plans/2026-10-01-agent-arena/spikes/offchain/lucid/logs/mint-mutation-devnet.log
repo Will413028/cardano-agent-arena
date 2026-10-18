@@ -1,0 +1,11 @@
+[2026-10-18T03:36:29.280Z] funded 6db3a254452e2f07c6641f00757cd0d298655aad04ebab7d34876dc502263598
+[2026-10-18T03:36:29.634Z] BUILD-REJECTED correct blueprint, minted name=ARBITRARY, datum.name=arbitrary: "failed script execution Mint[0] the validator crashed / exited prematurely"
+[2026-10-18T03:36:29.968Z] NODE-REJECTED correct blueprint, minted name=ARBITRARY, datum.name=arbitrary, forced (fixed ex units): {"code":3136,"message":"Invalid transaction submitted as valid, or vice-versa. Since Alonzo, the ledger may allow invalid transactions to be submitted and included on-chain, provided that they leave a collateral value as compensation. This prevent certain class of attacks. As a consequence, transactions now have a validity tag with them. Your transaction did not match what that validity tag is stating. The field 'data.declaredSpending' indicates what the transaction is said to consume (collaterals or inputs) and the field 'data.mismatchReason' provides more information about the mismatch.","da
+[2026-10-18T03:36:50.264Z] ACCEPTED  mutant blueprint, minted name=ARBITRARY, datum.name=arbitrary tx=af8707c152167ca812767cb9a233f12811c221876f2e7a93cae58b1c0b0adb63
+[2026-10-18T03:36:50.266Z] SUMMARY {
+  "correctBuild": "build-rejected",
+  "correctForced": "node-rejected",
+  "mutantArbitrary": "accepted"
+}
+[2026-10-18T03:36:50.266Z] MUTATION PASS
+exit=0

@@ -1,0 +1,38 @@
+$ npx esbuild entries/browser-builder.mjs --bundle --platform=browser --format=esm --minify --outfile=out/browser-builder.js --metafile=out/browser-builder.meta.json
+
+  out/browser-builder.js  964.5kb
+
+⚡ Done in 1734ms
+exit=0
+size bytes: 987641
+gzip bytes: 291096
+$ npx esbuild entries/browser-builder-aiken.mjs --bundle --platform=browser --format=esm --minify --outfile=out/browser-builder-aiken.js --metafile=out/browser-builder-aiken.meta.json
+✘ [ERROR] No loader is configured for ".wasm" files: node_modules/@evolution-sdk/aiken-uplc/dist/bundler/aiken_uplc_bg.wasm
+
+    node_modules/@evolution-sdk/aiken-uplc/dist/bundler/aiken_uplc.js:1:22:
+      1 │ import * as wasm from "./aiken_uplc_bg.wasm";
+        ╵                       ~~~~~~~~~~~~~~~~~~~~~~
+
+1 error
+exit=0
+ls: out/browser-builder-aiken.js: No such file or directory
+gzip: can't stat: out/browser-builder-aiken.js (out/browser-builder-aiken.js): No such file or directory
+gzip bytes: 0
+$ npx esbuild entries/browser-builder.mjs --bundle --platform=browser --format=esm --outfile=out/browser-builder.unminified.js
+
+  out/browser-builder.unminified.js  2.1mb ⚠️
+
+⚡ Done in 1346ms
+exit=
+$ node -e import(out/browser-builder.js) (evaluates bundle, lists exports)
+exports: [ 'mintThread' ]
+node: references in bundle:
+$ aiken-uplc with wasm loader:
+
+  out/browser-builder-aiken.js     969.4kb
+  out/aiken_uplc_bg-XV6SOC67.wasm  931.3kb
+
+⚡ Done in 1907ms
+-rw-r--r--@ 1 will  staff   953628 Oct 18 11:27 aiken_uplc_bg-XV6SOC67.wasm
+-rw-r--r--@ 1 will  staff   992647 Oct 18 11:27 browser-builder-aiken.js
+input bytes by package: [('effect', 3476852), ('@evolution-sdk/evolution', 1505248), ('fast-check', 382544), ('@noble/curves', 373665), ('@noble/hashes', 117669), ('@scure/base', 49993), ('@scure/bip39', 25356), ('pure-rand', 22846), ('@scure/bip32', 13193), ('entries/browser-builder.mjs', 1362)]

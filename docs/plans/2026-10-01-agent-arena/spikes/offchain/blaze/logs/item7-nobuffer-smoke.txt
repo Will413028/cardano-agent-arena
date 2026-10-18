@@ -1,0 +1,3 @@
+$ node item7-nobuffer-smoke.mjs
+./out/minimal-plain.js FAIL ReferenceError: Buffer is not defined
+./out/minimal-core.js OK 202f389e4341378fbe9324fa771f648c0bffa23ee7b77d452ebb9a4865b0d918

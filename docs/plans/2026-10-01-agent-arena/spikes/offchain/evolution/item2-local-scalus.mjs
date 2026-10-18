@@ -1,0 +1,21 @@
+// Item 2 (local evaluation variant): in-process Scalus UPLC evaluator rejects (a) bob's first move, (b) arbitrary-name mint on the correct blueprint.
+import { createScalusEvaluator } from "@evolution-sdk/scalus-uplc";
+import { devnetChain, newKey, fund, waitTx, Evo } from "./lib.mjs";
+import { script, signingClient, buildMint, buildMove, threadName, showErr } from "./game.mjs";
+const local = { evaluator: createScalusEvaluator };
+const chain = await devnetChain(); const sc = script();
+const alice = newKey("alice"), bob = newKey("bob");
+const f = await fund([alice, alice, alice, bob, bob].map((k) => ({ address: k.address, lovelace: 100_000_000n })), chain); await waitTx(f.txHash);
+const ca = signingClient(chain, alice), cb = signingClient(chain, bob);
+const utxos = await ca.getWalletUtxos();
+const bad = await buildMint({ client: ca, sc, seedUtxo: utxos[1], players: [alice.khHex, bob.khHex], tokenName: "deadbeef", datumName: threadName(utxos[1]), extraOpts: local });
+const rb = await bad.build();
+console.log("[arbitrary-name mint, correct blueprint, scalus]", rb._tag === "Left" ? "REJECTED:\n" + showErr(rb.left) : "ACCEPTED (unexpected)");
+const m = await buildMint({ client: ca, sc, seedUtxo: utxos[0], players: [alice.khHex, bob.khHex], extraOpts: local });
+const rm = await m.build(); const mintHash = Evo.TransactionHash.toHex(await rm.right.signAndSubmit()); await waitTx(mintHash);
+const [scriptUtxo] = (await ca.getUtxos(sc.address)).filter((u) => Evo.TransactionHash.toHex(u.transactionId) === mintHash);
+const state = { players: [alice.khHex, bob.khHex], moves: [], name: m.name, result: -1 };
+const b = await buildMove({ client: cb, sc, scriptUtxo, state, number: 7, signerKh: bob.kh, extraOpts: local });
+const r = await b.build();
+console.log("[bob first move, scalus]", r._tag === "Left" ? "REJECTED:\n" + showErr(r.left) : "ACCEPTED (unexpected)");
+console.log(rb._tag === "Left" && r._tag === "Left" ? "PASS" : "FAIL");

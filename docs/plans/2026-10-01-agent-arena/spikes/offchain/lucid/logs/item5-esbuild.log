@@ -1,0 +1,46 @@
+$ npx esbuild browser-entry.mjs --bundle --platform=browser --format=esm --outfile=out/browser.js --metafile=out/browser-meta.json
+npm warn Unknown user config "manage-package-manager-versions". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+✘ [ERROR] No loader is configured for ".wasm" files: node_modules/@emurgo/cardano-message-signing-browser/cardano_message_signing_bg.wasm
+
+    node_modules/@emurgo/cardano-message-signing-browser/cardano_message_signing.js:1:22:
+      1 │ import * as wasm from "./cardano_message_signing_bg.wasm";
+        ╵                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] No loader is configured for ".wasm" files: node_modules/@lucid-evolution/uplc/dist/browser/uplc_tx_bg.wasm
+
+    node_modules/@lucid-evolution/uplc/dist/browser/uplc_tx.js:1:22:
+      1 │ import * as wasm from "./uplc_tx_bg.wasm";
+        ╵                       ~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] No loader is configured for ".wasm" files: node_modules/@anastasia-labs/cardano-multiplatform-lib-browser/cardano_multiplatform_lib_bg.wasm
+
+    node_modules/@anastasia-labs/cardano-multiplatform-lib-browser/cardano_multiplatform_lib.js:2:22:
+      2 │ import * as wasm from "./cardano_multiplatform_lib_bg.wasm";
+        ╵                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+✘ [ERROR] Could not resolve "buffer"
+
+    node_modules/safe-buffer/index.js:3:21:
+      3 │ var buffer = require('buffer')
+        ╵                      ~~~~~~~~
+
+  The package "buffer" wasn't found on the file system but is built into node. Are you trying to bundle for node? You can use "--platform=node" to do that, which will remove this error.
+
+✘ [ERROR] Could not resolve "buffer"
+
+    node_modules/ripemd160/index.js:3:21:
+      3 │ var Buffer = require('buffer').Buffer;
+        ╵                      ~~~~~~~~
+
+  The package "buffer" wasn't found on the file system but is built into node. Are you trying to bundle for node? You can use "--platform=node" to do that, which will remove this error.
+
+✘ [ERROR] Could not resolve "buffer"
+
+    node_modules/core-util-is/lib/util.js:103:27:
+      103 │ exports.isBuffer = require('buffer').Buffer.isBuffer;
+          ╵                            ~~~~~~~~
+
+  The package "buffer" wasn't found on the file system but is built into node. Are you trying to bundle for node? You can use "--platform=node" to do that, which will remove this error.
+
+6 of 10 errors shown (disable the message limit with --log-limit=0)
+exit=1

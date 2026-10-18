@@ -1,0 +1,10 @@
+$ node item4-external-signers.mjs
+unsigned tx id 826079bc5c2dba695de884bbe13eea5ec33c41d01f36a1b6fdb6edbeee8f0ab2 vkeys before: 0 bytes: 164
+alice witness set from CIP-30 mock: a100d901028182582005660a308f3da0d82e4dbc...
+WebWallet.signTransaction returned same witness set: true
+assembled id unchanged: true vkeys: 2
+confirmed in Kupo [
+  "826079bc5c2dba695de884bbe13eea5ec33c41d01f36a1b6fdb6edbeee8f0ab2#1 addr_test1vrmsd8kdcae4k7v08244cpcqv4hrj7v8ykw2qker6l9d5sqemsnxg 14828295",
+  "826079bc5c2dba695de884bbe13eea5ec33c41d01f36a1b6fdb6edbeee8f0ab2#0 addr_test1vr8e63n907q628m64837spj2pvceupg6x2svpayr7xku0vgpytzgl 25000000"
+]
+STATUS PASS
