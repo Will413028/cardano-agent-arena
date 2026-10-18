@@ -34,12 +34,21 @@ jobs:
             docker exec yaci-$n /app/cardano-bin/cardano-node --version | head -1
             test $ok = 1
           done
-      - name: Topup arbitrary address on each instance
+      - name: Wait for Yaci status, then topup with retry
         run: |
           A=addr_test1qzlwg5c3mpr0cz5td0rvr5rvcgf02al05cqgd2wzv7pud6chpzk4elx4jh2f7xtftjrdxddr88wg6sfszu8r3gktpjtqrr00q9
+          start=$(date +%s)
           for n in a b; do
             p=$(docker port yaci-$n 10000/tcp | cut -d: -f2)
-            curl -s -m 60 -X POST -H 'Content-Type: application/json' -d "{\"address\":\"$A\",\"adaAmount\":1234}" http://127.0.0.1:$p/local-cluster/api/addresses/topup; echo
+            curl -s -m 5 http://127.0.0.1:$p/local-cluster/api/admin/devnet/status; echo
+            for i in $(seq 1 180); do
+              r=$(curl -s -m 60 -X POST -H 'Content-Type: application/json' -d "{\"address\":\"$A\",\"adaAmount\":1234}" http://127.0.0.1:$p/local-cluster/api/addresses/topup || true)
+              if echo "$r" | grep -q '"status":true'; then echo "$n topup ok after $(( $(date +%s)-start ))s attempts=$i"; break; fi
+              sleep 2
+            done
+            echo "$r"
+            curl -s -m 5 http://127.0.0.1:$p/local-cluster/api/admin/devnet/status; echo
+            echo "$r" | grep -q '"status":true'
           done
       - name: Removing one instance leaves the other healthy
         run: |
