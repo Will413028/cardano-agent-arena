@@ -1,10 +1,20 @@
 // Generated from validators/plutus.json; do not edit.
-export type ByteArray = { bytes: string };
-export type Data = unknown;
-export type Int = { int: number };
-export type List_ByteArray_ = { list: Array<ByteArray> };
-export type List_Int_ = { list: Array<Int> };
-export type cardano_transaction_OutputReference = { constructor: 0; fields: [ByteArray, Int] };
-export type skeleton_MatchDatum = { constructor: 0; fields: [List_ByteArray_, List_Int_, ByteArray, Int] };
+import { Type, TPlutusData, type Exact } from '@blaze-cardano/data';
+export const ByteArray = Type.String();
+export type ByteArray = Exact<typeof ByteArray>;
+export const Data = TPlutusData;
+export type Data = Exact<typeof Data>;
+export const Int = Type.BigInt();
+export type Int = Exact<typeof Int>;
+export const List_ByteArray_ = Type.Array(Type.String());
+export type List_ByteArray_ = Exact<typeof List_ByteArray_>;
+export const List_Int_ = Type.Array(Type.BigInt());
+export type List_Int_ = Exact<typeof List_Int_>;
+export const cardano_transaction_OutputReference = Type.Object({ transaction_id: Type.String(), output_index: Type.BigInt() }, { ctor: 0n });
+export type cardano_transaction_OutputReference = Exact<typeof cardano_transaction_OutputReference>;
+export const skeleton_MatchDatum = Type.Object({ players: Type.Array(Type.String()), moves: Type.Array(Type.BigInt()), policy: Type.String(), result: Type.BigInt() }, { ctor: 0n });
+export type skeleton_MatchDatum = Exact<typeof skeleton_MatchDatum>;
+export const MatchDatum = skeleton_MatchDatum;
 export type MatchDatum = skeleton_MatchDatum;
+export const MatchRedeemer = Int;
 export type MatchRedeemer = Int;

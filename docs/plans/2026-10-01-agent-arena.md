@@ -155,7 +155,7 @@ Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain
       - 刪除 `thread.ak`，重新產生 `plutus.json` 與型別，tx builder 跟著改。
     - `offchain/history.ts` 與 tx builder 移除 `aiken blueprint apply` 與所有 `child_process`：policy 等於 match hash，verifier 只算 token name 的 hash；`scriptAddress()` 改用 payment credential 比對，不再寫死 `addr_test` 與 header `70`。
     - 依 D14 把 `offchain/chain.ts` 換成 `@cardano-ogmios/client`，indexer 與 verifier 共用，整數不失真。
-    - 把 verifier 拆成 npm workspace 套件，自己的 `package.json` 只列 I9 允許清單內的依賴；用 `dependency-cruiser` 規則禁止 `verifier/` 遞移 import 交易建構相關套件（`@lucid-evolution/lucid|cml|provider|wallet`、`@evolution-sdk/evolution` 的交易建構子路徑、`@blaze-cardano/*`、`@meshsdk/*`）與 `node:child_process`，規則接進 `make check`。
+    - 把 verifier 拆成 npm workspace 套件，自己的 `package.json` 只列 I9 允許清單內的依賴；用 `dependency-cruiser` 規則禁止 `verifier/` 遞移 import 交易建構相關套件（`@lucid-evolution/lucid|cml|provider|wallet`、`@evolution-sdk/evolution` 的交易建構子路徑、`@blaze-cardano/sdk|tx|query|wallet|uplc|vm|emulator|blueprint`、`@meshsdk/*`）與 `node:child_process`；I9 允許的編碼函式庫是 `@blaze-cardano/data` 與 `@blaze-cardano/core`（4.5b 的 codec 已依賴），本步量它們遞移載入的 `@cardano-sdk/*` 與 `@sinclair/typebox` 是否含交易建構程式，含就改由 codec 自帶編碼，規則接進 `make check`。
   - 消費端：`rg -n "thread|6172656e61|TOKEN_NAME|arena|policy|addr_test|scriptAddress" validators/ offchain/ verifier/ indexer/ web/ test/ -g '*.ak' -g '*.ts'`、`rg -n "from ['\"].*(history|chain)" -g '*.ts'`、`rg -n "execFileSync|child_process" offchain/ verifier/ indexer/ test/`、`rg -n "\"workspaces\"|verifier" package.json`。
   - 不能動：I3、I5（版本鍵仍是 match validator 的 hash，現在也等於 policy id）、I8；verifier 的輸出格式與 E2E 的重播比對。
   - 驗收：`make check` 綠燈；`rg -n "child_process" offchain/ verifier/ indexer/` 無輸出；在乾淨暫存目錄只安裝 verifier 套件（`npm pack` 後安裝），對 devnet 戰局跑 `verifier replay` 成功；Aiken 測試涵蓋「token name 不等於 seed hash」「未花用 seed」「一次鑄兩個」「token 沒送到本 script」「初始 datum 非空盤」「spend 時 token 屬於別的 policy」六個拒絕案例；一筆含 2^53 以上 lovelace 的 Ogmios 回應 fixture 解碼後數值相等。mutation：在 `verifier/` 加一行 import 交易建構 SDK，`dependency-cruiser` 要失敗；把 mint 的 token name 檢查拿掉，「token name 不等於 seed hash」的 Aiken 測試要失敗；把 spend 的 policy 檢查拿掉，「別的 policy」測試要失敗。
@@ -368,7 +368,7 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
 | 3 Spike：替代執行方式 | 完成 | Hydra 20 步 confirmed snapshots、L1 開關與 deposit 成本、Bob 離線 Close/Fanout；簽章 transcript 曲線與最大 N=84 的 devnet 真實交易、合法／非法與 source mutation；19 Aiken checks；見 spike-alternatives.md | 無（N=84 只適用本 fixture 與 devnet 14M memory，不是 preprod 上限） | |
 | 4 Walking skeleton | 完成 | `48aa0be` 的 CI `make check` 全部通過（run `36868324868`，walking-skeleton job success）：Aiken 4 checks、blueprint 漂移、TS、unit 2 tests、三種勝負、非法交易拒絕、獨立重播、結果頁與 verifier mutation；超時清理修正 `85c7830` 的 CI run `36870994814` 全部 success。2026-10-18 本機（Docker Desktop 29.1.3、linux/arm64 image、8 CPU）在 `858e125` 跑完整 `make check` exit 0，另跑 3 次 `test:e2e` 與 1 次 8 核 CPU 滿載下的 `test:e2e` 皆通過，單次 docker 呼叫最長 894ms | 無。2026-10-01 本機 query tip／transaction build 的 60 秒 timeout 未能重現，根因未證實；當時的 Docker 執行環境已無法核對，CPU 滿載已排除 | `7d750cf`、`48aa0be`、`85c7830` |
 | 4.5a Spike：SDK、Ogmios client、devnet 選型 | 完成 | 三個 SDK 各 9 項（含 mint mutation，mutant 重建後重跑）、官方 Ogmios client 對 devnet 的 chain-sync 與 bigint、Yaci DevKit 在 macOS arm64 與 ubuntu-latest（CI run `39090704534`、`39090888319`）的並行與健康檢查；見 spike-offchain.md | 瀏覽器 bundle 只在 Node 裡載入過，沒有在真的瀏覽器跑；devnet 單一出塊者，真正的 rollback 沒測到 | |
-| 4.5b devnet 與程式內交易建構 | 未開始 | | 步驟 4.5a | |
+| 4.5b devnet 與程式內交易建構 | 程式完成待驗收 | 2026-10-18 本機（load 80–150）：改動前基線 `make check` exit 0；改動後 `make check` 兩個同時並行皆 exit 0（各自的 Yaci 容器）；三個非法案例建構時 Ogmios 3010、強行送出 3136，無 `MissingVKeyWitnesses`；mutation：拿掉簽章檢查後錯簽測試在建構層失敗，再略過建構層則在強行送出層失敗；就緒改成只看 HTTP 200 後就緒單元測試 2/3 失敗；`rg -n "cardano-cli\|docker\(['\"]exec\|cli\(net" offchain/ scripts/ test/` 無輸出 | CI `make check`（推上去後補 run id）。就緒 mutation 用 stub 回應：Yaci 0.12.0 的 Ogmios 實測要到已有 block 才連得上，「200 但無 block」在真實 devnet 觀察不到 | |
 | 4.5c verifier 套件、Ogmios client、固定 policy | 未開始 | | 步驟 4.5b | |
 | 4.5d 測試分層與逾時觀測 | 未開始 | | 步驟 4.5c | |
 | 5 規則引擎與測試向量 | 未開始 | | 尚未開工 | |
@@ -442,3 +442,33 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
 | `scriptAddress()` 寫死 `addr_test` 與 header `70` | 採用。併入 4.5c |
 | verifier 在 preprod 不能每次從 origin 全量 chain-sync | 採用。寫進 ADR 的 Followup，歸步驟 7 |
 | 反方論點：multi-validator 讓建局邏輯的改版也切開 Elo 分組 | 記入 ADR 的代價，以及「一個月內改版超過一次就重評」的觸發條件 |
+
+### 2026-10-18：步驟 4.5b 開工的設計審查
+
+一個沒參與實作的唯讀 subagent 用 design-review skill 的提示詞原文審查 4.5b 的設計與作者的沿用盤點表。結果是 10 個發現：改 6、記 2、提 1、駁回 1。
+
+| 發現 | 處理 |
+|---|---|
+| ADR 的預期成果寫「`scripts/`、`test/` 沒有任何 `child_process`」，但 4.5b 驗收的 rg 只禁 `cardano-cli`／`docker exec`，harness 仍要起容器、E2E 仍要開獨立行程重播 | 提。兩份權威文件互相牴觸，交給 Will；4.5b 先照計畫的驗收做（docker CLI 改成非同步 `execFile` 加 AbortSignal） |
+| 當機或被殺時會留下整套 Yaci 的孤兒容器 | 記。E2E 攔 SIGINT／SIGTERM 時移除自己的容器（實測中斷後無殘留）；SIGKILL 仍會殘留，README 寫明依 label 清除的指令。觸發條件：本機累積殘留成為常態時改用 reaper |
+| `.local/devnet-session.json` 是全域單檔，連續兩次 `devnet-up` 會讓第一個實例變孤兒 | 改。`devnet-up` 遇到既有 session 就拒絕啟動；手動 session 一個 checkout 一個，並行實例只屬於測試 |
+| `Devnet.directory` 與 `ROOT` 是 cardano-cli bind mount 時代的殘留，產生器因 `ROOT` 依賴 harness | 改。harness 只回傳容器名與 Ogmios／Kupo endpoint；證據目錄由 E2E 管理；產生器自己算路徑 |
+| builder 收 devnet 控制代碼並在內部簽章；collateral 預切、點號 unit 是 cardano-cli 的形狀 | 改。builder 收 provider 與 `Wallet`，回傳未簽交易；簽章送出在呼叫端（I6、CIP-30 同形）；collateral 交給 Blaze 選 |
+| 4.5b 在 4.5c 就要丟掉的參數化 policy 上寫 builder，且經 `aiken blueprint apply` 子程序 | 改一半。參數套用改用 Blaze 的程式內 `applyParams`，builder 不再有子程序；E2E 證明它和 verifier 用 aiken 算出的 policy hash 一致。validator 改寫仍留在 4.5c（分段是自己訂的，但拋棄的只剩約 5 行） |
+| epoch 邊界的協定參數變動可能打斷 E2E | 記。實測 Yaci Docker 模式 epoch 600 slot（1 秒／slot），啟動時沒有待生效的治理提案，到 slot 355 cost model 未變；E2E 約 1 分鐘。觸發條件：E2E 接近 10 分鐘或換 Yaci 版本時重量 |
+| faucet 照搬 spike 的手寫 Ogmios JSON-RPC 與 3997 重試 | 改。改用 provider 既有的 `Unwrapped.Ogmios.queryLedgerStateUtxo`，不帶重試 |
+| `Kupmios.awaitTransactionConfirmation` 不等價於 Kupo 輪詢 | 改。讀碼確認它的判斷式用逗號運算子、輪詢間隔 20 秒；改為直接輪詢 Kupo `/matches/*@<txid>`，30 秒逾時 |
+| 保留自寫產生器與 spike「(6) 經 bundler 通過」的判讀不一致 | 駁回。Blaze 產生器的輸出 import `@blaze-cardano/tx` 與 `uplc`，codec 由 verifier 共用，I9 不允許 verifier 載入交易建構程式；自寫產生器只輸出 `@blaze-cardano/data` 的 schema。`data` 多帶的 `@sinclair/typebox` 是否在允許清單內，留到 4.5c 量 |
+
+4.5b 收尾時再派一個沒參與的審查者看整份 diff：8 個發現，改 1、記 6、駁回 1。
+
+| 發現 | 處理 |
+|---|---|
+| 4.5c 的禁止清單寫 `@blaze-cardano/*`，和 I9 允許的編碼函式庫、4.5b 的 codec 衝突 | 改。4.5c 禁止清單改列交易建構子套件，並在 4.5c 量 `data`／`core` 的遞移依賴 |
+| `signSubmit` 自己輪詢 Kupo、綁 Kupmios 的 `kupoUrl` | 記。觸發條件：出現第二個 provider（步驟 8 或 11）或 upstream 修好 `awaitTransactionConfirmation` 時，改回 `Provider` 介面或覆寫該方法 |
+| 每位玩家仍撥兩筆（100＋10 ADA），是預切 collateral 的殘留形狀 | 記。Blaze 可能用同一筆當 collateral，未實測；4.5d 搬到 Emulator 時以一筆驗證，通過就改 |
+| 計畫要求的 slot config 沒做 | 記。目前交易沒有有效期，用不到；觸發條件：步驟 6 開始設 validity interval 時由呼叫端提供（從 Ogmios genesis 讀） |
+| `verifier/.mutant-*.ts` 被 SIGKILL 時會殘留，4.5c 要把 `verifier/` 打包 | 記。4.5c 驗收的 `npm pack` 前確認無 `.mutant-*`；4.5d 改成竄改 fixture 後此副本消失 |
+| CI 只用 tag 鎖 Yaci image | 記。交給 quality-baseline 的供應鏈強化改用 digest |
+| SDK 缺陷的繞法（`void kill()`、自寫 Kupo 輪詢、180 秒 watchdog）沒寫移除條件 | 記。觸發條件：`@blaze-cardano/ogmios` 或 `query` 升版時重驗並移除；watchdog 在 4.5d 換成單次 30 秒、可取消的請求逾時 |
+| faucet 手寫 vkey witness 重做了錢包的簽章 | 駁回。`HotSingleWallet` 只收 normal key，faucet 是 BIP32 衍生的 extended key |

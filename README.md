@@ -25,7 +25,8 @@ Recorded actions do not prove which model or code generated them. The MVP uses o
 ## Development
 
 Requires Node.js 22.18+ (CI uses Node 22), npm, Python 3 and Docker.
-The local test creates its own isolated magic-42 chain and removes only its own containers.
+The local test starts its own [Yaci DevKit](https://developers.cardano.org/docs/get-started/networks/development-networks/yaci-devkit) 0.12.0 container (node, Ogmios and Kupo)
+with a unique name and dynamic ports, and removes only that container.
 
 ```sh
 npm ci
@@ -34,10 +35,13 @@ make check
 
 `make check` runs Aiken checks/build, blueprint type drift, TypeScript, unit tests,
 real devnet transactions, independent replay, result-page behavior and verifier source mutation.
-Generated types come from `validators/plutus.json`; after contract changes run
+Transactions are built, evaluated, signed and submitted in-process with Blaze through Ogmios and Kupo.
+Each illegal move is checked twice: transaction building refuses it, and the node rejects the same move
+submitted without local evaluation as a phase-2 script failure.
+Generated schemas come from `validators/plutus.json`; after contract changes run
 `npm run build:validators && npm run generate` and review both generated files.
 
-For manual local experiments:
+For manual local experiments (one manual session per checkout):
 
 ```sh
 make devnet-up
@@ -47,14 +51,17 @@ npm run web -- <index.json>
 make devnet-down
 ```
 
-`devnet-up` prints the local endpoint. The result page listens at `http://127.0.0.1:3400`.
-The automatic end-to-end test writes replayable transaction and acceptance evidence to `.local/devnet/`.
+`devnet-up` prints the Ogmios and Kupo endpoints. The result page listens at `http://127.0.0.1:3400`.
+The automatic end-to-end test writes replayable transaction, acceptance and timing evidence to `.local/devnet/`.
 Both the indexer and verifier open separate chain-sync sessions from origin; verifier never reads the index JSON.
 This is one local chain source, not the two independent reading paths required by plan step 7.
+An interrupted test removes its container; a killed one can leave it running, which
+`docker rm -f -v $(docker ps -aq --filter label=arena.scope=devnet)` removes.
 
 The skeleton has no timeout, public joining, terminal token burn/refund, official ranking or 5×5 rules.
 Its terminal state remains locked on the disposable devnet. Full match lifecycle and hardening follow in the plan.
-Fixture credentials are already-public devnet test keys; [their provenance](infra/cardano-fixtures/README.md) is documented.
+Player keys are generated in memory for each test run. Funding comes from Yaci DevKit's public default test
+mnemonic, which must never hold funds on a public network.
 
 ## References
 

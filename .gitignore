@@ -14,3 +14,6 @@ __pycache__/
 
 # Local chain state and generated test artifacts
 .local/
+
+# E2E verifier mutants (removed after each run)
+verifier/.mutant-*.ts
