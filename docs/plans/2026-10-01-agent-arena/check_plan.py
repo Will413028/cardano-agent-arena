@@ -25,7 +25,7 @@ def check_plan(plan):
     steps = re.split(r"^- \[[ x]\] \*\*", section(plan, "步驟"), flags=re.M)[1:]
     numbers = set()
     for body in steps:
-        m = re.match(r"(\d+)\. ([^*]+)\*\*（被擋於：([^）]+)）", body)
+        m = re.match(r"(\d+(?:\.\d+[a-z]?)?)\. ([^*]+)\*\*（被擋於：([^）]+)）", body)
         if not m:
             errors.append(f"步驟缺編號或「被擋於」：{body[:40]!r}")
             continue
@@ -59,7 +59,7 @@ def check_plan(plan):
             errors.append(f"{did} 沒有結論欄")
     progress = section(plan, "進度")
     for n in numbers:
-        if not re.search(rf"^\| {n} ", progress, re.M):
+        if not re.search(rf"^\| {re.escape(n)} ", progress, re.M):
             errors.append(f"進度表缺步驟 {n}")
     return numbers, ids, plan
 

@@ -13,7 +13,7 @@
 | Hydra Head | 少數參與者之間的鏈下 state channel，同構於 L1（同樣的 validator 可在 head 內跑）；所有參與者都要執行 hydra-node 並保持在線，有人不配合時要上 L1 關閉 head；官方範例有兩人猜拳遊戲 | head 內交易可設零手續費；開關 head 要 L1 交易 | [Hydra（docs.cardano.org）](https://docs.cardano.org/developer-resources/scalability-solutions/hydra)；[Hydra protocol overview](https://hydra.family/head-protocol/docs/protocol-overview)；[Open a head on testnet](https://hydra.family/head-protocol/docs/tutorial) | 步驟 3 在本機 devnet 實測 |
 | Aiken | 以 validator 判斷交易是否符合規則；有本機 `aiken check` 測試與 property test | 開源 | [Aiken validators](https://aiken-lang.org/language-tour/validators) | — |
 | Blockfrost（鏈資料 API，選用） | 免費方案每日 50,000 次請求、每秒 10 次（可突發 500）；需要註冊取得 project key | 免費方案；超量付費 | [Blockfrost Start Building](https://blockfrost.dev/start-building)；[developers.cardano.org：Blockfrost](https://developers.cardano.org/docs/developers/curriculum/production/api-providers/blockfrost/) | 官網 pricing 頁 |
-| 本機 devnet、自建索引（Ogmios／Kupo、Yaci DevKit 等） | 不需註冊；可讀實際 protocol parameters | 免費 | 未在本次逐一查證官方文件；步驟 2 開工時查並補來源 | — |
+| 本機 devnet、自建索引（Ogmios／Kupo、Yaci DevKit 等） | 不需註冊；可讀實際 protocol parameters | 免費 | 未在本次逐一查證官方文件；Yaci DevKit 的能力由步驟 4.5a 查證並補來源（2026-10-18 起） | — |
 | 測試網水龍頭（preprod tADA） | 取得測試幣，可能需 captcha 或 API key | 免費 | 未查證；步驟 2 開工時查 | — |
 
 ## 既有先例

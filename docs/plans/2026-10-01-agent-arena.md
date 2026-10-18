@@ -28,7 +28,7 @@
 - P1 會改到或取代的既有部署是否在線：無既有部署，全新系統。部署到鏈上的 validator 不可修改，寫成不變量 I5；步驟 12 的正式部署僅限 preprod（D8）。
 - P2 Will 已確認進入開發（2026-10-01），不再擋住步驟。
 - P3 投入的時間預算未定（未確認；影響步驟節奏，不擋步驟）。
-- P4 工具鏈（預設（可推翻））：validator 用 Aiken（來源 A 點名）；鏈下交易建構、客戶端、索引與 verifier 用 TypeScript（Cardano 鏈下函式庫生態最完整）；網站用靜態前端讀索引器 API；本機 devnet 跑測試，preprod 跑實測。
+- P4 工具鏈（預設（可推翻））：validator 用 Aiken（來源 A 點名）；鏈下交易建構、客戶端、索引與 verifier 用 TypeScript（Cardano 鏈下函式庫生態最完整）；網站用靜態前端讀索引器 API；本機 devnet 跑測試，preprod 跑實測。2026-10-18 起交易在程式內以 SDK 建構、devnet 改用維護中的工具，見 D13、D14、D15 與步驟 4.5a–4.5d。
 - P5 Cardano L1 參數：preprod maxTxSize 16,384 bytes、maxTxExecutionUnits memory 17,500,000／steps 10,000,000,000；devnet memory 14,000,000／steps 10,000,000,000。來源：節點 query 與 Koios epoch_params，2026-10-01 已查實值。preprod 20 筆入塊延遲 median 25.44s、p95 47.11s、max 105.18s，見 spike-l1.md；不是最終性。
 - P6 Hydra head 要求所有參與者執行 hydra-node 並在線，不配合時要上 L1 關閉 head（docs.cardano.org／hydra.family，2026-10-01；已實測 Bob 離線後 Close/Fanout，見 spike-alternatives.md）。
 - P7 對局詳情頁列出每步的交易 ID，讓人自行到任何 explorer 或節點核對（推論自 S4，不改契約；未確認）。
@@ -39,7 +39,7 @@
 
 ## 本階段依賴的不變量
 
-Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain/tx-builder.ts`、`indexer/cli.ts`、`verifier/cli.ts`、`web/server.ts`、`offchain/generated/contract.ts`；下表其餘模組仍是後續步驟的預計位置。
+Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain/tx-builder.ts`、`indexer/cli.ts`、`verifier/cli.ts`、`web/server.ts`、`offchain/generated/contract.ts`；下表其餘模組仍是後續步驟的預計位置。步驟 4.5a–4.5d 會改寫 `offchain/tx-builder.ts`、`offchain/chain.ts`、`offchain/history.ts`、`scripts/devnet.ts` 與 `test/devnet.e2e.ts`，完成後在此補實際路徑。
 
 | 不變量 | 依賴它的機制（預計模組） |
 |---|---|
@@ -47,10 +47,11 @@ Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain
 | I2 營運者沒有繞過驗證的權限：validator 參數裡沒有營運者金鑰可改戰局或結果（D10 已確認） | `validators/match.ak` 的參數、`scripts/deploy`、`offchain/tx-builder` |
 | I3 正式戰局只用公開鏈上資料與公開規則就能完整重播，不依賴營運者的索引器或網站 | `verifier`（多個資料來源）、`validators/match.ak` 的 datum／redeemer 編碼、逐步 L1 交易歷史（D5） |
 | I4 鏈下規則引擎與 validator 對同一行動序列得出相同的合法性與結果 | `rules/`（鏈下引擎）、`test-vectors/*.json`、`validators/match.ak` 的測試、差異測試 `make check` 一項 |
-| I5 已部署的 validator 不可修改；規則改版等於新的 match validator script hash（版本鍵是 match validator 的 hash，不是 thread token 的 minting policy hash）；hash 與規則版本的對照公開在 repo 的 `rules/versions.json`（D6 已確認 thread token） | `scripts/deploy`、`indexer`（以 script hash 分版本）、`verifier`（依 script hash 選規則版本）、`ranking`（依版本分組） |
+| I5 已部署的 validator 不可修改；規則改版等於新的 match validator script hash（版本鍵是 match validator 的 hash；D15 起 thread token 與 match 同一個 multi-validator，policy id 等於這個 hash）；hash 與規則版本的對照公開在 repo 的 `rules/versions.json`（D6 已確認 thread token） | `scripts/deploy`、`indexer`（以 script hash 分版本）、`verifier`（依 script hash 選規則版本）、`ranking`（依版本分組） |
 | I6 玩家私鑰不離開玩家端（D7 已確認自管 client／本機 runner） | `client`（簽章）、`starter-kit`、網站的錢包連接 |
 | I8 datum／redeemer 的編碼只有一個來源：Aiken 產生的 `plutus.json` blueprint；TS 型別由它產生，CI 檢查產生物沒有漂移 | `validators/`、`offchain/tx-builder`、`indexer`、`verifier`、`client`、`starter-kit`、CI 的 blueprint 漂移檢查 |
 | I7 排名是正式戰局結果的確定性函式，任何人可重算（D9 已確認鏈上可重算的計分限制） | `ranking`、`verifier rank` 子指令、排名頁 |
+| I9 verifier 是獨立的 npm workspace 套件，執行期依賴只有允許清單：規則引擎與 blueprint 編碼（共用模組）、`@cardano-ogmios/client`、步驟 4.5a 選定的編碼函式庫（限不載入交易建構程式的子路徑），加上步驟 7 的第二條讀取路徑 client；不依賴交易建構 SDK、外部 CLI 或營運者服務（D14 已確認） | `verifier/package.json`、`verifier/`、`offchain/history.ts`、`offchain/chain.ts` 的替代、`make check` 的 `dependency-cruiser` 規則 |
 
 ## 範圍
 
@@ -102,6 +103,86 @@ Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain
   - 需要人做的事：GitHub repo 已建立；需要對外登入或下載時仍依 session 授權規則處理。
   - 完成後的狀態：計畫與附件已在 repo 的 `docs/plans/`；驗證後依授權建立初始 commit，步驟 2、3 的重跑指令從此有版本控制。
 
+- [ ] **4.5a. Spike：鏈下 SDK、Ogmios client 與 devnet 工具選型**（被擋於：無；D13、D14、D15 已決）
+  - 範圍：拋棄式，程式碼放 `2026-10-01-agent-arena/spikes/offchain/`，產出 `2026-10-01-agent-arena/spike-offchain.md`；ubuntu 上的測項用暫時分支上的一次性 workflow 跑，跑完刪分支。
+    - SDK 候選：Lucid Evolution、Evolution SDK；兩者都不過關時才測 Blaze。採用版本須在 2026-10-18 前發布滿 14 天，編碼函式庫跟著該版本。每個候選做：
+      - (1) devnet 與該 SDK 的 Emulator 各跑一次真實流程：在程式內產生短命金鑰並由 devnet 撥款 → 用 D15 的 multi-validator 鑄 thread token（policy 即 match script hash、token name 為 seed outref 的 hash；用 spike 內的拋棄式 Aiken validator）→ 輸出到 match script 並附 inline datum → 帶 redeemer、collateral 與 required signer 的 spend。
+      - (2) 非法交易在建構時被本機評估擋下。
+      - (3) 手動指定 execution units、跳過本機評估後強行送出一筆「phase-1 合法、phase-2 失敗」的交易：不是輪到的玩家把自己列為 required signer 並簽章。節點經 Ogmios submit 拒絕，錯誤屬 phase-2 類別，不是 `MissingVKeyWitnesses`。
+      - (4) 建構未簽交易，交給外部簽章者（mock 的 CIP-30 `signTx(tx, partialSign)` 物件與本機金鑰檔各一）簽完再組合送出。
+      - (5) 用 esbuild 把建構器打包成瀏覽器 bundle，建置成功。
+      - (6) 能否從 `plutus.json`（CIP-57）產生型別化 schema；不能時記錄需要自寫產生器。
+      - (7) 編碼模組（PlutusData 編解碼、blake2b）能否在不載入交易建構程式的情況下單獨 import：列出實際載入的模組與套件。
+      - (8) provider 用 SDK 自己的 Ogmios＋Kupo 實作接 devnet，不需修補回應格式。
+      - (9) 在乾淨目錄 `npm ls --all --omit=dev --parseable | wc -l` 的遞移依賴數。
+    - Ogmios client：`@cardano-ogmios/client` 對 devnet 的 Ogmios 跑 `findIntersection`／`nextBlock`（含 rollback 事件）與 `submitTransaction`，大於 2^53 的整數不失真；記錄它支援的 Ogmios 版本。
+    - devnet 工具：Yaci DevKit 在 macOS arm64 Docker Desktop 與 ubuntu-latest 各測一次，記錄：
+      - 內附的 node、Ogmios、Kupo 版本。
+      - Conway 時代 PlutusV3 可用。
+      - 能否設定 slot 與 epoch 長度。
+      - 從啟動到第一個 block 的秒數。
+      - 怎麼為任意地址撥款。
+      - 兩個實例能否以不同 port 並行，`down` 只影響自己。
+      - Kupo 的 match、`--prune-utxo`、since 設定能否改成「全部、不 prune、從 origin」。
+      - 是否需要註冊。
+      - 官方文件來源與查詢日期補進 `external-interfaces.md`。
+  - 消費端：無（拋棄式；結論依 D13 的選型規則落地）。
+  - 不能動：產品程式碼；不碰 preprod、mainnet。
+  - 驗收：`spike-offchain.md` 對每個候選與 devnet 工具，逐項列出通過或失敗、指令與原始輸出、套件版本與發布日期，最後依 D13 的規則寫出選定的 SDK、備案 SDK、devnet 工具。mutation：把 spike validator 的 token name 檢查拿掉後，用任意 token name 鑄造的交易要被接受（證明測項 (1) 的拒絕案例真的打到 policy）；測項 (3) 的交易改由輪到的玩家簽章時要被接受（證明拒絕來自 validator）。
+  - 停止條件：所有 SDK 候選都無法完成測項 (1)–(4)，或 Yaci DevKit 與自建 compose 都無法在 ubuntu-latest 啟動時停下，回報選項。
+  - 需要人做的事：無（下載屬 session 授權範圍）。
+
+- [ ] **4.5b. devnet 與程式內交易建構**（被擋於：步驟 4.5a；必須在同一批完成：換掉 devnet 後舊的 `cli()` 交易路徑就不能用）
+  - 範圍：
+    - devnet：依 D13 換掉 `scripts/devnet.ts` 的 `docker run`／`docker exec` 啟動，用選定工具起 node、Ogmios、Kupo。Kupo 設定為 match 全部、不 prune、從 origin（步驟 7 的完整歷史）。每次啟動用唯一的實例名與動態 port，`down` 只移除自己的實例。
+    - 就緒條件：Ogmios `/health` 的 `connectionStatus` 為 `connected` 且 `lastKnownTip.blockNo > 0`，加上 Kupo `/health` 回報的最近 checkpoint slot ≥ Ogmios tip 的 slot。全部非同步並以 AbortSignal 設逾時，逾時錯誤帶最近的服務 log。
+    - 交易：`offchain/tx-builder.ts` 改用 D13 選定的 SDK，建構、平衡、評估、簽章、送出、等確認都在程式內；provider 直接用 SDK 的 Ogmios＋Kupo 實作，不另包自訂介面。金鑰在程式內每次產生、由 devnet 撥款。
+    - 選定 Yaci DevKit 時刪除 `infra/cardano-fixtures` 與 README 裡的 fixture 說明；選定自建 compose 時保留，並在 `infra/cardano-fixtures/README.md` 寫明用途。
+    - 編碼：`offchain/codec.ts` 與 `offchain/generated/` 改成選定 SDK 的型別化 schema，不再輸出 cardano-cli 的 detailed JSON。4.5a 測項 (6) 通過就改用 SDK 的 CIP-57 產生方式並刪掉 `scripts/generate-blueprint.ts` 的自寫輸出；不通過就保留自寫產生器但改輸出 SDK schema。I8 的漂移檢查沿用。
+    - 非法交易保留兩層：建構時被擋，以及 4.5a 測項 (3) 那種跳過本機評估後強行送出、以 phase-2 被拒。
+    - `make devnet-up`／`make devnet-down`、`npm run devnet`、CI 的 image 拉取與 `timeout-minutes`、README 的 Development 段跟著改；CI 證據上傳改為 `if-no-files-found: error`。
+  - 消費端：`rg -n "devnet\.ts|ROOT|startDevnet|stopDevnet|createMatch|SkeletonMatch|from ['\"].*(tx-builder|codec|generated)" -g '*.ts'`、`rg -n "devnet|credentials|cardano-fixtures|acceptance.json" Makefile .github/workflows/check.yml package.json README.md infra/`。
+  - 不能動：validator 邏輯（D15 的 policy 改寫在 4.5c）；`make check` 入口；I6 的方向（簽章在呼叫端，不在 devnet 容器內）；步驟 4 的 E2E 驗收項（三種勝負、非法交易拒絕、獨立重播、結果頁、verifier mutation）。
+  - 驗收：本機與 CI `make check` 綠燈；`rg -n "cardano-cli|docker\(['\"]exec|cli\(net" offchain/ scripts/ test/` 無輸出；E2E 的三個非法案例（錯簽、數字超界、錯結果）都同時驗建構被擋，以及強行送出後錯誤符合 phase-2 類別、不含 `MissingVKeyWitnesses`；兩個 devnet 實例並行時 `make check` 仍通過。mutation：把 validator 的簽章檢查拿掉重新 build，強行送出的錯簽測試要失敗；把就緒條件改成只看 HTTP 200，對剛啟動、尚無 block 的 devnet 跑就緒檢查的測試要失敗。
+  - 停止條件：選定的 devnet 工具在 CI 內啟動失敗時，依 D13 改用自建 compose 並在進度表記錄，不停下；兩者都失敗時停下回報。SDK 無法表達 4.5a 已驗過的交易形狀時，依 D13 改用備案 SDK。
+
+- [ ] **4.5c. verifier 獨立套件、官方 Ogmios client 與固定 thread policy**（被擋於：步驟 4.5b）
+  - 範圍：
+    - 依 D15 把 `thread.ak` 併進 `match.ak` 成為 multi-validator（`mint` 與 `spend` 兩個 handler），policy id 即 match script hash：
+      - mint：token name 為 seed outref 的 blake2b-256，seed 由 redeemer 指定且必須被花用；每次只鑄一個；token 必須送到本 script 地址；初始 datum 必須合法（兩位玩家、空行動、`result` 為 -1、datum 的 token name 等於鑄出的 name）。
+      - spend：輸入與輸出都持有本 policy、datum 指定 name 的 token；不再從 datum 讀 policy，也不寫死 `"arena"`。這樣鏈上就擋下偽造的建局（審查發現 G2）。
+      - burn 仍屬步驟 6 的結算範圍（審查發現 G1：現行 policy 無法銷毀），本步不做；walking skeleton 的終局 UTxO 照 README 所述留在可拋棄的 devnet。
+      - 刪除 `thread.ak`，重新產生 `plutus.json` 與型別，tx builder 跟著改。
+    - `offchain/history.ts` 與 tx builder 移除 `aiken blueprint apply` 與所有 `child_process`：policy 等於 match hash，verifier 只算 token name 的 hash；`scriptAddress()` 改用 payment credential 比對，不再寫死 `addr_test` 與 header `70`。
+    - 依 D14 把 `offchain/chain.ts` 換成 `@cardano-ogmios/client`，indexer 與 verifier 共用，整數不失真。
+    - 把 verifier 拆成 npm workspace 套件，自己的 `package.json` 只列 I9 允許清單內的依賴；用 `dependency-cruiser` 規則禁止 `verifier/` 遞移 import 交易建構相關套件（`@lucid-evolution/lucid|cml|provider|wallet`、`@evolution-sdk/evolution` 的交易建構子路徑、`@blaze-cardano/*`、`@meshsdk/*`）與 `node:child_process`，規則接進 `make check`。
+  - 消費端：`rg -n "thread|6172656e61|TOKEN_NAME|arena|policy|addr_test|scriptAddress" validators/ offchain/ verifier/ indexer/ web/ test/ -g '*.ak' -g '*.ts'`、`rg -n "from ['\"].*(history|chain)" -g '*.ts'`、`rg -n "execFileSync|child_process" offchain/ verifier/ indexer/ test/`、`rg -n "\"workspaces\"|verifier" package.json`。
+  - 不能動：I3、I5（版本鍵仍是 match validator 的 hash，現在也等於 policy id）、I8；verifier 的輸出格式與 E2E 的重播比對。
+  - 驗收：`make check` 綠燈；`rg -n "child_process" offchain/ verifier/ indexer/` 無輸出；在乾淨暫存目錄只安裝 verifier 套件（`npm pack` 後安裝），對 devnet 戰局跑 `verifier replay` 成功；Aiken 測試涵蓋「token name 不等於 seed hash」「未花用 seed」「一次鑄兩個」「token 沒送到本 script」「初始 datum 非空盤」「spend 時 token 屬於別的 policy」六個拒絕案例；一筆含 2^53 以上 lovelace 的 Ogmios 回應 fixture 解碼後數值相等。mutation：在 `verifier/` 加一行 import 交易建構 SDK，`dependency-cruiser` 要失敗；把 mint 的 token name 檢查拿掉，「token name 不等於 seed hash」的 Aiken 測試要失敗；把 spend 的 policy 檢查拿掉，「別的 policy」測試要失敗。
+  - 停止條件：官方 client 不支援選定 devnet 的 Ogmios 版本且無相容版本時停下，回到 D14。
+
+- [ ] **4.5d. 測試分層與逾時觀測**（被擋於：步驟 4.5c）
+  - 範圍：
+    - 交易建構器的單元測試改在選定 SDK 的 Emulator 跑：建構邏輯、datum／redeemer 形狀、費用與找零，非法案例靠建構時的本機評估失敗。審查已指出 Lucid Emulator 送出時不跑 script，所以鏈上拒絕留在 devnet。
+    - 現有斷言的去向：
+
+      | 現有斷言（`test/devnet.e2e.ts`） | 去向 |
+      |---|---|
+      | 三種勝負的鏈上結果 | devnet |
+      | 錯簽、數字超界、錯結果：建構時被擋 | Emulator |
+      | 錯簽、數字超界、錯結果：強行送出以 phase-2 被拒 | devnet |
+      | indexer 記錄與 verifier 獨立重播一致 | devnet |
+      | 結果頁顯示 | devnet |
+      | verifier 勝負反轉 mutation（現為改寫原始碼） | 改成竄改重播輸入 fixture，不改 repo 原始碼 |
+
+    - 每次 devnet 呼叫記錄耗時，E2E 結束輸出各類呼叫的次數、最大與 p95 耗時。單次呼叫逾時上限 30 秒，與 Ogmios RPC 一致；逾時錯誤帶服務 log。
+    - `make check` 加 Emulator 測試。
+  - 消費端：`rg -n "test:e2e|npm test|--test|ARENA_TRACE" package.json Makefile .github/workflows/check.yml scripts/ test/`。
+  - 不能動：步驟 4 的驗收項全部保留，依上表換執行層，不刪檢查。
+  - 驗收：`make check` 綠燈並印出耗時摘要；Emulator 測試在停掉 Docker 時也能跑；上表每一列在測試裡都找得到對應斷言，`test/devnet.e2e.ts` 不再寫入 `verifier/`（`rg -n "writeFileSync.*verifier" test/` 無輸出）。mutation：在 tx builder 把 datum 的 `result` 寫成錯的勝者，Emulator 測試要失敗；把重播 fixture 的一步行動竄改，verifier 比對要失敗。
+  - 停止條件：無特殊。
+  - 完成後的狀態：10/01 的 CLI timeout 根因仍未證實；本批只移除那條機制並加上觀測，之後若在 Ogmios 或 Kupo 路徑重演，照耗時紀錄重開 bug-fix。
+
 - [ ] **5. 規則引擎與共用測試向量**（被擋於：步驟 4）
   - 範圍：用 TypeScript 寫 D4 遊戲的純函式規則引擎（5×5 空格落子、兩人交替、橫直斜連四、滿盤和局、5 分鐘逾時）；建立 `test-vectors/*.json`（每個向量：初始狀態、行動序列、預期合法性與結果），寫一個產生器把向量轉成 Aiken 測試檔（`validators/tests/vectors.ak`，生成物不手改），讓步驟 6 的 validator 直接用同一組向量（I4）。本步只驗鏈下引擎與產生器；validator 那半在步驟 6。
   - 消費端：`rg -n "from ['\"].*rules" offchain/ web/ verifier/`（verifier、觀戰頁、回放頁、starter kit 的本地預覽）。
@@ -109,7 +190,7 @@ Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain
   - 驗收：`make check` 綠燈；向量涵蓋每條規則至少一個合法與一個非法案例（`check_plan.py` 不負責，這裡用 `make vectors-coverage` 列出每條規則的案例數）；產生器的輸出與 commit 的 `vectors.ak` 一致（漂移檢查）；mutation：在鏈下引擎放寬一條規則（例如允許走到已佔格），向量測試要失敗。
   - 停止條件：某條規則在 Aiken 內的成本超過步驟 2、3 量到的預算時停下回報，可能要回頭改 D4 的規則。
 
-- [ ] **6. 切片：一場完整的正式戰局**（被擋於：步驟 5）
+- [ ] **6. 切片：一場完整的正式戰局**（被擋於：步驟 5；步驟 4.5d）
   - 範圍：validator 實作公開建局、玩家自管簽章加入與行動、5 分鐘逾時判負、結算與 thread token 銷毀全流程；明定首步計時、未加入挑戰的取消與退款，以及有效期／datum 的 slot 一致性；鏈下 tx builder；兩個參考 Agent 在 devnet 打完一整局。規則版本對應 script hash（I5）。
   - 消費端：`rg -n "MatchDatum|MatchRedeemer|buildMoveTx|buildSettleTx" -g '*.ak' -g '*.ts'`（索引器、verifier、client、網站）。
   - 不能動：I1、I2、I4；共用測試向量只能新增，不改既有向量的預期（改了代表規則變了，回到 D4）。
@@ -117,7 +198,7 @@ Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain
   - 停止條件：同一狀態 UTxO 的併發衝突讓一局無法在合理時間內完成（門檻依 D4、D5 拍板的延遲上限）時停下回報。
 
 - [ ] **7. 切片：獨立重播 verifier**（被擋於：步驟 6）
-  - 範圍：`verifier replay`、`verifier check <match-id>`：從兩條獨立讀取路徑讀正式戰局（devnet：節點的 chain-sync 與 Kupo 類的 UTxO 索引；preprod 另加一個公開 API）。重播已花用的 UTxO 需要完整鏈歷史，文件寫明要用不 prune 的索引，依 script hash 選規則版本重播，輸出逐步盤面與勝負，並與鏈上結算比對。發布為可單獨安裝的 CLI 與文件。
+  - 範圍：`verifier replay`、`verifier check <match-id>`：從兩條獨立讀取路徑讀正式戰局（devnet：節點的 chain-sync 與 Kupo 類的 UTxO 索引，由步驟 4.5b 的 devnet 提供；preprod 另加一個公開 API；verifier 的依賴依 D14／I9）。重播已花用的 UTxO 需要完整鏈歷史，文件寫明要用不 prune 的索引，依 script hash 選規則版本重播，輸出逐步盤面與勝負，並與鏈上結算比對。發布為可單獨安裝的 CLI 與文件。
   - 消費端：`rg -n "verifier" web/ offchain/ docs/`（回放頁、排名重算、文件）。
   - 不能動：I3——verifier 不得讀營運者的索引器或資料庫。
   - 驗收：devnet 上步驟 6 產生的每一局 `verifier check` 都通過；devnet 上兩條讀取路徑結果一致；preprod 戰局（步驟 11 之後）再加公開 API 比對；mutation：在 fixture 裡竄改一步行動，`verifier check` 要回報不一致並以非零結束。
@@ -146,7 +227,7 @@ Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain
   - 停止條件：D9 的防刷分方案需要鏈下身分（例如 GitHub 登入）而 Will 沒有授權時停下。
 
 - [ ] **11. 硬化**（被擋於：步驟 6–10）
-  - 範圍：對抗測試（double satisfaction、datum 偽造、逾時濫用、UTxO 搶占、超大 datum 讓對手交易超出上限）；非功能需求門檻（`nfr-and-risks.md`）的量測與監控指令；營運手冊（索引器重建、devnet／testnet 重置）；建部署腳本與 script hash 檢查，先部署到 preprod（步驟 12 沿用同一支腳本）。
+  - 範圍：preprod 的 provider 接上：預設用 SDK 的 Koios 實作（免註冊），Will 註冊 Blockfrost 後可改用；對抗測試（double satisfaction、datum 偽造、逾時濫用、UTxO 搶占、超大 datum 讓對手交易超出上限）；非功能需求門檻（`nfr-and-risks.md`）的量測與監控指令；營運手冊（索引器重建、devnet／testnet 重置）；建部署腳本與 script hash 檢查，先部署到 preprod（步驟 12 沿用同一支腳本）。
   - 消費端：同步驟 6、7。
   - 不能動：I1–I7。
   - 驗收：每項攻擊一個 devnet 測試，被拒；mutation：拿掉對應檢查時該攻擊測試要失敗（逐項紀錄）；NFR 每項有量測值與門檻比較（每步延遲門檻來自 D5、每局成本上限來自 D8）；preprod 上連續跑 20 局無人工介入；另開一個 session 只照營運手冊從零重建索引器成功。
@@ -164,7 +245,7 @@ Walking skeleton 的實際路徑為 `validators/validators/match.ak`、`offchain
 
 - [ ] **13. 收尾**（被擋於：步驟 12）
   - 完成定義逐項核對；跑 design-review skill（獨立設計審查）；把長期守住不變量的檢查（差異測試、部署 hash 檢查、verifier 重播 devnet 戰局）確認接在 CI；延後項附觸發條件搬回主清單（屆時沒有主清單就搬進 repo 的 roadmap 或 Will 指定處）；需要人做的事列給 Will。
-  - 驗收：`python3 check_plan.py` 無錯；CI 每個 job success；design-review 報告的每個發現都已處理或附駁回理由；`sed -n '/^## 本階段依賴的不變量/,/^## 範圍/p' docs/plans/2026-10-01-agent-arena.md | rg -c '預計'` 輸出 0（不變量表全部換成實際路徑）；D1 選 B 時步驟 1 的狀態是「不適用」並附 D1 的指向。
+  - 驗收：`python3 check_plan.py` 無錯；CI 每個 job success；design-review 報告的每個發現都已處理或附駁回理由；`sed -n '/^## 本階段依賴的不變量/,/^## 範圍/p' docs/plans/2026-10-01-agent-arena.md | rg -c '^\| I.*預計'` 輸出 0（不變量表的資料列全部換成實際路徑）；D1 選 B 時步驟 1 的狀態是「不適用」並附 D1 的指向。
 
 ## 決定
 
@@ -246,6 +327,30 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
   - B：營運者的資料庫——改起來容易；名稱與歸屬顯示需信任營運者，Elo 仍可依鏈上錢包與結果重算。
   - 結論：A：Agent 名稱、說明與對應錢包存鏈上，只登記適合公開的資料；ADR：[拍板紀錄](2026-10-01-agent-arena/decision-draft.md)。
 
+- **D13 鏈下交易建構與本機 devnet**（狀態：已決，2026-10-18，Will；擋住步驟：4.5a–4.5d、6、8；需要的事實：步驟 4.5a 的 SDK 與 devnet 實測）
+  - A：維持 `docker exec` 進 devnet node 容器跑 cardano-cli 建構、簽章、送出：這是現況。`transaction build` 要 node socket，玩家端不會有 preprod node；瀏覽器只能用 CIP-30。步驟 8 一定要換。10/01 的 60 秒 timeout 就卡在這條路上。
+  - B：程式內 TypeScript SDK（Lucid Evolution、Evolution SDK、Blaze、Mesh）經 provider 建構、評估、簽章、送出：這是業界基線。代價是 SDK 為 0.x、發版頻繁。
+  - devnet 的選項：自建 `docker run`＋`docker exec` 輪詢（現況）／自建 compose（node＋Ogmios＋Kupo、健康就緒）／Yaci DevKit（內建 Ogmios、Kupo、相容 Blockfrost 的 Yaci Store 與 CIP-30 錢包，由 4.5a 查證）。
+  - 建議：B，加 Yaci DevKit 與健康就緒；先做步驟 4.5a 的 spike 再定 SDK。
+  - 結論：B＋Yaci DevKit。選型規則如下，步驟 4.5a 依此落地，不再回頭問：
+    - SDK：取 4.5a 測項 (1)–(8) 全部通過、採用版本發布滿 14 天者；都通過時取測項 (9) 依賴數較少者；排名第二的通過者為備案。
+    - devnet：取 Yaci DevKit，條件是在 macOS arm64 與 ubuntu-latest 都能啟動、Conway 時代可跑 PlutusV3、能為任意地址撥款、兩個實例可並行且 `down` 只影響自己、Kupo 可設為全部／不 prune／從 origin、免註冊。任一不成立就改用自建 compose（node＋Ogmios＋Kupo，版本鎖定），不停下。
+    - 理由與取捨見 ADR `docs/adr/2026-10-18-in-process-offchain-and-devnet.md`。
+
+- **D14 verifier 的依賴範圍**（狀態：已決，2026-10-18，Will；擋住步驟：4.5c、7，新增 I9；需要的事實：步驟 4.5a 測項 (7) 與 Ogmios client 實測）
+  - A：verifier 與交易建構共用同一個 SDK：程式最少，但「可獨立驗證」的審查範圍包含整個 SDK。
+  - B：verifier 是獨立套件，只依賴允許清單（規則引擎、blueprint 編碼、編碼函式庫的子路徑、官方 `@cardano-ogmios/client`）：有 schema 型別、整數不失真、由官方維護；官方 client 帶約 10 個遞移依賴（ws、cross-fetch、json-bigint 等，2026-10-18 `npm view` 查到）。
+  - C：同 B，但 Ogmios 讀取維持自寫 client（Node 原生 WebSocket、零依賴）：審查範圍最小；協定實作與整數解析要自己維護。
+  - 建議：最初建議 B 時，理由寫成「審查範圍較小」，這個前提是錯的；更正後改建議 C。
+  - 結論：B。Will 在 2026-10-18 看過「官方 client 帶 10 個依賴、自寫的零依賴」這個取捨後，選官方 client。邊界改用允許清單、獨立 workspace 套件與 `dependency-cruiser` 規則守住（I9）。
+
+- **D15 thread token 的形式**（狀態：已決，2026-10-18，Will；擋住步驟：4.5a、4.5c、6；需要的事實：無）
+  - A：以 seed UTxO 為參數的 one-shot policy（Aiken 範例做法、現況）：每局 policy hash 不同，建局與 verifier 都要做 UPLC 參數套用。現行版本還有兩個缺口：沒有 burn 分支；`match.ak` 只信任 datum 宣告的 policy，鏈上可偽造建局。
+  - B：獨立的固定 policy，token name 為 seed outref 的 hash，match 以參數綁定這個 policy：policy 改版與規則版本分開，但兩支 script 要互相綁定。
+  - C：multi-validator，mint 與 spend 同一個 script，policy id 等於 match hash，token name 為 seed outref 的 hash，mint 時驗初始 datum 與去向（[Aiken common design patterns](https://aiken-lang.org/fundamentals/common-design-patterns)）：只有一個版本鍵，鏈上直接擋下偽造建局；代價是 mint 邏輯改版也會換掉規則版本。
+  - 建議：C（兩份獨立 ADR 草稿也都選 C）。
+  - 結論：C。Will 在 2026-10-18 選了「固定 policy、token name 為 seed hash」，C 是它在業界基線下的形式。在步驟 4.5c 改 walking skeleton，burn 在步驟 6；不影響 D6，I5 的文字已同步。
+
 拍板順序：
 1. 現在可拍：P2（是否進入開發）→ D1 → D2、D3、D6、D10、D11、D12（彼此獨立）。
 2. 步驟 2、3 完成後：D5 → D4（D4 的同時行動選項依 D5 的成本）→ D7（依 D5）→ D8。
@@ -262,8 +367,12 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
 | 2 Spike：L1 成本與延遲 | 完成 | devnet 合法／非法與 mutation、UTxO contention、雙玩家簽章與 state token、最低 ADA；preprod 20 筆入塊與索引延遲，全部驗證為有效 script spend；見 spike-l1.md | 無（只完成 spike 的驗收，不代表正式產品） | |
 | 3 Spike：替代執行方式 | 完成 | Hydra 20 步 confirmed snapshots、L1 開關與 deposit 成本、Bob 離線 Close/Fanout；簽章 transcript 曲線與最大 N=84 的 devnet 真實交易、合法／非法與 source mutation；19 Aiken checks；見 spike-alternatives.md | 無（N=84 只適用本 fixture 與 devnet 14M memory，不是 preprod 上限） | |
 | 4 Walking skeleton | 完成 | `48aa0be` 的 CI `make check` 全部通過（run `36868324868`，walking-skeleton job success）：Aiken 4 checks、blueprint 漂移、TS、unit 2 tests、三種勝負、非法交易拒絕、獨立重播、結果頁與 verifier mutation；超時清理修正 `85c7830` 的 CI run `36870994814` 全部 success。2026-10-18 本機（Docker Desktop 29.1.3、linux/arm64 image、8 CPU）在 `858e125` 跑完整 `make check` exit 0，另跑 3 次 `test:e2e` 與 1 次 8 核 CPU 滿載下的 `test:e2e` 皆通過，單次 docker 呼叫最長 894ms | 無。2026-10-01 本機 query tip／transaction build 的 60 秒 timeout 未能重現，根因未證實；當時的 Docker 執行環境已無法核對，CPU 滿載已排除 | `7d750cf`、`48aa0be`、`85c7830` |
+| 4.5a Spike：SDK、Ogmios client、devnet 選型 | 未開始 | | 尚未開工 | |
+| 4.5b devnet 與程式內交易建構 | 未開始 | | 步驟 4.5a | |
+| 4.5c verifier 套件、Ogmios client、固定 policy | 未開始 | | 步驟 4.5b | |
+| 4.5d 測試分層與逾時觀測 | 未開始 | | 步驟 4.5c | |
 | 5 規則引擎與測試向量 | 未開始 | | 尚未開工 | |
-| 6 完整正式戰局 | 未開始 | | 步驟 5 | |
+| 6 完整正式戰局 | 未開始 | | 步驟 5、4.5d | |
 | 7 Verifier | 未開始 | | 步驟 6 | |
 | 8 自帶 Agent 參賽 | 未開始 | | 步驟 6 | |
 | 9 觀戰、回放、詳情 | 未開始 | | 步驟 6、7 | |
@@ -294,3 +403,42 @@ Will 已於 2026-10-01 拍板下列結論；D1–D12 全部已決；選項保留
 | 低：D10 選 A 時卡住的局鎖住的 ADA 沒估金額 | 已改。D10 的 A 註明金額，由步驟 2 量 |
 
 修改後重跑 `python3 2026-10-01-agent-arena/check_plan.py`，結果是 `steps=13 decisions=12 errors=0`。檢查器本身也跑過 mutation：拿掉一個停止條件、把需求指到不存在的步驟、報告缺風險列，三種情況都會報錯。
+
+### 2026-10-18：步驟 4.5 與 D13–D15
+
+兩個沒參與撰寫的唯讀 subagent 分頭審查：一個是計畫審查者（`reference/reviewer-prompt.md` 原文），一個是設計審查者（design-review skill 的提示詞原文）。計畫審查 17 個發現（高 2），設計審查 12 個發現。兩題交給 Will 決定（D14 的 Ogmios client、D15），其餘照改；無駁回。
+
+| 發現 | 處理 |
+|---|---|
+| 高：4.5b 要求刪掉 `cli()`，但 tx builder 到 4.5c 前都還依賴它 | 已改。devnet 與交易建構合併成 4.5b，標「必須在同一批完成」 |
+| 高：簽章 mutation 會被 phase-1（缺見證）擋下，打不到 validator | 已改。強行送出的錯簽案例改成「非輪到的玩家把自己列為 signer 並簽章」，並斷言錯誤屬 phase-2、不含 `MissingVKeyWitnesses` |
+| D13、D14 引用的 ADR 不存在 | 已改。ADR `docs/adr/2026-10-18-in-process-offchain-and-devnet.md` 與本次修訂一起提交 |
+| I9 用「SDK」劃界，無法機械判定，又和 codec 跟隨 SDK 衝突 | 已改。I9 改為允許清單；verifier 拆成獨立 workspace 套件，加 `dependency-cruiser` 規則；4.5a 加測項 (7)（編碼能否單獨 import） |
+| 換成官方 Ogmios client 的理由「審查範圍較小」與事實相反 | 交給 Will：選官方 client（D14 結論更新），4.5a 加 client 實測 |
+| 參數化 thread policy 讓 verifier 必須做 UPLC 參數套用 | 交給 Will：選固定 policy（新增 D15），在 4.5c 實作 |
+| `offchain/generated` 輸出 cardano-cli 的 JSON 形狀，移除 CLI 後就失去理由 | 已改。4.5b 改成 SDK 的型別化 schema；4.5a 加測項 (6)（CIP-57 產生） |
+| 選型沒有瀏覽器／CIP-30／外部簽章 | 已改。4.5a 加測項 (4)、(5)，D13 選型規則納入 |
+| Yaci 的資金、金鑰、genesis、並行隔離、Kupo prune 設定都沒寫 | 已改。4.5a 加測項；4.5b 寫明短命金鑰、撥款、唯一實例與動態 port、Kupo 設定、fixture 的去留 |
+| Kupo 就緒「正常」無法判定 | 已改。改成 checkpoint slot ≥ Ogmios tip slot |
+| 自訂 `ChainProvider` 是多餘的轉接層；preprod provider 沒有歸屬步驟 | 已改。直接用 SDK provider；步驟 11 接 Koios（Blockfrost 為 Will 註冊後的選項） |
+| 4.5e 的 mutation 指向不存在的「回合數」欄位 | 已改。改成 `result` 寫錯 |
+| 4.5c、4.5e 對 E2E 內容互相矛盾 | 已改。4.5d 附現有斷言的去向表 |
+| E2E 的 verifier mutation 直接改寫 repo 原始碼，與平行 session 衝突 | 已改。改成竄改重播輸入 fixture |
+| 消費端漏了 `generate-blueprint.ts` 的 `ROOT`、README、CI 證據路徑 | 已改。消費端搜尋擴大；證據上傳改為 `if-no-files-found: error` |
+| D13 寫「不再回頭問」，停止條件卻寫「停下」；備案 SDK 未定義；依賴數沒說怎麼量 | 已改。devnet 失敗自動改用 compose；備案為排名第二的通過者；依賴數用 `npm ls --all --omit=dev --parseable \| wc -l` |
+| codec 版本與 14 天規則 | 已改。編碼函式庫跟著採用版本 |
+| Yaci 的事實沒有來源 | 已改。由 4.5a 查證並補進 `external-interfaces.md` |
+| 步驟 13 的 `rg -c '預計'` 永遠不會是 0 | 已改。只比對表格資料列 |
+| 4.5e 的逾時上限沒有數值 | 已改。30 秒，與 Ogmios RPC 一致 |
+
+修改後重跑 `python3 2026-10-01-agent-arena/check_plan.py`，結果是 `steps=17 decisions=15 errors=0`。步驟編號的正則改成接受 `4.5a` 這種子步驟；mutation 驗證過：拿掉 4.5a 的停止條件、改掉進度表的 4.5d，兩種情況都會報錯。
+
+依 decision-log skill 的規定，這個決策反轉成本高，所以另派兩個沒參與的 subagent 各自起草 ADR，選項不預設。兩份草稿和我的草稿的差異與處理：
+
+| 草稿提出的論點 | 處理 |
+|---|---|
+| 兩份都選 multi-validator（policy id 等於 match hash），並指出現行 policy 無法 burn（G1）、鏈上可偽造建局（G2） | 採用。D15 改為 C；4.5c 補 mint 的去向與初始 datum 檢查、spend 的 policy 檢查；burn 留在步驟 6 |
+| 草稿一不選 Yaci：自建 node＋Ogmios 已在 CI 量測過，只差加一個 Kupo | 駁回。「已量測」是既有程式碼帶來的 SELF-IMPOSED 理由，不是外部約束；D13 已寫明 Yaci 任一條件不成立就自動改用自建 compose，這個論點由選型規則處理 |
+| `scriptAddress()` 寫死 `addr_test` 與 header `70` | 採用。併入 4.5c |
+| verifier 在 preprod 不能每次從 origin 全量 chain-sync | 採用。寫進 ADR 的 Followup，歸步驟 7 |
+| 反方論點：multi-validator 讓建局邏輯的改版也切開 Elo 分組 | 記入 ADR 的代價，以及「一個月內改版超過一次就重評」的觸發條件 |
